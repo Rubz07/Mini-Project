@@ -1,0 +1,124 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+.bannerClass {
+  flex: 1;
+  width: 50%;
+  height: 100%;
+}
+.bannerImage {
+  width: 100%;
+  height: 100%;
+}
+
+.box {
+  flex-direction: column;
+  border: none;
+  width: 60%;
+  margin: 0.5vw 0q;
+}
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.box .steps ul {
+  overflow: hidden;
+  display: flex;
+  justify-content: start;
+}
+.box .steps ul li div {
+  color: #999;
+  padding: 10px 0 15px 45px;
+  position: relative;
+  background: #f5f5f5;
+  width: 10vw;
+}
+.box .steps ul li div span {
+  font-size: 13px;
+}
+.box .steps ul li:first-child div {
+  width: 10vw;
+  padding-left: 15px;
+}
+.box .steps ul li div::before {
+  content: " ";
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid #ddd;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  left: 100%;
+  z-index: 1;
+  margin-left: 1px;
+}
+.box .steps ul li div::after {
+  content: " ";
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid #f5f5f5;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  left: 100%;
+  z-index: 2;
+}
+.box .steps ul li.done div {
+  border-color: #20a8d8 !important;
+  color: #fff !important;
+  background: #20a8d8 !important;
+}
+.box .steps ul li.done div::after {
+  border-left: 30px solid #20a8d8;
+}
+.box .steps ul li.active div {
+  border-color: #167495 !important;
+  color: #fff !important;
+  background: #167495 !important;
+}
+.box .steps ul li.active div::after {
+  border-left: 30px solid #167495;
+}
+.box .step-component {
+  padding: 20px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: aqua;
+}
+.box .btn-component {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  margin-top: 1.5vw;
+  font-size: 1.3541666666666667vw;
+  color: #fff;
+  padding: 0.5208333333333334vw 2.0833333333333335vw;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  font-family: "NunitoSB";
+  background: linear-gradient(94.35deg, #9d86ff 0%, #785ee1 99.44%);
+  box-shadow: 0px 0.20833333333333334vw 0.5208333333333334vw
+    rgba(139, 114, 240, 0.67);
+  border-radius: 0.5208333333333334vw;
+  transition: 0.2s;
+}
