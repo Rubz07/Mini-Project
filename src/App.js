@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "./Components/Nav/Nav";
+import Nav from "./Components/Authentication/Registration/Registration";
 
 import "./App.css";
 
