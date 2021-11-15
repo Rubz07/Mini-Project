@@ -1,19 +1,26 @@
 import React, { useState } from "react";
-import image1 from "../../../Assets/images/image-1.png";
-import image2 from "../../../Assets/images/image-2.png";
+import axios from "../../../axios";
+import { Link, Route } from "react-router-dom";
+// import image1 from "../../../Assets/images/image-1.png";
+// import image2 from "../../../Assets/images/image-2.png";
+
 import "./Registration.css";
 const Registration = () => {
+  //========================State Management=====================//
+
   const fullNameError = document.querySelector(".fullname .error");
   const fullEmailError = document.querySelector(".emailclass .error");
   const fullMobileError = document.querySelector(".mobile .error");
   const fullPincodeError = document.querySelector(".pincodeclass .error");
   const fullPasswordError = document.querySelector(".password .error");
   const fullcPasswordError = document.querySelector(".confirmpassword .error");
+  const regSubBtn = document.querySelector("#reg-btn");
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [mobile, setMobile] = useState();
   const [address, setAddress] = useState();
+  const [district, setDistrict] = useState();
   const [pincode, setPincode] = useState();
   const [password, setPassword] = useState();
   const [cpassword, setcPassword] = useState();
@@ -33,6 +40,8 @@ const Registration = () => {
   const validPassword =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
+  //========================Validation function=====================//
+
   const validateName = () => {
     if (validName.test(name)) {
       setNameError(false);
@@ -44,6 +53,7 @@ const Registration = () => {
       setNameError(true);
     }
   };
+
   const validateEmail = () => {
     if (validEmail.test(email)) {
       setEmailError(false);
@@ -103,157 +113,211 @@ const Registration = () => {
     }
   };
 
-  return (
-    <div className="wrapper">
-      <div className="img1">
-        {" "}
-        <img src={image1} alt="" class="image-1" />
-      </div>
-      <div className="inner">
-        <form action="">
-          <h3>New Account?</h3>
-          <div className="form-holder fullname">
-            <span className="lnr lnr-user"></span>
-            <input
-              type="text"
-              className="form-control"
-              value={name}
-              id="full-name"
-              placeholder="Name"
-              onChange={(e) => setName(e.target.value)}
-              onKeyUp={validateName}
-            />
-            <div
-              className={
-                nameError ? "error error-visible " : "error error-hidden"
-              }
-            ></div>
-          </div>
+  //Submit Button Visibility
+  const buttonCursor = document.querySelector(".button"); //To avoid poniterevent and cursor problem
 
-          <div className="input2">
-            <div className="form-holder emailclass">
-              <span className="lnr lnr-envelope"></span>
+  const submitval = () => {
+    if (
+      fullNameError == false &&
+      emailError == false &&
+      mobileError == false &&
+      addressError == false &&
+      pincodeError == false &&
+      passwordError == false
+    ) {
+      regSubBtn.classList.remove("disabled");
+      buttonCursor.classList.remove("cursor-disabled");
+    } else {
+      regSubBtn.classList.add("disabled");
+      buttonCursor.classList.add("cursor-disabled");
+    }
+  };
+  //========================API CALLING=====================//
+
+  const handleSubmit = async () => {
+    const data = {
+      name: name,
+      email: email,
+      mobile: mobile,
+      address: address,
+      pincode: pincode,
+      password: password,
+      confirmpassword: cpassword,
+    };
+
+    const res = await axios.post("/register", data);
+    if (res.status === 200) {
+      console.log(res);
+    } else {
+      //need to doo some edit
+      console.log(res.data.message);
+    }
+  };
+  //========================Main Body=====================//
+  return (
+    <Route>
+      <div className="wrapper">
+        <div className="img1">
+          {" "}
+          {/* <img src={image1} alt="" class="image-1" /> */}
+        </div>
+        <div className="inner">
+          <form action="" id="reg-form" onKeyUp={submitval}>
+            <h3>New Account?</h3>
+            <div className="form-holder fullname">
+              <span className="lnr lnr-user"></span>
               <input
-                type="email"
+                type="text"
                 className="form-control"
-                value={email}
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyUp={validateEmail}
+                value={name}
+                id="full-name"
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+                onKeyUp={validateName}
               />
               <div
                 className={
-                  emailError ? "error error-visible " : "error error-hidden"
+                  nameError ? "error error-visible " : "error error-hidden"
                 }
               ></div>
             </div>
-            <div className="form-holder mobile">
+
+            <div className="input2">
+              <div className="form-holder emailclass">
+                <span className="lnr lnr-envelope"></span>
+                <input
+                  type="email"
+                  className="form-control"
+                  value={email}
+                  placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyUp={validateEmail}
+                />
+                <div
+                  className={
+                    emailError ? "error error-visible " : "error error-hidden"
+                  }
+                ></div>
+              </div>
+              <div className="form-holder mobile">
+                <span className="lnr lnr-phone-handset"></span>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={mobile}
+                  placeholder="Phone Number"
+                  onChange={(e) => setMobile(e.target.value)}
+                  onKeyUp={validateMobile}
+                />
+                <div
+                  className={
+                    mobileError ? "error error-visible " : "error error-hidden"
+                  }
+                ></div>
+              </div>
+            </div>
+
+            <div className="form-holder address">
+              <span className="lnr lnr-phone-handset"></span>
+              <input
+                type="address"
+                className="form-control"
+                placeholder="Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+            <div className="dropdwn">
+              <span className="lnr lnr-drop-down"></span>
+              <select
+                className="drp-control"
+                data-flag="true"
+                onChange={(e) => setDistrict(e.target.value)}
+              >
+                <option value="  " selected>
+                  Select District
+                </option>
+                <option>Afghanistan</option>
+                <option value="Alappuzha">Alappuzha</option>
+                <option value="Ernakulam">Ernakulam</option>
+                <option value="Idukki">Idukki</option>
+                <option value="Kannur">Kannur</option>
+                <option value="Kasaragod">Kasaragod</option>
+                <option value="Kollam">Kollam</option>
+                <option value="Kottayam">Kottayam</option>
+                <option value="Kozhikode">Kozhikode</option>
+                <option value="Malappuram">Malappuram</option>
+                <option value="Palakkad">Palakkad</option>
+                <option value="Pathanamthitta">Pathanamthitta</option>
+                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                <option value="Thrissur">Thrissur</option>
+                <option value="Wayanad">Wayanad</option>
+              </select>
+            </div>
+            <div className="form-holder pincodeclass">
               <span className="lnr lnr-phone-handset"></span>
               <input
                 type="text"
                 className="form-control"
-                value={mobile}
-                placeholder="Phone Number"
-                onChange={(e) => setMobile(e.target.value)}
-                onKeyUp={validateMobile}
+                placeholder="Pincode"
+                value={pincode}
+                onChange={(e) => setPincode(e.target.value)}
+                onKeyUp={validatePincode}
               />
+
               <div
                 className={
-                  mobileError ? "error error-visible " : "error error-hidden"
+                  pincodeError ? "error error-visible " : "error error-hidden"
                 }
               ></div>
             </div>
-          </div>
-
-          <div className="form-holder address">
-            <span className="lnr lnr-phone-handset"></span>
-            <input
-              type="address"
-              className="form-control"
-              placeholder="Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-          <div className="dropdwn">
-            <span className="lnr lnr-drop-down"></span>
-            <select className="drp-control" data-flag="true">
-              <option value="  " selected>
-                Select District
-              </option>
-              <option>Afghanistan</option>
-              <option value="Alappuzha">Alappuzha</option>
-              <option value="Ernakulam">Ernakulam</option>
-              <option value="Idukki">Idukki</option>
-              <option value="Kannur">Kannur</option>
-              <option value="Kasaragod">Kasaragod</option>
-              <option value="Kollam">Kollam</option>
-              <option value="Kottayam">Kottayam</option>
-              <option value="Kozhikode">Kozhikode</option>
-              <option value="Malappuram">Malappuram</option>
-              <option value="Palakkad">Palakkad</option>
-              <option value="Pathanamthitta">Pathanamthitta</option>
-              <option value="Thiruvananthapuram">Thiruvananthapuram</option>
-              <option value="Thrissur">Thrissur</option>
-              <option value="Wayanad">Wayanad</option>
-            </select>
-          </div>
-          <div className="form-holder pincodeclass">
-            <span className="lnr lnr-phone-handset"></span>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Pincode"
-              value={pincode}
-              onChange={(e) => setPincode(e.target.value)}
-              onKeyUp={validatePincode}
-            />
-
-            <div
-              className={
-                pincodeError ? "error error-visible " : "error error-hidden"
-              }
-            ></div>
-          </div>
-          <div className="form-holder password">
-            <span className="lnr lnr-lock"></span>
-            <input
-              type="password"
-              className="form-control"
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              onKeyUp={validatePassword}
-            />
-            <div
-              className={
-                passwordError ? "error error-visible " : "error error-hidden"
-              }
-            ></div>
-          </div>
-          <div className="form-holder confirmpassword">
-            <span className="lnr lnr-lock"></span>
-            <input
-              type="password"
-              className="form-control"
-              value={cpassword}
-              placeholder="Confirm Password"
-              onChange={(e) => setcPassword(e.target.value)}
-              onKeyUp={validateConfirmPassword}
-            />
-            <div
-              className={
-                confirmpasswordError
-                  ? "error error-visible "
-                  : "error error-hidden"
-              }
-            ></div>
-          </div>
-
-          <input type="button" value="Register" className="btn1"></input>
-        </form>
+            <div className="form-holder password">
+              <span className="lnr lnr-lock"></span>
+              <input
+                type="password"
+                className="form-control"
+                value={password}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyUp={validatePassword}
+              />
+              <div
+                className={
+                  passwordError ? "error error-visible " : "error error-hidden"
+                }
+              ></div>
+            </div>
+            <div className="form-holder confirmpassword">
+              <span className="lnr lnr-lock"></span>
+              <input
+                type="password"
+                className="form-control"
+                value={cpassword}
+                placeholder="Confirm Password"
+                onChange={(e) => setcPassword(e.target.value)}
+                onKeyUp={validateConfirmPassword}
+              />
+              <div
+                className={
+                  confirmpasswordError
+                    ? "error error-visible "
+                    : "error error-hidden"
+                }
+              ></div>
+            </div>
+            <div className="button cursor-disable">
+              <input
+                type="button"
+                value="Register"
+                id="reg-btn"
+                class="primary-button disabled"
+                onClick={handleSubmit}
+              ></input>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </Route>
   );
 };
 

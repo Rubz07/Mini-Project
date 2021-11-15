@@ -288,6 +288,7 @@ button:hover:after {
   transform: scale(0.97);
   box-shadow: none;
 }
+
 @media (max-width: 991px) {
   .inner {
     width: 400px;
@@ -325,11 +326,23 @@ button:hover:after {
   font-family: "Gilroy_M";
   font-size: 14px;
 }
+
+/* Error Visibility */
+
 .error-visible {
   visibility: visible;
 }
 .error-hidden {
   visibility: hidden;
 }
+
+/* isabled Button Style */
+/* .disabled {
+  opacity: 40%;
+  pointer-events: none;
+}
+.cursor-disable {
+  cursor: not-allowed;
+} */
 
 /*# sourceMappingURL=style.css.map */
