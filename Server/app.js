@@ -1,16 +1,15 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var db = require("./dbconfig/dbconnection");
-var indexRouter = require("./routes/User/index");
-
-var cors = require("cors");
-var app = express();
-app.use(cors());
-var dotenv = require("dotenv");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const db = require("./dbconfig/dbconnection");
+const indexRouter = require("./routes/User/index");
+const dotenv = require("dotenv");
 dotenv.config();
+const cors = require("cors");
+const app = express();
+app.use(cors());
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");

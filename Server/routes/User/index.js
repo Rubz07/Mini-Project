@@ -22,9 +22,30 @@ router.post("/register", async (req, res, next) => {
     });
 });
 router.post("/otpAuthentication", async (req, res, next) => {
-  otpAuthentication.otpAuthentication(req.body.mobile).then((response)=>{
-    
-  })
+  otpAuthentication.otpAuthentication(req.body.mobile).then((response) => {
+    if (response.register_status) {
+      res.status(200).json({ message: "otp sended" });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
+router.post("/otpVerification", async (req, res, next) => {
+  otpAuthentication
+    .otpVerification(req.body.otpcode, req.body.mobile)
+    .then((response) => {
+      if (response.register_status) {
+        res.status(200).json({ message: "Successfully verified" });
+      } else {
+        res.json({
+          message: "enterd otp is incorrect",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 module.exports = router;
