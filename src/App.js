@@ -1,6 +1,7 @@
 import React from "react";
-import Nav from "./Components/Authentication/Registration/Registration";
+import Register from "./Components/Authentication/Registration/Registration";
 import Login from "./Components/Authentication/Login/Login";
+import OtpAuthentication from "./Components/Authentication/Otp/OtpAuthentication";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
@@ -9,8 +10,9 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route exact path="/" component={Nav} />
-          <Route path="/register" component={Login} />
+          <Route exact path="/" component={OtpAuthentication} />
+          <Route exact path="/register" component={Register} />
+          <Route path="/login" component={Login} />
         </Switch>
       </Router>
     </div>

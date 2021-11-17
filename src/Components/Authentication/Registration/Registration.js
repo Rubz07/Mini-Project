@@ -25,17 +25,17 @@ const Registration = () => {
   const [password, setPassword] = useState();
   const [cpassword, setcPassword] = useState();
 
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [mobileError, setMobileError] = useState(false);
+  const [nameError, setNameError] = useState(true);
+  const [emailError, setEmailError] = useState(true);
+  const [mobileError, setMobileError] = useState(true);
   const [addressError, setAddressError] = useState(false);
-  const [pincodeError, setPincodeError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [confirmpasswordError, setconfirmPasswordError] = useState(false);
+  const [pincodeError, setPincodeError] = useState(true);
+  const [passwordError, setPasswordError] = useState(true);
+  const [confirmpasswordError, setconfirmPasswordError] = useState(true);
 
-  const validName = /^[a-zA-Z]+$/;
+  const validName = /^[a-z A-Z]+$/;
   const validEmail = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/;
-  const validPhone = /^([0-9_\-]{10,13})+$/;
+  const validPhone = /^([0-9_\-]{10})+$/;
   const validPincode = /^[1-9][0-9]{5}$/;
   const validPassword =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
@@ -107,31 +107,46 @@ const Registration = () => {
       setconfirmPasswordError(false);
     } else if (cpassword == "") {
       fullcPasswordError.innerText = "Field cannot be blank";
+      setconfirmPasswordError(true);
     } else {
       fullcPasswordError.innerText = "Password mismatch";
-      setconfirmPasswordError(true);
+      setconfirmPasswordError(false);
     }
   };
 
   //Submit Button Visibility
+
   const buttonCursor = document.querySelector(".button"); //To avoid poniterevent and cursor problem
 
   const submitval = () => {
+    console.log(
+      nameError,
+      emailError,
+      mobileError,
+      addressError,
+      pincodeError,
+      passwordError,
+      confirmpasswordError
+    );
     if (
-      fullNameError == false &&
+      nameError == false &&
       emailError == false &&
       mobileError == false &&
       addressError == false &&
       pincodeError == false &&
-      passwordError == false
+      passwordError == false &&
+      confirmpasswordError == false
     ) {
+      console.log("hloo");
       regSubBtn.classList.remove("disabled");
       buttonCursor.classList.remove("cursor-disabled");
     } else {
+      console.log("hii");
       regSubBtn.classList.add("disabled");
       buttonCursor.classList.add("cursor-disabled");
     }
   };
+
   //========================API CALLING=====================//
 
   const handleSubmit = async () => {
@@ -139,6 +154,7 @@ const Registration = () => {
       name: name,
       email: email,
       mobile: mobile,
+      district: district,
       address: address,
       pincode: pincode,
       password: password,
@@ -310,7 +326,7 @@ const Registration = () => {
                 type="button"
                 value="Register"
                 id="reg-btn"
-                class="primary-button disabled"
+                class="btn1 primary-button disabled"
                 onClick={handleSubmit}
               ></input>
             </div>

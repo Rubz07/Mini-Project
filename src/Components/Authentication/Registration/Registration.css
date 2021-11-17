@@ -275,6 +275,7 @@ button:hover:after {
   color: #fff;
   padding: 0.5208333333333334vw 2.0833333333333335vw;
   border: none;
+  width: 100%;
   outline: none;
   cursor: pointer;
   user-select: none;
@@ -337,12 +338,12 @@ button:hover:after {
 }
 
 /* isabled Button Style */
-/* .disabled {
+.disabled {
   opacity: 40%;
   pointer-events: none;
 }
 .cursor-disable {
   cursor: not-allowed;
-} */
+}
 
 /*# sourceMappingURL=style.css.map */

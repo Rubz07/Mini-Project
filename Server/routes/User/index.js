@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var users = require("../../model/userModel");
 var Authentication = require("../../APP/AUTHENTICATION/auth");
+var otpAuthentication = require("../../APP/AUTHENTICATION/otpAuthentication");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.send("welcome");
@@ -20,6 +21,10 @@ router.post("/register", async (req, res, next) => {
       console.log(e);
     });
 });
-router.post("/login", async (req, res, next) => {});
+router.post("/otpAuthentication", async (req, res, next) => {
+  otpAuthentication.otpAuthentication(req.body.mobile).then((response)=>{
+    
+  })
+});
 
 module.exports = router;

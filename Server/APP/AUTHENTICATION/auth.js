@@ -19,6 +19,7 @@ module.exports = {
           var user = new userSchema({
             name: data.name,
             email: data.email,
+            district: data.district,
             address: data.address,
             pincode: data.pincode,
             mobile: data.mobile,

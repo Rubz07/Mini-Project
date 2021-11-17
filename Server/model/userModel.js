@@ -10,6 +10,9 @@ var userSchema = new mongoose.Schema({
   mobile: {
     type: Number,
   },
+  district:{
+    type:String
+  },
   address: {
     type: String,
   },
