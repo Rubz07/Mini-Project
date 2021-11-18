@@ -11,8 +11,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={OtpAuthentication} />
-          <Route exact path="/register" component={Register} />
-          <Route path="/login" component={Login} />
+          <Route exact path="/" component={Register} />
+          <Route exactpath="/login" component={Login} />
         </Switch>
       </Router>
     </div>

@@ -10,7 +10,8 @@ const Registration = () => {
 
   const fullNameError = document.querySelector(".fullname .error");
   const fullEmailError = document.querySelector(".emailclass .error");
-  const fullMobileError = document.querySelector(".mobile .error");
+  const fullAdhaarError = document.querySelector(".mobile .error");
+  const fullAddressError = document.querySelector(".address .error");
   const fullPincodeError = document.querySelector(".pincodeclass .error");
   const fullPasswordError = document.querySelector(".password .error");
   const fullcPasswordError = document.querySelector(".confirmpassword .error");
@@ -18,7 +19,7 @@ const Registration = () => {
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-  const [mobile, setMobile] = useState();
+  const [adhaar, setAdhaar] = useState();
   const [address, setAddress] = useState();
   const [district, setDistrict] = useState();
   const [pincode, setPincode] = useState();
@@ -27,15 +28,15 @@ const Registration = () => {
 
   const [nameError, setNameError] = useState(true);
   const [emailError, setEmailError] = useState(true);
-  const [mobileError, setMobileError] = useState(true);
-  const [addressError, setAddressError] = useState(false);
+  const [adhaarError, setAdhaarError] = useState(true);
+  const [addressError, setAddressError] = useState(true);
   const [pincodeError, setPincodeError] = useState(true);
   const [passwordError, setPasswordError] = useState(true);
   const [confirmpasswordError, setconfirmPasswordError] = useState(true);
 
   const validName = /^[a-z A-Z]+$/;
   const validEmail = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/;
-  const validPhone = /^([0-9_\-]{10})+$/;
+  const validAdhaar = /^[01]\d{3}[\s-]?\d{4}[\s-]?\d{4}$/;
   const validPincode = /^[1-9][0-9]{5}$/;
   const validPassword =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
@@ -66,15 +67,24 @@ const Registration = () => {
     }
   };
 
-  const validateMobile = () => {
-    if (validPhone.test(mobile)) {
-      setMobileError(false);
-    } else if (mobile == "") {
-      fullMobileError.innerText = "Field cannot be blank";
-      setMobileError(true);
+  const validateAdhaar = () => {
+    if (validAdhaar.test(adhaar)) {
+      setAdhaarError(false);
+    } else if (adhaar == "") {
+      fullAdhaarError.innerText = "Field cannot be blank";
+      setAdhaarError(true);
     } else {
-      fullMobileError.innerText = "Invalid phone number";
-      setMobileError(true);
+      fullAdhaarError.innerText = "Invalid Adhaar number";
+      setAdhaarError(true);
+    }
+  };
+
+  const validateAddress = () => {
+    if (address == "") {
+      fullAddressError.innerText = "Field cannot be blank";
+      setAddressError(true);
+    } else {
+      setAddressError(false);
     }
   };
 
@@ -122,7 +132,7 @@ const Registration = () => {
     console.log(
       nameError,
       emailError,
-      mobileError,
+      adhaarError,
       addressError,
       pincodeError,
       passwordError,
@@ -131,7 +141,7 @@ const Registration = () => {
     if (
       nameError == false &&
       emailError == false &&
-      mobileError == false &&
+      adhaarError == false &&
       addressError == false &&
       pincodeError == false &&
       passwordError == false &&
@@ -153,7 +163,7 @@ const Registration = () => {
     const data = {
       name: name,
       email: email,
-      mobile: mobile,
+      mobile: adhaar,
       district: district,
       address: address,
       pincode: pincode,
@@ -187,7 +197,7 @@ const Registration = () => {
                 className="form-control"
                 value={name}
                 id="full-name"
-                placeholder="Name"
+                placeholder="Full Name"
                 onChange={(e) => setName(e.target.value)}
                 onKeyUp={validateName}
               />
@@ -220,14 +230,14 @@ const Registration = () => {
                 <input
                   type="text"
                   className="form-control"
-                  value={mobile}
-                  placeholder="Phone Number"
-                  onChange={(e) => setMobile(e.target.value)}
-                  onKeyUp={validateMobile}
+                  value={adhaar}
+                  placeholder="Aadhaar Number"
+                  onChange={(e) => setAdhaar(e.target.value)}
+                  onKeyUp={validateAdhaar}
                 />
                 <div
                   className={
-                    mobileError ? "error error-visible " : "error error-hidden"
+                    adhaarError ? "error error-visible " : "error error-hidden"
                   }
                 ></div>
               </div>
@@ -241,7 +251,13 @@ const Registration = () => {
                 placeholder="Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                onKeyUp={validateAddress}
               />
+              <div
+                className={
+                  addressError ? "error error-visible " : "error error-hidden"
+                }
+              ></div>
             </div>
             <div className="dropdwn">
               <span className="lnr lnr-drop-down"></span>

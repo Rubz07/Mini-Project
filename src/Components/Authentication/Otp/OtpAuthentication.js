@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "../../../axios";
 import "./OtpAuthentication.css";
+import Lottie from "react-lottie";
+import Checkanimation from "../../../Assets/Lottie/CheckAnimation.json";
 
 function OtpAuthentication() {
   const history = useHistory();
 
   const fullMobileError = document.querySelector(".mobile .error");
   const verifyInput = document.querySelector(".verifyotpform-holder");
+  const verifyCheck = document.querySelector(".Checkanimation");
   const regSubBtn = document.querySelector("#reg-btn");
   const [mobile, setMobile] = useState();
   const [otpcode, setOtpCode] = useState();
@@ -38,6 +41,17 @@ function OtpAuthentication() {
     } else {
       setOtpError(false);
     }
+  };
+
+  //===========Lottie Options======================//
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: Checkanimation,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
 
   const buttonCursor = document.querySelector(".button"); //To avoid poniterevent and cursor problem
@@ -83,7 +97,10 @@ function OtpAuthentication() {
     };
     const res = await axios.post("/otpVerification", data);
     if (res.status === 200) {
-      history.push("/register");
+      verifyInput.classList.remove("anim-hidden");
+      // history.push("/register");
+
+      console.log("hello");
       console.log(res);
     } else {
       console.log(res.data.message);
@@ -128,7 +145,7 @@ function OtpAuthentication() {
               ></input>
             </div>
           </div>
-          <div className="mobileinput">
+          <div className="verifyOtpinput">
             <div className="verifyotpform-holder mobile hidden-mob">
               <span className="lnr lnr-phone-handset"></span>
               <input
@@ -138,30 +155,17 @@ function OtpAuthentication() {
                 placeholder="Otp Code"
                 onChange={(e) => setOtpCode(e.target.value)}
                 onKeyUp={validateOtp}
+                onInput={verifyOtp}
               />
+
               <div
                 className={
                   mobileError ? "error error-visible " : "error error-hidden"
                 }
               ></div>
-              {/* <svg
-                className="checkmark"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 52 52"
-              >
-                <circle
-                  className="checkmark__circle"
-                  cx={26}
-                  cy={26}
-                  r={25}
-                  fill="none"
-                />
-                <path
-                  className="checkmark__check"
-                  fill="none"
-                  d="M14.1 27.2l7.1 7.2 16.7-16.8"
-                />
-              </svg> */}
+            </div>
+            <div className="Checkanimation anim-hidden">
+              <Lottie options={defaultOptions} height={35} width={35} />
             </div>
           </div>
           <div className="button cursor-disable">
@@ -170,7 +174,6 @@ function OtpAuthentication() {
               value="Verify"
               id="reg-btn"
               class="btn1 primary-button disabled"
-              onClick={verifyOtp}
             ></input>
           </div>
         </form>

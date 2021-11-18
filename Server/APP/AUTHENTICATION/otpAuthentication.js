@@ -12,7 +12,6 @@ module.exports = {
       let response = {};
       const mobilenumber = `+${91}` + mobno;
       if (isNaN(mobno) || mobno.length != 10) {
-        console.log("hello00000");
         register_status = false;
         resolve({ register_status });
       } else {
@@ -23,6 +22,7 @@ module.exports = {
             channel: "sms",
           })
           .then((status) => {
+            console.log(status);
             if (status) {
               response.register_status = true;
               resolve(response);

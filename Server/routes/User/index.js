@@ -11,9 +11,11 @@ router.get("/", function (req, res, next) {
 router.post("/register", async (req, res, next) => {
   Authentication.userRegistration(req.body)
     .then((response) => {
-      if (response.register_status == true) {
+      console.log(response);
+      if (response) {
         res.status(200).json({ message: "success" });
       } else {
+        console.log("hi");
         res.json({ message: "user already registered" });
       }
     })
@@ -38,7 +40,7 @@ router.post("/otpVerification", async (req, res, next) => {
       if (response.register_status) {
         res.status(200).json({ message: "Successfully verified" });
       } else {
-        res.json({
+        res.status(200).json({
           message: "enterd otp is incorrect",
         });
       }

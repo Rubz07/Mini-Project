@@ -118,6 +118,15 @@ h3 {
   column-gap: 20px;
   justify-content: space-between;
 }
+.verifyOtpinput {
+  display: flex;
+  column-gap: 20px;
+}
+
+.Checkanimation {
+  position: absolute;
+  right: 40%;
+}
 
 .otpform-holder span.lnr-lock {
   left: 2px;
@@ -371,4 +380,8 @@ h3 {
 }
 .hidden-btn {
   display: block;
+}
+.anim-hidden {
+  visibility: hidden;
+  display: none;
 }
