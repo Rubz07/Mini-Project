@@ -22,7 +22,6 @@ module.exports = {
             channel: "sms",
           })
           .then((status) => {
-            console.log(status);
             if (status) {
               response.register_status = true;
               resolve(response);
@@ -51,7 +50,7 @@ module.exports = {
               resolve(response);
             }
           })
-          .catch((err) => console.log("error", err));
+          .catch((err) => resolve(err));
       });
     } catch (error) {
       console.log("some error occured");

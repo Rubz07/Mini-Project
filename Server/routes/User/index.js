@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var users = require("../../model/userModel");
 var Authentication = require("../../APP/AUTHENTICATION/auth");
+var Login = require("../../app/AUTHENTICATION/Login");
 var otpAuthentication = require("../../APP/AUTHENTICATION/otpAuthentication");
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -39,15 +40,13 @@ router.post("/otpVerification", async (req, res, next) => {
     .then((response) => {
       if (response.register_status) {
         res.status(200).json({ message: "Successfully verified" });
-      } else {
-        res.status(200).json({
-          message: "enterd otp is incorrect",
-        });
       }
     })
     .catch((err) => {
       console.log(err);
     });
 });
+
+router.post("/login", Login);
 
 module.exports = router;

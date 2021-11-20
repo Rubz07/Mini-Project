@@ -9,13 +9,14 @@ function OtpAuthentication() {
   const history = useHistory();
 
   const fullMobileError = document.querySelector(".mobile .error");
+  const fullverifyError = document.querySelector(".verify .error");
   const verifyInput = document.querySelector(".verifyotpform-holder");
   const verifyCheck = document.querySelector(".Checkanimation");
   const regSubBtn = document.querySelector("#reg-btn");
   const [mobile, setMobile] = useState();
   const [otpcode, setOtpCode] = useState();
   const [sendOtpcode, setSendOtpCode] = useState("Send Otp");
-  const [otpError, setOtpError] = useState(true);
+  const [otpError, setOtpError] = useState(false);
   const [mobileError, setMobileError] = useState();
 
   const validPhone = /^([0-9_\-]{10})+$/;
@@ -33,15 +34,15 @@ function OtpAuthentication() {
     }
   };
 
-  const validateOtp = () => {
-    if (validOtp.test(otpcode)) {
-      setOtpError(false);
-    } else if (otpcode == "") {
-      setOtpError(false);
-    } else {
-      setOtpError(false);
-    }
-  };
+  // const validateOtp = () => {
+  //   if (validOtp.test(otpcode)) {
+  //     setOtpError(false);
+  //   } else if (otpcode == "") {
+  //     setOtpError(false);
+  //   } else {
+  //     setOtpError(false);
+  //   }
+  // };
 
   //===========Lottie Options======================//
 
@@ -57,13 +58,13 @@ function OtpAuthentication() {
   const buttonCursor = document.querySelector(".button"); //To avoid poniterevent and cursor problem
   const submitval = () => {
     console.log(otpError);
-    if (otpError == false) {
-      regSubBtn.classList.remove("disabled");
-      buttonCursor.classList.remove("cursor-disabled");
-    } else {
-      regSubBtn.classList.add("disabled");
-      buttonCursor.classList.add("cursor-disabled");
-    }
+    // if (sendOtpcode == "Resend") {
+    //   regSubBtn.classList.remove("disabled");
+    //   buttonCursor.classList.remove("cursor-disabled");
+    // } else {
+    //   regSubBtn.classList.add("disabled");
+    //   buttonCursor.classList.add("cursor-disabled");
+    // }
   };
 
   //===================API CALLING=====================//
@@ -79,6 +80,8 @@ function OtpAuthentication() {
           if (res.status == 200) {
             setSendOtpCode("Resend");
             verifyInput.classList.remove("hidden-mob");
+            regSubBtn.classList.remove("disabled");
+            buttonCursor.classList.remove("cursor-disabled");
           } else {
             verifyInput.classList.add("hidden-mob");
             console.log(res.data.message);
@@ -96,14 +99,27 @@ function OtpAuthentication() {
       mobile: mobile,
     };
     const res = await axios.post("/otpVerification", data);
-    if (res.status === 200) {
-      verifyInput.classList.remove("anim-hidden");
+    if (res) {
+      setOtpError(true);
+      verifyCheck.classList.remove("anim-hidden");
       // history.push("/register");
-
-      console.log("hello");
       console.log(res);
     } else {
-      console.log(res.data.message);
+    
+      verifyCheck.classList.add("anim-hidden");
+     
+    }
+  };
+
+  const nextreg = () => {
+    console.log(otpError);
+    if (otpError == true) {
+      history.push({
+        pathname: "/register",
+        state: { mobile: mobile },
+      });
+    } else {
+      fullverifyError.innerText = "Entered otp is incorrect";
     }
   };
 
@@ -146,7 +162,7 @@ function OtpAuthentication() {
             </div>
           </div>
           <div className="verifyOtpinput">
-            <div className="verifyotpform-holder mobile hidden-mob">
+            <div className="verifyotpform-holder verify hidden-mob">
               <span className="lnr lnr-phone-handset"></span>
               <input
                 type="text"
@@ -154,8 +170,7 @@ function OtpAuthentication() {
                 value={otpcode}
                 placeholder="Otp Code"
                 onChange={(e) => setOtpCode(e.target.value)}
-                onKeyUp={validateOtp}
-                onInput={verifyOtp}
+                onKeyUp={verifyOtp}
               />
 
               <div
@@ -165,7 +180,7 @@ function OtpAuthentication() {
               ></div>
             </div>
             <div className="Checkanimation anim-hidden">
-              <Lottie options={defaultOptions} height={35} width={35} />
+              <Lottie options={defaultOptions} height={30} width={30} />
             </div>
           </div>
           <div className="button cursor-disable">
@@ -174,6 +189,7 @@ function OtpAuthentication() {
               value="Verify"
               id="reg-btn"
               class="btn1 primary-button disabled"
+              onClick={nextreg}
             ></input>
           </div>
         </form>

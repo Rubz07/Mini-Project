@@ -22,6 +22,7 @@ module.exports = {
             address: data.address,
             pincode: data.pincode,
             mobile: data.mobile,
+            adhaar: data.adhaar,
             password: data.password,
           });
           var userData = await user.save();

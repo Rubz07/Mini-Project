@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../../../axios";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, useLocation } from "react-router-dom";
+
 // import image1 from "../../../Assets/images/image-1.png";
 // import image2 from "../../../Assets/images/image-2.png";
 
 import "./Registration.css";
 const Registration = () => {
   //========================State Management=====================//
+  const location = useLocation();
+  useEffect(() => {
+    // result: '/secondpage'
+    setMobile(location.state.mobile);
+  }, [location]);
 
   const fullNameError = document.querySelector(".fullname .error");
   const fullEmailError = document.querySelector(".emailclass .error");
@@ -19,6 +25,7 @@ const Registration = () => {
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
+  const [mobile, setMobile] = useState();
   const [adhaar, setAdhaar] = useState();
   const [address, setAddress] = useState();
   const [district, setDistrict] = useState();
@@ -45,6 +52,7 @@ const Registration = () => {
 
   const validateName = () => {
     if (validName.test(name)) {
+      console.log(mobile);
       setNameError(false);
     } else if (name == "") {
       fullNameError.innerText = "Field cannot be blank";
@@ -163,7 +171,8 @@ const Registration = () => {
     const data = {
       name: name,
       email: email,
-      mobile: adhaar,
+      mobile: mobile,
+      adhaar: adhaar,
       district: district,
       address: address,
       pincode: pincode,
