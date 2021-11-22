@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Main.css";
+import axios from "../../../axios";
 import { MDBDataTable } from "mdbreact";
 import hello from "../../../Assets/images/hello.svg";
 import Charts from "../Charts/Charts";
 function Main() {
+  const [count, setCount] = useState();
+  const [date, setDate] = useState();
+  const [description, setDescription] = useState();
+  useEffect(async () => {
+    try {
+      let response = await axios.get(`/getComplaint`);
+      let newState = response.complaint.map((e) => e);
+      console.log(newState); // map your state here and then update the state
+      console.log(newState);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, []);
   const data = {
     columns: [
       {
@@ -41,7 +55,7 @@ function Main() {
       {
         SerialNo: "1",
         RegistrationNo: "186475",
-        Date: "2011/04/25",
+        Date: "dfgdfg",
         Description: "Water lekage",
         Status: "Approved",
       },
@@ -87,11 +101,10 @@ function Main() {
         </div> */}
 
         <div className="main__cards">
-          
           <div className="card card_a">
             <div className="top-sec">
               <i className="fa fa-file-alt fa-3x text-red"></i>
-              <span className="font-bold text-title">2467</span>
+              <span className="font-bold text-title">{count}</span>
             </div>
             <div className="card_inner">
               <p className="text-primary-p">Total Grievances Registered</p>

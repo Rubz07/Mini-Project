@@ -1,7 +1,10 @@
 import React from "react";
 import Navbar from "../../Navbar/Navbar";
 import Sidebar from "../../Sidebar/Sidebar";
+import water from "../../../../Assets/images/water.png";
+import Dashboard from "../../Dashboard/Dashboard";
 import "./SelectCategory.css";
+import { Link, Route, useLocation, Switch } from "react-router-dom";
 function SelectCategory() {
   return (
     <main>
@@ -20,42 +23,14 @@ function SelectCategory() {
         </div>
         <div className="category_main__cards">
           <div className="category_card card_a">
-            <i className="fa fa-school fa-2x text-blue "></i>
+            <i className="fa fa-hand-holding-water fa-2x text-blue "></i>
             <div className="category_card_inner">
-              <p className="text-cat-p">Higher Education</p>
+              <Link to="/waterauthority">
+                <p className="text-cat-p">Water Authority</p>
+              </Link>
             </div>
           </div>
 
-          <div className="category_card card_b">
-            <i className="fa fa-file-alt fa-2x text-blue"></i>
-            <div className="category_card_inner">
-              <p className="text-cat-p">Banking</p>
-            </div>
-          </div>
-          <div className="category_card card_b">
-            <i className="fa fa-file-alt fa-2x text-blue"></i>
-            <div className="category_card_inner">
-              <p className="text-cat-p">Banking</p>
-            </div>
-          </div>
-          <div className="category_card card_b">
-            <i className="fa fa-file-alt fa-2x text-blue"></i>
-            <div className="category_card_inner">
-              <p className="text-cat-p">Banking</p>
-            </div>
-          </div>
-          <div className="category_card card_b">
-            <i className="fa fa-file-alt fa-2x text-blue"></i>
-            <div className="category_card_inner">
-              <p className="text-cat-p">Banking</p>
-            </div>
-          </div>
-          <div className="category_card card_b">
-            <i className="fa fa-file-alt fa-2x text-blue"></i>
-            <div className="category_card_inner">
-              <p className="text-cat-p">Banking</p>
-            </div>
-          </div>
           <div className="category_card card_b">
             <i className="fa fa-file-alt fa-2x text-blue"></i>
             <div className="category_card_inner">

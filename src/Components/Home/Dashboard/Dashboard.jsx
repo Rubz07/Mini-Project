@@ -19,10 +19,8 @@ function Dashboard() {
       <div className="dashboardContainer">
         <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
         <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
-        {/* <Main />
-        <SelectCategory /> */}
         <Route exact path="/" component={Main} />
-        <Route exact path="/selectCategory" component={SelectCategory} />
+        <Route exact path="/selectCategory" component={SelectCategory}/>
       </div>
     </Switch>
   );

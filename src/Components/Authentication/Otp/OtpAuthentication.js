@@ -114,10 +114,7 @@ function OtpAuthentication() {
   const nextreg = () => {
     console.log(otpError);
     if (otpError == true) {
-      history.push({
-        pathname: "/register",
-        state: { mobile: mobile },
-      });
+     
     } else {
       fullverifyError.innerText = "Entered otp is incorrect";
     }

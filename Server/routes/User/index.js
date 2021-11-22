@@ -4,6 +4,7 @@ var users = require("../../model/userModel");
 var Authentication = require("../../APP/AUTHENTICATION/auth");
 var Login = require("../../app/AUTHENTICATION/Login");
 var otpAuthentication = require("../../APP/AUTHENTICATION/otpAuthentication");
+var userOperation = require("../../APP/USER/UserOperations");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.send("welcome");
@@ -48,5 +49,27 @@ router.post("/otpVerification", async (req, res, next) => {
 });
 
 router.post("/login", Login);
+
+router.post("/postcomplaint", async (req, res) => {
+  console.log("hii");
+  userOperation.postComplaint(req.body).then((response) => {
+    if (response.register_status) {
+      res.status(200).json({ message: "otp sended" });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
+router.get("/getComplaint", async (req, res) => {
+  userOperation.getAllComplaints().then((response) => {
+    console.log(response);
+    if (response) {
+      res.status(200).json({ complaint: response, count: response.length });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
 
 module.exports = router;

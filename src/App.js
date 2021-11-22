@@ -4,6 +4,7 @@ import Login from "./Components/Authentication/Login/Login";
 import OtpAuthentication from "./Components/Authentication/Otp/OtpAuthentication";
 import SelectCategory from "./Components/Home/Complaint/SelectCategory/SelectCategory";
 import Dashboard from "./Components/Home/Dashboard/Dashboard";
+import Waterauthority from "./Components/Home/Complaint/SelectCategory/Categories/Water_Authority/Waterauthority";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
@@ -18,6 +19,7 @@ function App() {
               <SelectCategory />
             </Dashboard>
           </Route>
+          <Route exact path="/waterauthority" component={Waterauthority} />
           <Route exact path="/verification" component={OtpAuthentication} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
