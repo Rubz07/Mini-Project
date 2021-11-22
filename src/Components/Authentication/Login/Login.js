@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import image1 from "../../../Assets/images/image-1.png";
 import axios from "../../../axios";
 import { Link, Route } from "react-router-dom";
+import "./Login.css";
 function Login() {
   const fullMobileError = document.querySelector(".mobile .error");
   const fullPasswordError = document.querySelector(".password .error");
