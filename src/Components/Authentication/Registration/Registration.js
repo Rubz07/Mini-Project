@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../axios";
 import { Link, Route, useLocation } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 // import image1 from "../../../Assets/images/image-1.png";
 // import image2 from "../../../Assets/images/image-2.png";
 
 import "./Registration.css";
 const Registration = () => {
+  const history = useHistory();
   //========================State Management=====================//
   const location = useLocation();
   useEffect(() => {
@@ -182,8 +183,9 @@ const Registration = () => {
 
     const res = await axios.post("/register", data);
     if (res.status === 200) {
-      console.log(res);
+      history.push("/login");
     } else {
+      alert("some error occured");
       //need to doo some edit
       console.log(res.data.message);
     }

@@ -102,20 +102,23 @@ function OtpAuthentication() {
     if (res) {
       setOtpError(true);
       verifyCheck.classList.remove("anim-hidden");
-      // history.push("/register");
+
       console.log(res);
     } else {
-    
       verifyCheck.classList.add("anim-hidden");
-     
     }
   };
 
   const nextreg = () => {
     console.log(otpError);
     if (otpError == true) {
-     
+      history.push({
+        pathname: "/register",
+        search: "?query=abc",
+        state: { mobile: mobile },
+      });
     } else {
+      alert("Entered otp is incorrect");
       fullverifyError.innerText = "Entered otp is incorrect";
     }
   };

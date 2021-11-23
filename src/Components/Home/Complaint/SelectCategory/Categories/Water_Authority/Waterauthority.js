@@ -22,11 +22,16 @@ function Waterauthority() {
 
     const res = await axios.post("/postcomplaint", data);
     if (res.status == 200) {
-      history.push("/");
-      console.log(res);
+      if (
+        window.confirm("Registration Successfull \n \n Do You want to go back?")
+      ) {
+        history.push("/dashboard");
+      } else {
+      }
+    } else {
+      alert("Some error occured");
     }
   };
-
   return (
     <div className="wrapper">
       <div className="inner">
@@ -86,12 +91,22 @@ function Waterauthority() {
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
+            <div class="form-group">
+              <label for="exampleFormControlFile1">
+                Attach supporting documment(if any)
+              </label>
+              <input
+                type="file"
+                class="form-control-file"
+                id="exampleFormControlFile1"
+              />
+            </div>
           </div>
 
           <div className="button ">
             <input
               type="button"
-              value="Register"
+              value="Submit"
               id="reg-btn"
               class="btn1"
               onClick={handleComplaint}

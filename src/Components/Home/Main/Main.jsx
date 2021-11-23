@@ -2,22 +2,38 @@ import React, { useEffect, useState } from "react";
 import "./Main.css";
 import axios from "../../../axios";
 import { MDBDataTable } from "mdbreact";
-import hello from "../../../Assets/images/hello.svg";
-import Charts from "../Charts/Charts";
+import { Link, Route, useLocation } from "react-router-dom";
+
 function Main() {
   const [count, setCount] = useState();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState([]);
   const [description, setDescription] = useState();
-  useEffect(async () => {
+
+  useEffect(() => {
     try {
-      let response = await axios.get(`/getComplaint`);
-      let newState = response.complaint.map((e) => e);
-      console.log(newState); // map your state here and then update the state
-      console.log(newState);
+      axios.get(`/getComplaint`).then((response) => {
+        let a = response.data.complaint;
+        let b = a.map((complaint) => {
+          return complaint;
+        });
+        setCount(response.data.count);
+        // setDescription(b[0].description);
+        // setDate(b[0].date);
+      });
     } catch (error) {
       console.error(error.message);
     }
   }, []);
+
+  // const complaintDetails = () => {
+  //   try {
+  //     axios.get(`/getComplaint`).then((response) => {
+  //       console.log(response.data.complaint);
+  //     });
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
   const data = {
     columns: [
       {
@@ -55,37 +71,37 @@ function Main() {
       {
         SerialNo: "1",
         RegistrationNo: "186475",
-        Date: "dfgdfg",
-        Description: "Water lekage",
+        Date: "11/23/2021",
+        Description: "water lekage",
         Status: "Approved",
       },
       {
-        SerialNo: "2",
+        SerialNo: "1",
         RegistrationNo: "186475",
-        Date: "2011/04/25",
-        Description: "Water lekage",
+        Date: "11/23/2021",
+        Description: "water lekage",
         Status: "Approved",
       },
       {
-        SerialNo: "3",
+        SerialNo: "1",
         RegistrationNo: "186475",
-        Date: "2011/04/25",
-        Description: "Water lekage",
-        Status: "closed",
-      },
-      {
-        SerialNo: "4",
-        RegistrationNo: "186475",
-        Date: "2011/04/25",
-        Description: "Water lekage",
+        Date: "11/23/2021",
+        Description: "water lekage",
         Status: "Approved",
       },
       {
-        SerialNo: "5",
+        SerialNo: "1",
         RegistrationNo: "186475",
-        Date: "2011/04/25",
-        Description: "Water lekage",
-        Status: "pending",
+        Date: "11/23/2021",
+        Description: "water lekage",
+        Status: "Approved",
+      },
+      {
+        SerialNo: "1",
+        RegistrationNo: "186475",
+        Date: "11/23/2021",
+        Description: "water lekage",
+        Status: "Approved",
       },
     ],
   };
@@ -114,7 +130,7 @@ function Main() {
           <div className="card card_b">
             <div className="top-sec">
               <i className="fa fa-file-alt fa-3x text-yellow"></i>
-              <span className="font-bold text-title">2467</span>
+              <span className="font-bold text-title">0</span>
             </div>
             <div className="card_inner">
               <p className="text-primary-p">Number of Grievances Pending</p>
@@ -124,7 +140,7 @@ function Main() {
           <div className="card card_c">
             <div className="top-sec">
               <i className="fa fa-file-alt fa-3x text-green"></i>
-              <span className="font-bold text-title">2467</span>
+              <span className="font-bold text-title">0</span>
             </div>
             <div className="card_inner">
               <p className="text-primary-p">Number of Grievances Closed</p>

@@ -1,25 +1,52 @@
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+var randomstring = require("randomstring");
+const client = require("twilio")(accountSid, authToken);
+const dotenv = require("dotenv");
+dotenv.config();
+
 const complaintSchema = require("../../model/userComplaint");
 module.exports = {
   postComplaint: (data) => {
-    console.log(data);
     try {
       return new Promise(async (resolve, reject) => {
-        var postcomplaint = new complaintSchema({
-          name: data.name,
-          description: data.description,
-          category: data.category,
-          panchayat: data.panchayat,
-          area: data.area,
+        let regno = randomstring.generate({
+          length: 6,
+          charset: "numeric",
         });
-        var complaint = await postcomplaint.save();
-        console.log(complaint);
-        if (complaint) {
-          const response = {
-            register_status: true,
-            message: "complaint Registration successfull",
-          };
-          resolve(response);
-        }
+        console.log(regno);
+        client.messages
+          .create({
+            body:
+              "Your complaint is registered successfully and you register number is " +
+              regno,
+            from: "+19704382955",
+            to: "+919048317092",
+          })
+          .then(async (message) => {
+            if (message) {
+              console.log(message.sid);
+              var postcomplaint = new complaintSchema({
+                registrationNo: regno,
+                name: data.name,
+                description: data.description,
+                complaint_category: data.category,
+                panchayat: data.panchayat,
+                area: data.area,
+              });
+              var complaint = await postcomplaint.save();
+              if (complaint) {
+                console.log(complaint);
+                const response = {
+                  register_status: true,
+                  message: "complaint Registration successfull",
+                };
+                resolve(response);
+              }
+            } else {
+              console.log("network issue");
+            }
+          });
       }).catch((err) => console.log("error", err));
     } catch (error) {
       console.log(error);
@@ -33,7 +60,7 @@ module.exports = {
         .exec()
         .then((response) => {
           if (response) {
-            console.log(response);
+            // console.log(response);
             resolve(response);
           }
         })

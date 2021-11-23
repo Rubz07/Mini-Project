@@ -51,10 +51,9 @@ router.post("/otpVerification", async (req, res, next) => {
 router.post("/login", Login);
 
 router.post("/postcomplaint", async (req, res) => {
-  console.log("hii");
   userOperation.postComplaint(req.body).then((response) => {
     if (response.register_status) {
-      res.status(200).json({ message: "otp sended" });
+      res.status(200).json({ message: "complaint registered successfully" });
     } else {
       res.status(401).json({ message: "some error occured" });
     }

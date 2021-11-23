@@ -22,7 +22,7 @@ function Sidebar({ sidebarOpen, closeSidebar }) {
         <div className="sidebar__link active_menu_link">
           <i className="fa fa-home"></i>
 
-          <a href="#">Dashboard</a>
+          <Link to="/dashboard">Dashboard</Link>
         </div>
         <h2>COMPLAINT</h2>
         <div className="sidebar__link">
@@ -41,7 +41,7 @@ function Sidebar({ sidebarOpen, closeSidebar }) {
 
         <div className="sidebar__logout">
           <i className="fa fa-power-off"></i>
-          <a href="#">Log out</a>
+          <Link to="/login">Log out</Link>
         </div>
       </div>
     </div>

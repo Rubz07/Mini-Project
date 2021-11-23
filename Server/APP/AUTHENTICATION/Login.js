@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
     );
     console.log(process.env.SECRET_CODE);
     console.log(token);
-    res.header("auth-token", token).send(token)
+    res.status(200).json({ tokenstring: token });
     next();
   } catch (err) {
     return res.status(400).json({

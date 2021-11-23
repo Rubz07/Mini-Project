@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import image1 from "../../../Assets/images/image-1.png";
 import axios from "../../../axios";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, useHistory } from "react-router-dom";
 import "./Login.css";
 function Login() {
+  const history = useHistory();
   const fullMobileError = document.querySelector(".mobile .error");
   const fullPasswordError = document.querySelector(".password .error");
   const regSubBtn = document.querySelector("#reg-btn");
@@ -61,7 +62,7 @@ function Login() {
     };
     const res = await axios.post("/login", data);
     if (res.status === 200) {
-      console.log(res);
+      history.push("/dashboard");
     } else {
       //need to doo some edit
       console.log(res.data.message);
