@@ -3,37 +3,25 @@ import "./Main.css";
 import axios from "../../../axios";
 import { MDBDataTable } from "mdbreact";
 import { Link, Route, useLocation } from "react-router-dom";
+import $ from "jquery";
 
 function Main() {
   const [count, setCount] = useState();
-  const [date, setDate] = useState([]);
-  const [description, setDescription] = useState();
+
+  const [complaints, setComplaints] = useState([]);
+  console.log(complaints);
+  async function getComplaints() {
+    let response = await axios.get(`/getComplaint`);
+    setCount(response.data.count);
+    if (response.status === 200) {
+      setComplaints(response.data.complaint);
+    }
+  }
 
   useEffect(() => {
-    try {
-      axios.get(`/getComplaint`).then((response) => {
-        let a = response.data.complaint;
-        let b = a.map((complaint) => {
-          return complaint;
-        });
-        setCount(response.data.count);
-        // setDescription(b[0].description);
-        // setDate(b[0].date);
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
+    getComplaints();
   }, []);
 
-  // const complaintDetails = () => {
-  //   try {
-  //     axios.get(`/getComplaint`).then((response) => {
-  //       console.log(response.data.complaint);
-  //     });
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // };
   const data = {
     columns: [
       {
@@ -68,43 +56,46 @@ function Main() {
       },
     ],
     rows: [
+      // {
+      //   SerialNo: "1",
+      //   RegistrationNo: { regno } ? regno : "",
+      //   Date: { date } ? date : "",
+      //   Description: { description } ? description : "",
+      //   Status: { status } ? status : "",
+      // },
+
       {
         SerialNo: "1",
         RegistrationNo: "186475",
-        Date: "11/23/2021",
+        Date: "11/24/2021",
         Description: "water lekage",
-        Status: "Approved",
+        Status: "Pending",
       },
-      {
-        SerialNo: "1",
-        RegistrationNo: "186475",
-        Date: "11/23/2021",
-        Description: "water lekage",
-        Status: "Approved",
-      },
-      {
-        SerialNo: "1",
-        RegistrationNo: "186475",
-        Date: "11/23/2021",
-        Description: "water lekage",
-        Status: "Approved",
-      },
-      {
-        SerialNo: "1",
-        RegistrationNo: "186475",
-        Date: "11/23/2021",
-        Description: "water lekage",
-        Status: "Approved",
-      },
-      {
-        SerialNo: "1",
-        RegistrationNo: "186475",
-        Date: "11/23/2021",
-        Description: "water lekage",
-        Status: "Approved",
-      },
+
+      // {
+      //   SerialNo: "1",
+      //   RegistrationNo: "186475",
+      //   Date: "11/23/2021",
+      //   Description: "water lekage",
+      //   Status: "Approved",
+      // },
+      // {
+      //   SerialNo: "1",
+      //   RegistrationNo: "186475",
+      //   Date: "11/23/2021",
+      //   Description: "water lekage",
+      //   Status: "Approved",
+      // },
+      // {
+      //   SerialNo: "1",
+      //   RegistrationNo: "186475",
+      //   Date: "11/23/2021",
+      //   Description: "water lekage",
+      //   Status: "Approved",
+      // },
     ],
   };
+
   return (
     <main>
       <div className="main__container">
@@ -120,6 +111,7 @@ function Main() {
           <div className="card card_a">
             <div className="top-sec">
               <i className="fa fa-file-alt fa-3x text-red"></i>
+
               <span className="font-bold text-title">{count}</span>
             </div>
             <div className="card_inner">
@@ -160,7 +152,47 @@ function Main() {
           <div className="charts_header">
             <p className="text-header">List of Grievances</p>
           </div>
-          <MDBDataTable striped bordered small data={data} />
+
+          <table
+            id="dtBasicExample"
+            class="table table-striped table-bordered table-sm"
+            cellspacing="0"
+            width="100%"
+          >
+            <thead>
+              <tr>
+                <th class="th-sm">Sn.</th>
+                <th class="th-sm">Registration Number</th>
+                <th class="th-sm">Received Date</th>
+                <th class="th-sm">Grievance Description</th>
+                <th class="th-sm">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {complaints &&
+                complaints.length > 0 &&
+                complaints.map((data) => {
+                  return (
+                    <tr key={data._id}>
+                      <td>1</td>
+                      <td>{data.registrationNo}</td>
+                      <td>{data.date}</td>
+                      <td>{data.description}</td>
+                      <td>{data.status}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </div>
     </main>

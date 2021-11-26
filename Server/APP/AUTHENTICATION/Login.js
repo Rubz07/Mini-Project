@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
   try {
-    console.log(req.body);
     //validation
     if (!req.body.mobile || !req.body.password)
       return res.status(400).json({
@@ -15,7 +14,6 @@ module.exports = async (req, res, next) => {
     const user = await userSchema.findOne({
       mobile: req.body.mobile,
     });
-    console.log(user);
     if (!user)
       return res.status(404).json({
         status: false,
@@ -33,9 +31,8 @@ module.exports = async (req, res, next) => {
       process.env.SECRET_CODE,
       { expiresIn: "1d" }
     );
-    console.log(process.env.SECRET_CODE);
     console.log(token);
-    res.status(200).json({ tokenstring: token });
+    res.status(200).json({ authToken: token });
     next();
   } catch (err) {
     return res.status(400).json({

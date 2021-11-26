@@ -5,6 +5,7 @@ var Authentication = require("../../APP/AUTHENTICATION/auth");
 var Login = require("../../app/AUTHENTICATION/Login");
 var otpAuthentication = require("../../APP/AUTHENTICATION/otpAuthentication");
 var userOperation = require("../../APP/USER/UserOperations");
+var { verifyLoggin } = require("../../AuthController/AuthController");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.send("welcome");
@@ -49,6 +50,7 @@ router.post("/otpVerification", async (req, res, next) => {
 });
 
 router.post("/login", Login);
+router.post("/isAuthenticated", verifyLoggin);
 
 router.post("/postcomplaint", async (req, res) => {
   userOperation.postComplaint(req.body).then((response) => {
