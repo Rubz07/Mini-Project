@@ -1,9 +1,13 @@
 import React from "react";
 import logo from "../../../Assets/images/logo.svg";
-import { Link, Route, useLocation } from "react-router-dom";
+import { Link, Route, useLocation, useHistory } from "react-router-dom";
 import "./Sidebar.css";
 function Sidebar({ sidebarOpen, closeSidebar }) {
-  console.log(closeSidebar);
+  const history = useHistory();
+  const termination = async () => {
+    window.localStorage.removeItem("auth");
+    history.push("/login");
+  };
   return (
     <div className={sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
       <div className="sidebar__title">
@@ -41,7 +45,7 @@ function Sidebar({ sidebarOpen, closeSidebar }) {
 
         <div className="sidebar__logout">
           <i className="fa fa-power-off"></i>
-          <Link to="/login">Log out</Link>
+          <Link onClick={termination}>Log out</Link>
         </div>
       </div>
     </div>

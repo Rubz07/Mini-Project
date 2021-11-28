@@ -49,8 +49,12 @@ router.post("/otpVerification", async (req, res, next) => {
     });
 });
 
-router.post("/login", Login);
-router.post("/isAuthenticated", verifyLoggin);
+router.post("/login", Login, (req, res) => {
+  res.status(200).json({ authToken: req.user });
+});
+router.post("/isAuthenticated", verifyLoggin, (req, res) => {
+  res.json({ user: req.user });
+});
 
 router.post("/postcomplaint", async (req, res) => {
   userOperation.postComplaint(req.body).then((response) => {
@@ -64,7 +68,6 @@ router.post("/postcomplaint", async (req, res) => {
 
 router.get("/getComplaint", async (req, res) => {
   userOperation.getAllComplaints().then((response) => {
-    console.log(response);
     if (response) {
       res.status(200).json({ complaint: response, count: response.length });
     } else {

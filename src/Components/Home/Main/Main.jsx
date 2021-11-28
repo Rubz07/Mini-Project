@@ -9,7 +9,7 @@ function Main() {
   const [count, setCount] = useState();
 
   const [complaints, setComplaints] = useState([]);
-  console.log(complaints);
+
   async function getComplaints() {
     let response = await axios.get(`/getComplaint`);
     setCount(response.data.count);

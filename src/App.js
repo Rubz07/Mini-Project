@@ -21,7 +21,8 @@ function App() {
             </Dashboard>
           </Route>
           <Route exact path="/waterauthority" component={Waterauthority} />
-          {/* <Route exact path="/" component={AdminDashboard} /> */}
+          <Route exact path="/Admindashboard" component={AdminDashboard} />
+          <Route exact path="/" component={OtpAuthentication} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
         </Switch>

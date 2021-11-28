@@ -11,8 +11,10 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory,
 } from "react-router-dom";
 function Dashboard() {
+  const history = useHistory();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const openSidebar = () => {
@@ -22,26 +24,22 @@ function Dashboard() {
     setSidebarOpen(false);
   };
 
-  // const [complaints, setComplaints] = useState([]);
-  // console.log(complaints);
-  // async function getComplaints() {
-  //   let response = await axios.get(`/getComplaint`, {
-  //     headers: { Authorization: window.localStorage.getItem("auth-token") },
-  //   });
-  //   if (response.status === 200) {
-  //     setComplaints(response.data.complaint);
-  //   }
-  // }
+  async function isAuthenticated() {
+    let response = await axios.post(`/isAuthenticated`, {
+      headers: { Authorization: localStorage.getItem("auth") },
+    });
+    console.log("status", response.status);
+    if (response.status == 401) {
+      console.log("done");
+    } else {
+      console.log("pooooiiiii");
+      history.push("/login");
+      //return <Redirect to="/login"></Redirect>;
+    }
+  }
 
   useEffect(() => {
-    let response = axios.post(`/isAuthenticated`, {
-      headers: { Authorization: window.localStorage.getItem("auth-token") },
-    });
-    if (response.status === 200) {
-      console.log("KIKI", response.data);
-    } else {
-      Redirect("/login");
-    }
+    isAuthenticated();
   }, []);
 
   return (

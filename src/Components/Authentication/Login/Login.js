@@ -62,7 +62,7 @@ function Login() {
     };
     const res = await axios.post("/login", data);
     if (res.status === 200) {
-      window.localStorage.setItem("auth-token", res.data.authToken);
+      await window.localStorage.setItem("auth", res.data.authToken);
       history.push("/dashboard");
     } else {
       //need to doo some edit

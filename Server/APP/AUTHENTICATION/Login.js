@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
       { expiresIn: "1d" }
     );
     console.log(token);
-    res.status(200).json({ authToken: token });
+    req.user = token;
     next();
   } catch (err) {
     return res.status(400).json({
