@@ -1,51 +1,84 @@
 import React from "react";
-import logo from "../../../Assets/images/logo.svg";
 import { Link, Route, useLocation, useHistory } from "react-router-dom";
 import "./Sidebar.css";
-function Sidebar({ sidebarOpen, closeSidebar }) {
+import {
+  LineStyle,
+  Timeline,
+  MailOutline,
+  DynamicFeed,
+  ChatBubbleOutline,
+  WorkOutline,
+  Report,
+  AddCircleOutline,
+  Edit,
+  Autorenew,
+  Lock,
+  ExitToApp,
+} from "@material-ui/icons";
+function Sidebar() {
   const history = useHistory();
   const termination = async () => {
     window.localStorage.removeItem("auth");
     history.push("/login");
   };
   return (
-    <div className={sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
-      <div className="sidebar__title">
-        <div className="sidebar__img">
-          <img src={logo} alt="logo" />
-          <h1>Cmportal</h1>
+    <div className="sidebar">
+      <div className="sidebarWrapper">
+        <div className="sidebarMenu">
+          <h2 className="sidebarTitle">Dashboard</h2>
+          <ul className="sidebarList">
+            <Link to="/dashboard" className="link">
+              <li className="sidebarListItem active">
+                <LineStyle className="sidebarIcon" />
+                Home
+              </li>
+            </Link>
+          </ul>
         </div>
-        <i
-          className="fa fa-times"
-          id="sidebarIcon"
-          onClick={() => closeSidebar()}
-        ></i>
-      </div>
-
-      <div className="sidebar__menu">
-        <div className="sidebar__link active_menu_link">
-          <i className="fa fa-home"></i>
-
-          <Link to="/dashboard">Dashboard</Link>
+        <div className="sidebarMenu">
+          <h2 className="sidebarTitle">Complaints</h2>
+          <ul className="sidebarList">
+            <Link to="/categories" className="link">
+              <li className="sidebarListItem">
+                <AddCircleOutline className="sidebarIcon" />
+                Lodge Public Grievance
+              </li>
+            </Link>
+            <Link to="/ComplaintStatus" className="link">
+              <li className="sidebarListItem">
+                <Autorenew className="sidebarIcon" />
+                Grievance Status
+              </li>
+            </Link>
+          </ul>
         </div>
-        <h2>COMPLAINT</h2>
-        <div className="sidebar__link">
-          <i className="fa fa-plus"></i>
-          <Link to="/selectCategory">Lodge Public Grievance</Link>
-          {/* <a href="#"></a> */}
+        <div className="sidebarMenu">
+          <h2 className="sidebarTitle">Profile</h2>
+          <ul className="sidebarList">
+            <Link to="/editprofile" className="link">
+              <li className="sidebarListItem">
+                <Edit className="sidebarIcon" />
+                Edit Profile
+              </li>
+            </Link>
+            <Link to="/changepassword" className="link">
+              <li className="sidebarListItem">
+                <Lock className="sidebarIcon" />
+                Change Password
+              </li>
+            </Link>
+          </ul>
         </div>
-        <div className="sidebar__link">
-          <i className="fa fa-history"></i>
-          <a href="#">Account Activity</a>
-        </div>
-        <div className="sidebar__link">
-          <i className="fa fa-edit"></i>
-          <a href="#">Edit Profile</a>
-        </div>
-
-        <div className="sidebar__logout">
-          <i className="fa fa-power-off"></i>
-          <Link onClick={termination}>Log out</Link>
+        <div className="sidebarMenu">
+          <h2 className="sidebarTitle"></h2>
+          <ul className="sidebarList">
+            <Link to="/Logout" className="link">
+              <li className="sidebarListItem">
+                <ExitToApp className="sidebarIcon" />
+                Logout
+              </li>
+            </Link>
+          </ul>
         </div>
       </div>
     </div>

@@ -1,13 +1,23 @@
-.productList {
+.complaintDetails {
   flex: 4;
+  margin: 20px;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.productListItem {
+.complaintTitle {
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+.complaintListItem {
   display: flex;
   align-items: center;
 }
 
-.productListImg {
+.complaintListImg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -15,7 +25,7 @@
   margin-right: 10px;
 }
 
-.productListEdit {
+.complaintListEdit {
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
@@ -25,7 +35,7 @@
   margin-right: 20px;
 }
 
-.productListDelete {
+.complaintListDelete {
   color: red;
   cursor: pointer;
 }

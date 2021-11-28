@@ -1,31 +1,34 @@
 import React from "react";
 import "./Navbar.css";
-import avatar from "../../../Assets/images/avatar.svg";
+import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 
-function Navbar({ sidebarOpen, openSidebar }) {
+function Navbar() {
   return (
-    <nav className="navbar">
-      <div className="nav_icon" onClick={() => openSidebar()}>
-        <i className="fa fa-bars"></i>
+    <div className="topbar">
+      <div className="topbarWrapper">
+        <div className="topLeft">
+          <span className="logo">lamaadmin</span>
+        </div>
+        <div className="topRight">
+          <div className="topbarIconContainer">
+            <NotificationsNone />
+            <span className="topIconBadge">2</span>
+          </div>
+          <div className="topbarIconContainer">
+            <Language />
+            <span className="topIconBadge">2</span>
+          </div>
+          <div className="topbarIconContainer">
+            <Settings />
+          </div>
+          <img
+            src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+            alt=""
+            className="topAvatar"
+          />
+        </div>
       </div>
-      <div className="navbar__left">
-        <a className="active_link" href="#">
-          Dashboard
-        </a>
-      </div>
-
-      <div className="navbar__right">
-        <a href="#">
-          <i className="fa fa-search"></i>
-        </a>
-        <a href="#">
-          <i className="fa fa-clock-o"></i>
-        </a>
-        <a href="#">
-          <img width="30" src={avatar} alt="avatar" />
-        </a>
-      </div>
-    </nav>
+    </div>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import "./SideBarAdmin.css";
+
 import {
   LineStyle,
   Timeline,
@@ -17,12 +18,12 @@ import {
 import { Link } from "react-router-dom";
 function SideBarAdmin() {
   return (
-    <div className="sidebarAdmin">
+    <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Dashboard</h3>
+          <h2 className="sidebarTitle">Dashboard</h2>
           <ul className="sidebarList">
-            <Link to="/Admindashboard" className="link">
+            <Link to="/" className="link">
               <li className="sidebarListItem active">
                 <LineStyle className="sidebarIcon" />
                 Home
@@ -39,7 +40,7 @@ function SideBarAdmin() {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Quick Menu</h3>
+          <h2 className="sidebarTitle">Quick Menu</h2>
           <ul className="sidebarList">
             <Link to="/users" className="link">
               <li className="sidebarListItem">
@@ -64,7 +65,7 @@ function SideBarAdmin() {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Notifications</h3>
+          <h2 className="sidebarTitle">Notifications</h2>
           <ul className="sidebarList">
             <li className="sidebarListItem">
               <MailOutline className="sidebarIcon" />
@@ -81,7 +82,7 @@ function SideBarAdmin() {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Staff</h3>
+          <h2 className="sidebarTitle">Staff</h2>
           <ul className="sidebarList">
             <li className="sidebarListItem">
               <WorkOutline className="sidebarIcon" />

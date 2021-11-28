@@ -1,6 +1,6 @@
-.sidebarAdmin {
+.sidebar {
   flex: 1;
-  height: calc(100vh - 50px);
+  height: 100vh;
   background-color: rgb(251, 251, 255);
   position: sticky;
   top: 50px;
@@ -16,8 +16,9 @@
 }
 
 .sidebarTitle {
-  font-size: 13px;
-  color: rgb(187, 186, 186);
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(94, 86, 86);
 }
 
 .sidebarList {

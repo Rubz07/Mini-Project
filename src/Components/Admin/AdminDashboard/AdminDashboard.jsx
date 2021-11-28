@@ -14,7 +14,7 @@ function AdminDashboard() {
   return (
     <Router>
       <Topbar />
-      <div className="Admincontainer">
+      <div className="AdminWrapper">
         <SidebarAdmin />
         <Switch>
           <Route exact path="/Admindashboard">

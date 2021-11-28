@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@900&display=swap");
-.Admincontainer {
+/* @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@900&display=swap"); */
+.AdminWrapper {
   display: flex;
   margin-top: 10px;
 }

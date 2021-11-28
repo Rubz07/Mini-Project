@@ -1,11 +1,7 @@
 import React from "react";
-import Navbar from "../../Navbar/Navbar";
-import Sidebar from "../../Sidebar/Sidebar";
-import water from "../../../../Assets/images/water.png";
-import Dashboard from "../../UserDashboard/Dashboard";
-import "./SelectCategory.css";
 import { Link, Route, useLocation, Switch } from "react-router-dom";
-function SelectCategory() {
+import "./Catagories.css";
+function Catagories() {
   return (
     <main>
       <div className="category_main__container">
@@ -43,4 +39,4 @@ function SelectCategory() {
   );
 }
 
-export default SelectCategory;
+export default Catagories;
