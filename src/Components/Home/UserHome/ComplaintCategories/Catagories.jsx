@@ -21,7 +21,7 @@ function Catagories() {
           <div className="category_card card_a">
             <i className="fa fa-hand-holding-water fa-2x text-blue "></i>
             <div className="category_card_inner">
-              <Link to="/waterauthority">
+              <Link to="/water">
                 <p className="text-cat-p">Water Authority</p>
               </Link>
             </div>

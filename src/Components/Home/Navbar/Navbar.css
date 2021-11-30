@@ -14,7 +14,14 @@
   align-items: center;
   justify-content: space-between;
 }
-
+.greetingTitle {
+  font-weight: bold;
+  color: black;
+}
+.userName {
+  font-weight: bold;
+  color: black;
+}
 .logo {
   font-weight: bold;
   font-size: 30px;

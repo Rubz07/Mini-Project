@@ -8,6 +8,7 @@
 .widgetLgTitle {
   font-size: 22px;
   font-weight: 600;
+  color: #555555;
 }
 
 .widgetLgTable {
@@ -17,6 +18,7 @@
 
 .widgetLgTh {
   text-align: left;
+  color: #555555;
 }
 
 .widgetLgUser {
@@ -33,9 +35,13 @@
   margin-right: 10px;
 }
 
-.widgetLgDate,
+.widgetLgDate {
+  color: #555555;
+}
+
 .widgetLgAmount {
   font-weight: 300;
+  color: #555555;
 }
 
 .widgetLgButton {
@@ -55,4 +61,7 @@
 .widgetLgButton.Pending {
   background-color: #ebf1fe;
   color: #2a7ade;
+}
+.widgetLgName {
+  color: #555555;
 }

@@ -25,6 +25,7 @@ var userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  status: { type: Boolean, default: true, required: true },
 });
 
 userSchema.pre("save", function (next) {

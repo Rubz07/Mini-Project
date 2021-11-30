@@ -12,6 +12,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import Catagories from "../UserHome/ComplaintCategories/Catagories";
+import ComplaintForm from "../UserHome/ComplaintForm/ComplaintForm";
 function Dashboard() {
   const history = useHistory();
 
@@ -44,6 +45,9 @@ function Dashboard() {
           </Route>
           <Route path="/categories">
             <Catagories />
+          </Route>
+          <Route path="/water">
+            <ComplaintForm />
           </Route>
           {/* <div className="dashboardContainer">
             <Route exact path="/dashboard" component={Main} />

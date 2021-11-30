@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const db = require("./dbconfig/dbconnection");
 const indexRouter = require("./routes/User/index");
+var adminRouter = require("./routes/Admin/AdminHandler");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/admin", adminRouter);
 
 db.connect((err) => {
   if (err) console.log("connection error" + err);

@@ -9,6 +9,7 @@
 .widgetSmTitle {
   font-size: 22px;
   font-weight: 600;
+  color: #555555;
 }
 
 .widgetSmImg {
@@ -38,10 +39,12 @@
 
 .widgetSmUsername {
   font-weight: 600;
+  color: #555555;
 }
 
 .widgetSmUserTitle {
   font-weight: 300;
+  color: #555555;
 }
 
 .widgetSmButton {

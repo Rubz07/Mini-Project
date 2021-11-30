@@ -5,6 +5,7 @@ const client = require("twilio")(accountSid, authToken);
 const dotenv = require("dotenv");
 dotenv.config();
 
+const userSchema = require("../../model/userModel");
 const complaintSchema = require("../../model/userComplaint");
 module.exports = {
   postComplaint: (data) => {
@@ -61,6 +62,21 @@ module.exports = {
         .then((response) => {
           if (response) {
             // console.log(response);
+            resolve(response);
+          }
+          reject(response);
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+  getAllUsers: () => {
+    return new Promise(async (resolve, reject) => {
+      await userSchema
+        .find()
+        .exec()
+        .then((response) => {
+          if (response) {
+            console.log(response);
             resolve(response);
           }
           reject(response);

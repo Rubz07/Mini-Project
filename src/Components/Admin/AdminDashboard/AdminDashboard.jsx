@@ -10,6 +10,7 @@ import NewUser from "../AdminMain/newUser/NewUser";
 import Product from "../AdminMain/product/Product";
 import NewProduct from "../AdminMain/newProduct/NewProduct";
 import ProductList from "../AdminMain/productList/ProductList";
+import OfficerList from "../AdminMain/OfficerList/OfficerList";
 function AdminDashboard() {
   return (
     <Router>
@@ -22,6 +23,9 @@ function AdminDashboard() {
           </Route>
           <Route path="/users">
             <Userlist />
+          </Route>
+          <Route path="/officers">
+            <OfficerList />
           </Route>
           <Route path="/user/:userId">
             <User />

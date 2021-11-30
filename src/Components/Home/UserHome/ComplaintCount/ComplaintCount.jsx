@@ -7,7 +7,6 @@ function ComplaintCount({ complaint }) {
       <div className="complaintFeaturedItem">
         <div className="complaintcomplaintFeaturedMoneyContainer">
           <span className="complaintFeaturedMoney">{complaint.length}</span>
-
           <Save className="complaintFeaturedIcon " />
         </div>
         <span className="complaintFeaturedSub">Compared to last month</span>

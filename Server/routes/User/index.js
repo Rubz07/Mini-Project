@@ -68,6 +68,7 @@ router.post("/postcomplaint", async (req, res) => {
 
 router.get("/getComplaint", async (req, res) => {
   userOperation.getAllComplaints().then((response) => {
+    console.log(response);
     if (response) {
       res.status(200).json({ complaint: response, count: response.length });
     } else {

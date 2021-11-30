@@ -14,6 +14,7 @@ import {
   ChatBubbleOutline,
   WorkOutline,
   Report,
+  AddCircleOutlineOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 function SideBarAdmin() {
@@ -29,16 +30,9 @@ function SideBarAdmin() {
                 Home
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <TrendingUp className="sidebarIcon" />
-              Sales
-            </li>
           </ul>
         </div>
+
         <div className="sidebarMenu">
           <h2 className="sidebarTitle">Quick Menu</h2>
           <ul className="sidebarList">
@@ -51,19 +45,44 @@ function SideBarAdmin() {
             <Link to="/products" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
-                Products
+                Complaints
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <AttachMoney className="sidebarIcon" />
-              Transactions
-            </li>
+
+            <Link to="/departments" className="link">
+              <li className="sidebarListItem">
+                <AttachMoney className="sidebarIcon" />
+                Departments
+              </li>
+            </Link>
+
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports
             </li>
           </ul>
         </div>
+
+        <div className="sidebarMenu">
+          <h2 className="sidebarTitle">Officer</h2>
+          <ul className="sidebarList">
+            <li className="sidebarListItem">
+              <AddCircleOutlineOutlined className="sidebarIcon" />
+              Add Officer
+            </li>
+            <Link to="/officers" className="link">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Manage
+              </li>
+            </Link>
+            <li className="sidebarListItem">
+              <Report className="sidebarIcon" />
+              Reports
+            </li>
+          </ul>
+        </div>
+
         <div className="sidebarMenu">
           <h2 className="sidebarTitle">Notifications</h2>
           <ul className="sidebarList">
@@ -78,23 +97,6 @@ function SideBarAdmin() {
             <li className="sidebarListItem">
               <ChatBubbleOutline className="sidebarIcon" />
               Messages
-            </li>
-          </ul>
-        </div>
-        <div className="sidebarMenu">
-          <h2 className="sidebarTitle">Staff</h2>
-          <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <WorkOutline className="sidebarIcon" />
-              Manage
-            </li>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <Report className="sidebarIcon" />
-              Reports
             </li>
           </ul>
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 import Charts from "../../Charts/Charts";
 import Featuredinfo from "../../Featuredinfo/Featuredinfo";
 import "./AdminHome.css";
-import { BrowserRouter as Router, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { userData } from "../../../../dummyData";
 import WidgetSmall from "../../WidgetSmall/WidgetSmall";
 import WidgetLarge from "../../WidgetLarge/WidgetLarge";
@@ -13,12 +13,6 @@ function AdminHome() {
       <Switch>
         <div className="adminHome">
           <Featuredinfo />
-          <Charts
-            data={userData}
-            title="User Analytics"
-            grid
-            dataKey="Active User"
-          />
           <div className="homeWidgets">
             <WidgetSmall />
             <WidgetLarge />

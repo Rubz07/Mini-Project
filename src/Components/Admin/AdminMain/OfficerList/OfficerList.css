@@ -1,4 +1,4 @@
-.userList {
+.officerList {
   flex: 4;
   margin: 20px;
   padding: 20px;
@@ -6,20 +6,12 @@
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.userListUser {
+.officerListUser {
   display: flex;
   align-items: center;
 }
 
-.userListImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.userListEdit {
+.officerListEdit {
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
@@ -29,12 +21,12 @@
   margin-right: 20px;
 }
 
-.userListDelete {
+.officerListDelete {
   color: red;
   cursor: pointer;
 }
 
-.userTitle {
+.officerTitle {
   margin-bottom: 20px;
   font-weight: bold;
   padding: 7px;
@@ -42,12 +34,12 @@
   color: black;
 }
 
-.complaintListItem {
+.officerListItem {
   display: flex;
   align-items: center;
 }
 
-.complaintListImg {
+.officerListImg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -55,7 +47,7 @@
   margin-right: 10px;
 }
 
-.userListEdit {
+.officerListEdit {
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
@@ -65,27 +57,29 @@
   margin-right: 20px;
 }
 
-.userListDelete {
+.officerListDelete {
   color: red;
   border: none;
 
   cursor: pointer;
   margin-left: 20px;
 }
-.userHeadings {
+.officerHeadings {
   margin: 36px 16px 0 16px;
   font-family: "Gilroy_SB";
   font-size: 20px;
+
   color: black;
+  justify-content: space-between;
   display: flex;
 }
-.userDatas {
+.officerDatas {
   margin-top: 4px;
   display: flex;
   flex-direction: column;
   row-gap: 24px;
 }
-.Data {
+.officerData {
   padding: 20px;
   background: white;
   border-radius: 10px;
