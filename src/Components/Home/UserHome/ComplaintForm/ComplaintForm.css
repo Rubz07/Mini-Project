@@ -1,57 +1,89 @@
-.newUser {
-    flex: 4;
+.complaintForm {
+  flex: 4;
+}
+
+.form-title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.form-title::before {
+  content: "";
+  font-size: 25px;
+  position: absolute;
+  height: 3px;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  background: #9b58b6;
+}
+
+.complaint-details {
+  display: grid;
+  align-items: center;
+}
+
+.input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.complaint-input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.complaint-input :focus {
+  border-color: #9b58b6;
+}
+.complaint-submit {
+  background: darkblue;
+  color: #fff;
+  font-family: "Gilroy_B";
+  font-size: 18px;
+  padding: 2px 0;
+  border: none;
+  outline: none;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+.complaint-submit:active {
+  -webkit-transform: scale(0.99);
+  transform: scale(0.99);
+  background: #3425a5;
+}
+/* .complaint-submit:hover {
+  background: rgb(18, 18, 141);
+} */
+
+@media (max-width) {
+  .complaintForm {
+    max-width: 100%;
   }
-  
-  .newUserForm {
-    display: flex;
-    flex-wrap: wrap;
+  .input-box {
+    margin-bottom: 15px;
+    width: 100%;
   }
-  
-  .newUserItem {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    margin-right: 20px;
+  .complaint-details {
+    max-height: 300px;
+    overflow-y: scroll;
   }
-  
-  .newUserItem > label {
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgb(151, 150, 150);
+  .complaint-details::-webkit-scrollbar {
+    width: 0;
   }
-  
-  .newUserItem > input {
-    height: 20px;
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 5px;
-  }
-  
-  .newUserGender > input {
-    margin-top: 15px;
-  }
-  
-  .newUserGender>label{
-      margin: 10px;
-      font-size: 18px;
-      color: #555;
-  }
-  
-  .newUserSelect{
-      height: 40px;
-      border-radius: 5px;
-  }
-  
-  .newUserButton{
-      width: 200px;
-      border: none;
-      background-color: darkblue;
-      color: white;
-      padding: 7px 10px;
-      font-weight: 600;
-      border-radius: 10px;
-      margin-top: 30px;
-      cursor: pointer;
-  }
+}
