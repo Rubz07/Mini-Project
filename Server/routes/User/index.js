@@ -40,7 +40,9 @@ router.post("/otpVerification", async (req, res, next) => {
   otpAuthentication
     .otpVerification(req.body.otpcode, req.body.mobile)
     .then((response) => {
+      console.log(response);
       if (response.register_status) {
+        console.log(response.register_status);
         res.status(200).json({ message: "Successfully verified" });
       }
     })

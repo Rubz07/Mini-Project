@@ -1,0 +1,171 @@
+.departmentList {
+  flex: 4;
+  margin: 20px;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.departmentListUser {
+  display: flex;
+  align-items: center;
+}
+
+.departmentListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.departmentListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+.departmentTitle {
+  margin-bottom: 20px;
+  font-weight: bold;
+  padding: 7px;
+
+  color: black;
+}
+.depmain-header {
+  display: flex;
+  justify-content: space-between;
+}
+.departmentListItem {
+  display: flex;
+  align-items: center;
+}
+
+.departmentListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.departmentListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.departmentListDelete {
+  color: red;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
+.editDep {
+  color: darkblue;
+  border: none;
+  cursor: pointer;
+}
+.departmentHeadings {
+  margin: 36px 16px 0 16px;
+  font-family: "Gilroy_SB";
+  font-size: 20px;
+
+  color: black;
+  justify-content: space-between;
+  display: flex;
+}
+.departmentDatas {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+.departmentData {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  font-family: "Gilroy_M";
+  font-size: 18px;
+  color: black;
+}
+td {
+  vertical-align: top;
+  text-align: center;
+}
+
+.departmentAddButton {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: darkblue;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+}
+.department-details {
+  display: grid;
+  align-items: center;
+}
+.departmentinput-box {
+  margin-bottom: 15px;
+}
+.departmentDetails {
+  display: block;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.department-input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.dep-header {
+  display: flex;
+  justify-content: space-between;
+}
+.departmentform-title {
+  color: black;
+  font-weight: bold;
+}
+.closeBtn {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.department-input :focus {
+  border-color: #9b58b6;
+}
+.bttn {
+  background: darkblue;
+  color: #fff;
+  font-family: "Gilroy_B";
+  font-size: 18px;
+  padding: 2px 0;
+  border: none;
+  outline: none;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+.bttn:active {
+  -webkit-transform: scale(0.99);
+  transform: scale(0.99);
+  background: #3425a5;
+}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+
 import { productRows } from "../../../../dummyData";
 import { Link } from "react-router-dom";
 import "./ComplaintList.css";
@@ -11,41 +10,6 @@ function ComplaintList({ complaint }) {
     setData(data.filter((item) => item.id !== id));
   };
 
-  let person = { registrationNo: complaint.registrationNo };
-  const columns = [
-      { field: "id", headerName: "Sn.", width: 200 },
-
-      {
-        field: "registrationNo",
-        headerName: "Registration Number",
-        width: 200,
-      },
-
-      {
-        field: "date",
-        headerName: "Received Date",
-        width: 200,
-      },
-      {
-        field: "description",
-        headerName: "Grievance description",
-        width: 200,
-      },
-      {
-        field: "status",
-        headerName: "Status",
-        width: 200,
-      },
-    ],
-    rows = [
-      {
-        id: 1,
-        registrationNo: complaint.date,
-        date: complaint.date,
-        description: complaint.description,
-        status: complaint.status,
-      },
-    ];
   return (
     <div className="complaintDetails">
       <div className="complaintTitle">Complaints</div>

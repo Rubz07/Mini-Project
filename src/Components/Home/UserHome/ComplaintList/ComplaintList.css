@@ -10,6 +10,8 @@
 }
 .complaintTitle {
   margin-bottom: 20px;
+  background-color: rgb(240, 240, 255);
+  padding: 4px;
   font-weight: bold;
   color: black;
 }
@@ -41,29 +43,22 @@
   color: red;
   cursor: pointer;
 }
-.headings {
-  margin: 36px 16px 0 16px;
-  font-family: "Gilroy_SB";
-  font-size: 20px;
-  color: black;
-  display: flex;
-}
+
 .datas {
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
   row-gap: 24px;
 }
 .data {
-  padding: 20px;
+  padding: 1.2px;
   background: white;
   border-radius: 10px;
   font-family: "Gilroy_M";
   font-size: 18px;
   color: black;
 }
-.td {
-  padding-right: 28px;
+td {
+  padding: 5px;
   vertical-align: top;
   text-align: left;
 }

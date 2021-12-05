@@ -11,6 +11,7 @@ import Product from "../AdminMain/product/Product";
 import NewProduct from "../AdminMain/newProduct/NewProduct";
 import ProductList from "../AdminMain/productList/ProductList";
 import OfficerList from "../AdminMain/OfficerList/OfficerList";
+import Departments from "../AdminMain/Departments/Departments";
 function AdminDashboard() {
   return (
     <Router>
@@ -41,6 +42,9 @@ function AdminDashboard() {
           </Route>
           <Route path="/newproduct">
             <NewProduct />
+          </Route>
+          <Route path="/departments">
+            <Departments />
           </Route>
         </Switch>
       </div>

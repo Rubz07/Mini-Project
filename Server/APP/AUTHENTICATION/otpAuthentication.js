@@ -34,6 +34,7 @@ module.exports = {
   otpVerification: (otpcode, mobileNO) => {
     try {
       return new Promise(async (resolve, reject) => {
+        let register_status = false;
         const mobilenumber = `+${91}` + mobileNO;
         client.verify
           .services(process.env.service_id)
@@ -42,12 +43,13 @@ module.exports = {
             code: otpcode,
           })
           .then(async (response) => {
+            register_status = false;
             if (response.status == "approved") {
-              response.register_status = true;
-              resolve(response);
+              register_status = true;
+              resolve(register_status);
             } else {
-              response.register_status = false;
-              resolve(response);
+              register_status = false;
+              resolve(register_status);
             }
           })
           .catch((err) => resolve(err));

@@ -23,7 +23,7 @@ function SelectCategory() {
         </div>
         <div className="category_main__cards">
           <div className="category_card card_a">
-            <i className="fa fa-hand-holding-water fa-2x text-blue "></i>
+            <i className="fa fa-university fa-2x text-blue "></i>
             <div className="category_card_inner">
               <Link to="/waterauthority">
                 <p className="text-cat-p">Water Authority</p>

@@ -99,7 +99,7 @@ function OtpAuthentication() {
       mobile: mobile,
     };
     const res = await axios.post("/otpVerification", data);
-    if (res) {
+    if (res.status===200) {
       setOtpError(true);
       verifyCheck.classList.remove("anim-hidden");
 
