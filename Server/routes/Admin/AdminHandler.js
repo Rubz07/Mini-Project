@@ -7,7 +7,6 @@ router.get("/", function (req, res, next) {
 
 router.get("/getUsers", async (req, res) => {
   adminOperations.getAllUsers().then((response) => {
-    console.log(response);
     if (response) {
       res.status(200).json({ users: response });
     } else {
@@ -42,6 +41,19 @@ router.get("/get-departments", async (req, res) => {
 
 router.post("/remove-department/:id", (req, res, next) => {
   adminOperations.removeDepartment(req.params.id).then((result) => {
+    try {
+      res.status(200).json({
+        message: "deleted",
+      });
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
+
+router.post("/deleteUser/:id", (req, res, next) => {
+  console.log("sdfsdfdsa", req.params.id);
+  adminOperations.removeUser(req.params.id).then((result) => {
     try {
       res.status(200).json({
         message: "deleted",

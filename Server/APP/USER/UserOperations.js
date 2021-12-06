@@ -11,27 +11,35 @@ module.exports = {
   postComplaint: (data) => {
     try {
       return new Promise(async (resolve, reject) => {
+        console.log(data.userid);
+        let user = await userSchema.find({
+          _id: data.userid,
+        });
+        let usermobile = `+${91}` + user[0].mobile;
+
         let regno = randomstring.generate({
           length: 6,
           charset: "numeric",
         });
-        console.log(regno);
+
         client.messages
           .create({
             body:
               "Your complaint is registered successfully and you register number is " +
               regno,
             from: "+19704382955",
-            to: "+919048317092",
+            to: usermobile,
           })
           .then(async (message) => {
             if (message) {
               console.log(message.sid);
               var postcomplaint = new complaintSchema({
                 registrationNo: regno,
-                name: data.name,
+                department: data.department,
+                userId: data.userid,
+                name: user[0].name,
                 description: data.description,
-                complaint_category: data.category,
+                complaint_type: data.category,
                 panchayat: data.panchayat,
                 area: data.area,
               });
@@ -80,6 +88,20 @@ module.exports = {
             resolve(response);
           }
           reject(response);
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+
+  getStatusDetails: (regno) => {
+    return new Promise(async (resolve, reject) => {
+      await complaintSchema
+        .findOne({ registrationNo: regno })
+        .then((response) => {
+          if (response) {
+            console.log(response);
+            resolve(response);
+          }
         })
         .catch((err) => console.log("error", err));
     });

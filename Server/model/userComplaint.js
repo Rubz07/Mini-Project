@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
-
+const Schema = mongoose.Schema;
 const complaintSchema = new mongoose.Schema({
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "users",
+  },
   registrationNo: {
     type: String,
     required: true,
@@ -12,7 +16,7 @@ const complaintSchema = new mongoose.Schema({
     required: true,
   },
   department: { type: String, ref: "departments" },
-  complaint_category: { type: String, required: true },
+  complaint_type: { type: String, required: true },
   officer: { type: String, ref: "officerModel" },
   area: {
     type: String,

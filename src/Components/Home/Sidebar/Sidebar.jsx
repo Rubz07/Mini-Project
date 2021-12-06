@@ -45,7 +45,7 @@ function Sidebar() {
                 Lodge Public Grievance
               </li>
             </Link>
-            <Link to="/ComplaintStatus" className="link">
+            <Link to="/complaint-status" className="link">
               <li className="sidebarListItem">
                 <Autorenew className="sidebarIcon" />
                 Grievance Status

@@ -21,11 +21,12 @@
 .complaintFeaturedMoneyContainer {
   margin: 10px 0px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
 .complaintFeaturedMoney {
-  font-size: 30px;
+  font-size: 60px;
   color: black;
   font-weight: 600;
 }
@@ -37,7 +38,7 @@
 }
 
 .complaintFeaturedIcon {
-  font-size: 14px;
+  font-size: 60px;
   margin-left: 5px;
   color: green;
 }
@@ -48,6 +49,6 @@
 
 .complaintFeaturedSub {
   font-size: 15px;
-  color: gray;
+  color: rgb(0, 0, 0);
   align-items: center;
 }

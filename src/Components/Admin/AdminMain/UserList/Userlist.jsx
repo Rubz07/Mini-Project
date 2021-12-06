@@ -9,23 +9,27 @@ import axios from "../../../../axios";
 //=============GET ALL USERS================//
 function Userlist() {
   const [users, setUsers] = useState([]);
-  async function getComplaints() {
+  async function getUsers() {
     let response = await axios.get(`/admin/getUsers`);
     if (response.status === 200) {
+      console.log(response.data);
       setUsers(response.data.users);
     }
   }
 
   //=============Delete User================//
-  async function deactivateUser(id) {
-    let response = await axios.get(`/deleteUser/` + id);
+  async function deactivateUser(e, id) {
+    e.preventDefault();
+    let response = await axios.post(`/admin/deleteUser/` + id);
     if (response.status === 200) {
+      getUsers();
+    } else {
       console.log(response);
     }
   }
 
   useEffect(() => {
-    getComplaints();
+    getUsers();
   }, []);
 
   return (
@@ -59,7 +63,7 @@ function Userlist() {
                     <td width="200px">
                       <DeleteOutline
                         className="userListDelete"
-                        onClick={deactivateUser(data._id)}
+                        onClick={(e) => deactivateUser(e, data._id)}
                       />
                     </td>
                   </tr>

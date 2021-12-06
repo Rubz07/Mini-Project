@@ -72,5 +72,17 @@ router.get("/getComplaint", async (req, res) => {
     }
   });
 });
+router.get("/getstatus/:id", (req, res, next) => {
+  userOperation.getStatusDetails(req.params.id).then((result) => {
+    try {
+      res.status(200).json({
+        statusdetails: result,
+        message: "fetched",
+      });
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
 
 module.exports = router;

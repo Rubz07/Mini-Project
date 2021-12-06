@@ -67,4 +67,19 @@ module.exports = {
         .catch((err) => console.log("error", err));
     });
   },
+
+  removeUser: (proid) => {
+    console.log(proid);
+    return new Promise(async (resolve, reject) => {
+      await userSchema
+        .updateOne({ _id: proid }, { $set: { status: "0" } })
+        .then((response) => {
+          if (response) {
+            console.log(response);
+            resolve(response);
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
 };

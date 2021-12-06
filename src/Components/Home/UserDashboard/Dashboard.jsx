@@ -15,6 +15,7 @@ import {
 import Catagories from "../UserHome/ComplaintCategories/Catagories";
 import ComplaintForm from "../UserHome/ComplaintForm/ComplaintForm";
 import Login from "../../Authentication/Login/Login";
+import ComplaintStatus from "../UserHome/ComplaintStatus/ComplaintStatus";
 function Dashboard() {
   const history = useHistory();
   const [authenticated, setAuthenticated] = useState(false);
@@ -56,6 +57,9 @@ function Dashboard() {
             </Route>
             <Route path="/water">
               <ComplaintForm />
+            </Route>
+            <Route path="/complaint-status">
+              <ComplaintStatus />
             </Route>
           </Switch>
         </div>
