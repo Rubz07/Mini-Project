@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { userContext } from "../../../AppContext";
 import "./Navbar.css";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 
 function Navbar() {
+  const { userdata } = useContext(userContext);
+
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -17,7 +20,7 @@ function Navbar() {
           /> */}
           <div className="userGreetings">
             <h4 className="greetingTitle">Hello</h4>
-            <h2 className="userName">Rubin</h2>
+            <h2 className="userName">{userdata.username}</h2>
           </div>
         </div>
       </div>

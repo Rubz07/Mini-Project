@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import image1 from "../../../Assets/images/image-1.png";
 import axios from "../../../axios";
-import { Link, Route, useHistory } from "react-router-dom";
+import { Route, useHistory, Redirect } from "react-router-dom";
 import "./Login.css";
 function Login() {
   const history = useHistory();
@@ -10,6 +10,7 @@ function Login() {
   const regSubBtn = document.querySelector("#reg-btn");
   const buttonCursor = document.querySelector(".button");
 
+  const [loginError, setLogginError] = useState("login failed");
   const [password, setPassword] = useState();
   const [passwordError, setPasswordError] = useState();
   const [mobile, setmobile] = useState();
@@ -61,14 +62,21 @@ function Login() {
       password: password,
     };
     const res = await axios.post("/login", data);
-    if (res.status === 200) {
-      await window.localStorage.setItem("auth", res.data.authToken);
+    console.log(res);
+    if (res.status === 200 && res.data.verify === true) {
+      window.localStorage.setItem("auth-token", res.data.authToken);
       history.push("/dashboard");
     } else {
-      //need to doo some edit
-      console.log(res.data.message);
+      alert("Login failed");
     }
   };
+
+  useEffect(() => {
+    const isToken = localStorage.getItem("auth-token");
+    if (isToken) {
+      history.push("/dashboard");
+    }
+  }, [history]);
 
   return (
     <Route>

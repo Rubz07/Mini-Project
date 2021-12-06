@@ -19,9 +19,10 @@ function ComplaintList({ complaint }) {
           <table>
             <tr>
               <th style={{ padding: "20px" }}>Sl.No</th>
-              <th>Registration Number</th>
-              <th>Date</th>
+              <th>Registration Id</th>
+              <th>Department</th>
               <th>Description</th>
+              <th>Date</th>
               <th>Status</th>
             </tr>
             {complaint &&
@@ -31,8 +32,9 @@ function ComplaintList({ complaint }) {
                   <tr key={data._id}>
                     <td width="200px">{index}</td>
                     <td width="200px">{data.registrationNo}</td>
-                    <td width="200px">{data.date}</td>
+                    <td width="200px">{data.department}</td>
                     <td width="200px">{data.description}</td>
+                    <td width="200px">{data.date}</td>
                     <td width="200px">{data.status}</td>
                   </tr>
                 );

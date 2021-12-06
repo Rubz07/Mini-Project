@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { userContext } from "../../../../AppContext";
 import axios from "../../../../axios";
 import "./Catagories.css";
 function Catagories() {
+  const history = useHistory();
   const [departments, setDepartments] = useState([]);
+  const { userdata } = useContext(userContext);
 
   async function getDepartments() {
     let response = await axios.get(`admin/get-departments`);
     if (response.status === 200) {
-      console.log(response.data);
       setDepartments(response.data.departments);
     }
   }
@@ -36,10 +38,12 @@ function Catagories() {
             departments.length > 0 &&
             departments.map((p) => {
               return (
-                <div className="category_card card_a">
+                <div className="category_card card_a" key={p._id}>
                   <i className=" fa fa-university fa-2x text-blue "></i>
                   <div className="category_card_inner">
-                    <Link to="/water">
+                    <Link
+                      to={{ pathname: "/water", department: p.departmentname }}
+                    >
                       <p className="text-cat-p">{p.departmentname}</p>
                     </Link>
                   </div>

@@ -11,12 +11,12 @@ const Registration = () => {
   //========================State Management=====================//
   const location = useLocation();
   useEffect(() => {
-    // result: '/secondpage'
     setMobile(location.state.mobile);
   }, [location]);
 
   const fullNameError = document.querySelector(".fullname .error");
   const fullEmailError = document.querySelector(".emailclass .error");
+  const regErr = document.querySelector(".registrationErr");
   const fullAdhaarError = document.querySelector(".mobile .error");
   const fullAddressError = document.querySelector(".address .error");
   const fullPincodeError = document.querySelector(".pincodeclass .error");
@@ -138,15 +138,6 @@ const Registration = () => {
   const buttonCursor = document.querySelector(".button"); //To avoid poniterevent and cursor problem
 
   const submitval = () => {
-    console.log(
-      nameError,
-      emailError,
-      adhaarError,
-      addressError,
-      pincodeError,
-      passwordError,
-      confirmpasswordError
-    );
     if (
       nameError == false &&
       emailError == false &&
@@ -156,7 +147,6 @@ const Registration = () => {
       passwordError == false &&
       confirmpasswordError == false
     ) {
-      console.log("hloo");
       regSubBtn.classList.remove("disabled");
       buttonCursor.classList.remove("cursor-disabled");
     } else {
@@ -182,13 +172,16 @@ const Registration = () => {
     };
 
     const res = await axios.post("/register", data);
-    if (res.status === 200) {
-      history.push("/login");
-    } else {
-      alert("some error occured");
-      //need to doo some edit
-      console.log(res.data.message);
-    }
+    try {
+      if (res.status === 200 && res.data.verify === "Approved") {
+        regErr.classList.add("reg-error");
+        history.push("/login");
+      } else {
+        regErr.classList.remove("reg-error");
+      }
+    } catch (error) {}
+    // Approved
+    console.log(res);
   };
   //========================Main Body=====================//
   return (
@@ -356,6 +349,9 @@ const Registration = () => {
                 class="btn1 primary-button disabled"
                 onClick={handleSubmit}
               ></input>
+            </div>
+            <div className="registrationErr reg-error">
+              <p>Entered Otp is incorrect</p>
             </div>
           </form>
         </div>

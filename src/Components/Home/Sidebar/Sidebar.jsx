@@ -1,25 +1,26 @@
 import React from "react";
-import { Link, Route, useLocation, useHistory } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Router,
+  useLocation,
+  useHistory,
+  Redirect,
+} from "react-router-dom";
 import "./Sidebar.css";
 import {
   LineStyle,
-  Timeline,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Report,
   AddCircleOutline,
   Edit,
   Autorenew,
   Lock,
   ExitToApp,
 } from "@material-ui/icons";
+
 function Sidebar() {
   const history = useHistory();
-  const termination = async () => {
-    window.localStorage.removeItem("auth");
-    history.push("/login");
+  const termination = () => {
+    window.localStorage.removeItem("auth-token");
   };
   return (
     <div className="sidebar">
@@ -72,8 +73,8 @@ function Sidebar() {
         <div className="sidebarMenu">
           <h2 className="sidebarTitle"></h2>
           <ul className="sidebarList">
-            <Link to="/Logout" className="link">
-              <li className="sidebarListItem">
+            <Link to="/login" className="link">
+              <li className="sidebarListItem" onClick={termination}>
                 <ExitToApp className="sidebarIcon" />
                 Logout
               </li>

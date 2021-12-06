@@ -3,6 +3,7 @@ import axios from "../../../axios";
 import ComplaintDetails from "../UserHome/ComplaintDetails/ComplaintDetails";
 import Navbar from "../Navbar/Navbar";
 import Sidebar from "../Sidebar/Sidebar";
+import { userContext } from "../../../AppContext";
 import "./Dashboard.css";
 import {
   BrowserRouter as Router,
@@ -13,48 +14,52 @@ import {
 } from "react-router-dom";
 import Catagories from "../UserHome/ComplaintCategories/Catagories";
 import ComplaintForm from "../UserHome/ComplaintForm/ComplaintForm";
+import Login from "../../Authentication/Login/Login";
 function Dashboard() {
   const history = useHistory();
+  const [authenticated, setAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
 
-  // async function isAuthenticated() {
-  //   let response = await axios.post(`/isAuthenticated`, {
-  //     headers: { Authorization: localStorage.getItem("auth") },
-  //   });
-  //   console.log("status", response.status);
-  //   if (response.status == 401) {
-  //     console.log("done");
-  //   } else {
-  //     console.log("pooooiiiii");
-  //     history.push("/login");
-  //     //return <Redirect to="/login"></Redirect>;
-  //   }
-  // }
+  async function isAuthenticated() {
+    let response = await axios.post(`/isAuthenticated`, {
+      headers: { Authorization: localStorage.getItem("auth-token") },
+    });
+    if (response.status === 200) {
+      setUser(response.data.user);
+      setAuthenticated(true);
+    } else {
+    }
+  }
 
-  // useEffect(() => {
-  //   isAuthenticated();
-  // }, []);
+  useEffect(() => {
+    const isToken = localStorage.getItem("auth-token");
+    if (!isToken) {
+      history.push("/login");
+    } else {
+      isAuthenticated();
+    }
+  }, [history]);
 
   return (
     <Router>
-      <Navbar />
-      <div className="userWrapper">
-        <Sidebar />
-        <Switch>
-          <Route exact path="/dashboard">
-            <ComplaintDetails />
-          </Route>
-          <Route path="/categories">
-            <Catagories />
-          </Route>
-          <Route path="/water">
-            <ComplaintForm />
-          </Route>
-          {/* <div className="dashboardContainer">
-            <Route exact path="/dashboard" component={Main} />
-            <Route exact path="/selectCategory" component={SelectCategory} />
-          </div> */}
-        </Switch>
-      </div>
+      <userContext.Provider value={{ userdata: user }}>
+        <Route path="/login" component={Login} />
+        <Navbar />
+        <div className="userWrapper">
+          <Sidebar />
+          <Switch>
+            <Route exact path="/dashboard">
+              <ComplaintDetails />
+            </Route>
+            <Route path="/categories">
+              <Catagories />
+            </Route>
+            <Route path="/water">
+              <ComplaintForm />
+            </Route>
+          </Switch>
+        </div>
+      </userContext.Provider>
     </Router>
   );
 }

@@ -11,7 +11,7 @@ const complaintSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: { type: String, ref: "categoryModel" },
+  department: { type: String, ref: "departments" },
   complaint_category: { type: String, required: true },
   officer: { type: String, ref: "officerModel" },
   area: {

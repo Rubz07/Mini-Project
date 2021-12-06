@@ -12,6 +12,7 @@ function OtpAuthentication() {
   const fullverifyError = document.querySelector(".verify .error");
   const verifyInput = document.querySelector(".verifyotpform-holder");
   const verifyCheck = document.querySelector(".Checkanimation");
+  const loginerr = document.querySelector(".loginErr");
   const regSubBtn = document.querySelector("#reg-btn");
   const [mobile, setMobile] = useState();
   const [otpcode, setOtpCode] = useState();
@@ -99,12 +100,14 @@ function OtpAuthentication() {
       mobile: mobile,
     };
     const res = await axios.post("/otpVerification", data);
-    if (res.status===200) {
+    console.log(res);
+    if (res.status === 200 && res.data.verify === "approved") {
       setOtpError(true);
+      loginerr.classList.add("login-error");
       verifyCheck.classList.remove("anim-hidden");
-
       console.log(res);
     } else {
+      loginerr.classList.remove("login-error");
       verifyCheck.classList.add("anim-hidden");
     }
   };
@@ -114,11 +117,10 @@ function OtpAuthentication() {
     if (otpError == true) {
       history.push({
         pathname: "/register",
-        search: "?query=abc",
+
         state: { mobile: mobile },
       });
     } else {
-      alert("Entered otp is incorrect");
       fullverifyError.innerText = "Entered otp is incorrect";
     }
   };
@@ -170,7 +172,7 @@ function OtpAuthentication() {
                 value={otpcode}
                 placeholder="Otp Code"
                 onChange={(e) => setOtpCode(e.target.value)}
-                onKeyUp={verifyOtp}
+                onBlur={verifyOtp}
               />
 
               <div
@@ -191,6 +193,9 @@ function OtpAuthentication() {
               class="btn1 primary-button disabled"
               onClick={nextreg}
             ></input>
+          </div>
+          <div className="loginErr login-error">
+            <p>Entered Otp is incorrect</p>
           </div>
         </form>
       </div>

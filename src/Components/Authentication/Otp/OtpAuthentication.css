@@ -385,3 +385,13 @@ h3 {
   visibility: hidden;
   display: none;
 }
+.loginErr {
+  color: #ec0000;
+  font-weight: bold;
+}
+
+.login-error {
+  visibility: hidden;
+  display: none;
+  color: #ec0000;
+}

@@ -27,13 +27,14 @@ module.exports = async (req, res, next) => {
         message: "Password Incorrect",
       });
     const token = jwt.sign(
-      { userid: user._id, email: user.email },
+      { userid: user._id, email: user.email, username: user.name },
       process.env.SECRET_CODE,
       { expiresIn: "1d" }
     );
-    console.log(token);
-    req.user = token;
-    next();
+    return res.status(200).json({
+      verify: true,
+      authToken: token,
+    });
   } catch (err) {
     return res.status(400).json({
       status: false,

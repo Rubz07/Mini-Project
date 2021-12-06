@@ -22,6 +22,7 @@ main {
   gap: 30px;
   margin: 20px 0;
   padding: 5px;
+  box-shadow: rgba(20, 20, 20, 1);
 }
 
 .category_card {
@@ -48,4 +49,11 @@ main {
 }
 .category_card_inner p:hover {
   color: #8eb1f1;
+}
+.text-cat-p {
+  color: black;
+  font-weight: bold;
+}
+.text-header {
+  color: black;
 }

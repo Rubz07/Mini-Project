@@ -42,17 +42,10 @@ module.exports = {
             to: mobilenumber,
             code: otpcode,
           })
-          .then(async (response) => {
-            register_status = false;
-            if (response.status == "approved") {
-              register_status = true;
-              resolve(register_status);
-            } else {
-              register_status = false;
-              resolve(register_status);
-            }
+          .then((response) => {
+            resolve(response.status);
           })
-          .catch((err) => resolve(err));
+          .catch((err) => console.log(err));
       });
     } catch (error) {
       console.log("some error occured");

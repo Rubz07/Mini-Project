@@ -345,5 +345,12 @@ button:hover:after {
 .cursor-disable {
   cursor: not-allowed;
 }
-
+.registrationErr {
+  color: #ec0000;
+  font-weight: bold;
+}
+.reg-error {
+  visibility: hidden;
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */

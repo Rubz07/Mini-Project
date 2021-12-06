@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./ComplaintForm.css";
+import { Link, Route, useLocation } from "react-router-dom";
+
 function ComplaintForm() {
+  const [departmentName, setDepartmentName] = useState(null);
+
+  const location = useLocation();
+  useEffect(() => {
+    const { department } = location;
+    setDepartmentName(department);
+  }, [location]);
   return (
     <div className="complaintForm">
       <div className="form-title">Complaint</div>
@@ -18,7 +27,7 @@ function ComplaintForm() {
           </div>
 
           <div className="input-box">
-            <span className="details">Full Name</span>
+            <span className="details">Full name</span>
             <input
               type="text"
               className="complaint-input"
