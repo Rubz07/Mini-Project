@@ -2,6 +2,10 @@ import React from "react";
 import "./ComplaintCount.css";
 import { Save, ArrowUpward } from "@material-ui/icons";
 function ComplaintCount({ complaint }) {
+  var pendingCount = complaint.filter(function (p) {
+    return p.status == "Pending";
+  });
+
   return (
     <div className="Complaintfeatured">
       <div className="complaintFeaturedItem">
@@ -15,7 +19,7 @@ function ComplaintCount({ complaint }) {
       </div>
       <div className="complaintFeaturedItem">
         <div className="complaintFeaturedMoneyContainer">
-          <span className="complaintFeaturedMoney">0</span>
+          <span className="complaintFeaturedMoney">{pendingCount.length}</span>
 
           <Save className="complaintFeaturedIcon" />
         </div>

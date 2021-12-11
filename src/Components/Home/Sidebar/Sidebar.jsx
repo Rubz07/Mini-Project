@@ -62,7 +62,7 @@ function Sidebar() {
                 Edit Profile
               </li>
             </Link>
-            <Link to="/changepassword" className="link">
+            <Link to="/change-password" className="link">
               <li className="sidebarListItem">
                 <Lock className="sidebarIcon" />
                 Change Password

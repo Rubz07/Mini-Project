@@ -1,5 +1,6 @@
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
+const { LocalHospital } = require("@material-ui/icons");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -8,13 +9,15 @@ const client = require("twilio")(accountSid, authToken);
 module.exports = {
   otpAuthentication: (mobno) => {
     return new Promise(async (resolve, reject) => {
-      let register_status = false;
-      let response = {};
-      const mobilenumber = `+${91}` + mobno;
-      if (isNaN(mobno) || mobno.length != 10) {
-        register_status = false;
-        resolve({ register_status });
-      } else {
+      try {
+        let register_status = false;
+
+        const mobilenumber = `+${91}` + mobno;
+        console.log(mobilenumber);
+        // if (isNaN(mobno) || mobno.length !== 10) {
+        //   register_status = false;
+        //   resolve({ register_status });
+        // } else {
         client.verify
           .services(process.env.service_id)
           .verifications.create({
@@ -23,11 +26,14 @@ module.exports = {
           })
           .then((status) => {
             if (status) {
-              response.register_status = true;
-              resolve(response);
+              register_status = true;
+              resolve(register_status);
             }
           })
           .catch((err) => console.log("error", err));
+        // }
+      } catch (error) {
+        console.log(error.message);
       }
     });
   },
@@ -43,6 +49,7 @@ module.exports = {
             code: otpcode,
           })
           .then((response) => {
+            console.log(response);
             resolve(response.status);
           })
           .catch((err) => console.log(err));

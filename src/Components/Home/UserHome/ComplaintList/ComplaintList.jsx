@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { productRows } from "../../../../dummyData";
 import { Link } from "react-router-dom";
 import "./ComplaintList.css";
 function ComplaintList({ complaint }) {
-  const [data, setData] = useState(productRows);
-
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
-
+  console.log(complaint);
   return (
     <div className="complaintDetails">
       <div className="complaintTitle">Complaints</div>

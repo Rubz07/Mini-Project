@@ -78,6 +78,7 @@ function OtpAuthentication() {
       await axios
         .post("/otpAuthentication", data)
         .then((res) => {
+          console.log(res.status);
           if (res.status == 200) {
             setSendOtpCode("Resend");
             verifyInput.classList.remove("hidden-mob");

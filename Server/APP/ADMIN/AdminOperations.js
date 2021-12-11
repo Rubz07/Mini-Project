@@ -5,11 +5,10 @@ module.exports = {
   getAllUsers: () => {
     return new Promise(async (resolve, reject) => {
       await userSchema
-        .find({ status: "1" })
+        .find()
         .exec()
         .then((response) => {
           if (response) {
-            console.log(response);
             resolve(response);
           }
           reject(response);
@@ -39,6 +38,23 @@ module.exports = {
     });
   },
 
+  updateDepartment: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await departmentSchema
+          .updateOne(
+            { _id: data.id },
+            { $set: { departmentname: data.newdep } }
+          )
+          .then((response) => {
+            if (response) resolve(response);
+          });
+      } catch (error) {
+        console.log((err) => err.message);
+      }
+    });
+  },
+
   getAlldepartments: () => {
     return new Promise(async (resolve, reject) => {
       await departmentSchema
@@ -46,7 +62,6 @@ module.exports = {
         .exec()
         .then((response) => {
           if (response) {
-            console.log(response);
             resolve(response);
           }
         })
@@ -68,11 +83,26 @@ module.exports = {
     });
   },
 
-  removeUser: (proid) => {
+  blockUser: (proid) => {
     console.log(proid);
     return new Promise(async (resolve, reject) => {
       await userSchema
         .updateOne({ _id: proid }, { $set: { status: "0" } })
+        .then((response) => {
+          if (response) {
+            console.log(response);
+            resolve(response);
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+
+  deleteUser: (proid) => {
+    console.log("id", proid);
+    return new Promise(async (resolve, reject) => {
+      await userSchema
+        .deleteOne({ _id: proid })
         .then((response) => {
           if (response) {
             console.log(response);

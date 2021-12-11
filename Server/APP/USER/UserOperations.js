@@ -1,4 +1,5 @@
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const bcrypt = require("bcryptjs");
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 var randomstring = require("randomstring");
 const client = require("twilio")(accountSid, authToken);
@@ -64,19 +65,41 @@ module.exports = {
 
   getAllComplaints: () => {
     return new Promise(async (resolve, reject) => {
-      await complaintSchema
-        .find()
-        .exec()
-        .then((response) => {
-          if (response) {
-            // console.log(response);
-            resolve(response);
-          }
-          reject(response);
-        })
-        .catch((err) => console.log("error", err));
+      try {
+        await complaintSchema
+          .find()
+          .exec()
+          .then((response) => {
+            if (response) {
+              resolve(response);
+            }
+            reject(response);
+          })
+          .catch((err) => console.log("error", err));
+      } catch (error) {
+        console.log(error.message);
+      }
     });
   },
+
+  getUserComplaint: (id) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await complaintSchema
+          .find({ userId: id })
+          .then((response) => {
+            if (response) {
+              console.log(response);
+              resolve(response);
+            }
+          })
+          .catch((err) => console.log("error", err));
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
+
   getAllUsers: () => {
     return new Promise(async (resolve, reject) => {
       await userSchema
@@ -100,6 +123,21 @@ module.exports = {
         .then((response) => {
           if (response) {
             console.log(response);
+            resolve(response);
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+  updatePassword: (data) => {
+    console.log(data);
+    return new Promise(async (resolve, reject) => {
+      const salt = await bcrypt.genSalt(10);
+      data.newpass = await bcrypt.hash(data.newpass, salt);
+      await userSchema
+        .updateOne({ _id: data.userid }, { $set: { password: data.newpass } })
+        .then((response) => {
+          if (response) {
             resolve(response);
           }
         })

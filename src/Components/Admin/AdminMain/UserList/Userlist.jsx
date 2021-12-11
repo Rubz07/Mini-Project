@@ -1,14 +1,38 @@
 import React, { useState, useEffect } from "react";
 import "./UserList.css";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../../../dummyData";
+import { DeleteOutline, Close } from "@material-ui/icons";
+
 import { Link } from "react-router-dom";
 import axios from "../../../../axios";
-
+import Modal from "react-modal";
 //=============GET ALL USERS================//
 function Userlist() {
   const [users, setUsers] = useState([]);
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: "600px",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState(false);
+  const [userid, setUserId] = useState(false);
+
+  function openModal(name, id) {
+    setName(name);
+    setUserId(id);
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   async function getUsers() {
     let response = await axios.get(`/admin/getUsers`);
     if (response.status === 200) {
@@ -17,17 +41,29 @@ function Userlist() {
     }
   }
 
-  //=============Delete User================//
+  //=============Block User================//
   async function deactivateUser(e, id) {
     e.preventDefault();
-    let response = await axios.post(`/admin/deleteUser/` + id);
+    let response = await axios.post(`/admin/blockUser/` + id);
     if (response.status === 200) {
       getUsers();
     } else {
       console.log(response);
     }
   }
+  //=============Block User================//
+  async function removeUser(e, id) {
+    e.preventDefault();
+    let response = await axios.post(`/admin/deleteUser/` + id);
+    if (response.status === 200) {
+      setIsOpen(false);
+      getUsers();
+    } else {
+      console.log(response);
+    }
+  }
 
+  //=============GetAll User================//
   useEffect(() => {
     getUsers();
   }, []);
@@ -60,10 +96,16 @@ function Userlist() {
                     <td width="176px">{data.adhaar}</td>
                     <td width="208px"></td>
                     <td width="240px">{data.status}</td>
-                    <td width="200px">
+                    <td width="200px" className="action-sec">
+                      <button
+                        className="productListEdit"
+                        onClick={(e) => deactivateUser(e, data._id)}
+                      >
+                        block
+                      </button>
                       <DeleteOutline
                         className="userListDelete"
-                        onClick={(e) => deactivateUser(e, data._id)}
+                        onClick={(e) => openModal(data.name, data._id)}
                       />
                     </td>
                   </tr>
@@ -72,6 +114,43 @@ function Userlist() {
           </table>
         </div>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="dep-header">
+          <div class="modal-close-btn">
+            <Close className="closeBtn" onClick={closeModal} />
+          </div>
+        </div>
+
+        <form>
+          <div className="title">
+            <h1>Are You Sure You Want to Delete?</h1>
+          </div>
+          <div className="body">
+            <div className="username">
+              <p>User : </p>
+            </div>
+            <div className="userid" style={{ paddingLeft: "20px" }}>
+              <p>{name}</p>
+            </div>
+          </div>
+          <div className="footer">
+            <button
+              onClick={() => {
+                closeModal();
+              }}
+              id="cancelBtn"
+            >
+              Cancel
+            </button>
+            <button onClick={(e) => removeUser(e, userid)}>Continue</button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }

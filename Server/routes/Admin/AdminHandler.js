@@ -27,6 +27,18 @@ router.post("/create-department", function (req, res, next) {
   });
 });
 
+router.post("/update-department", function (req, res, next) {
+  adminOperations.updateDepartment(req.body).then((response) => {
+    try {
+      if (response) {
+        res.status(200).json({ message: "Department updated Successfully" });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
+
 router.get("/get-departments", async (req, res) => {
   adminOperations.getAlldepartments().then((response) => {
     try {
@@ -51,9 +63,8 @@ router.post("/remove-department/:id", (req, res, next) => {
   });
 });
 
-router.post("/deleteUser/:id", (req, res, next) => {
-  console.log("sdfsdfdsa", req.params.id);
-  adminOperations.removeUser(req.params.id).then((result) => {
+router.post("/blockUser/:id", (req, res, next) => {
+  adminOperations.blockUser(req.params.id).then((result) => {
     try {
       res.status(200).json({
         message: "deleted",
@@ -64,4 +75,15 @@ router.post("/deleteUser/:id", (req, res, next) => {
   });
 });
 
+router.post("/deleteUser/:id", (req, res, next) => {
+  adminOperations.deleteUser(req.params.id).then((result) => {
+    try {
+      res.status(200).json({
+        message: "deleted",
+      });
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
 module.exports = router;

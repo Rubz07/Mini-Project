@@ -25,7 +25,7 @@ router.post("/register", async (req, res, next) => {
 });
 router.post("/otpAuthentication", async (req, res, next) => {
   otpAuthentication.otpAuthentication(req.body.mobile).then((response) => {
-    if (response.register_status) {
+    if (response) {
       res.status(200).json({ message: "otp sended" });
     } else {
       res.status(401).json({ message: "some error occured" });
@@ -64,7 +64,6 @@ router.post("/postcomplaint", async (req, res) => {
 
 router.get("/getComplaint", async (req, res) => {
   userOperation.getAllComplaints().then((response) => {
-    console.log(response);
     if (response) {
       res.status(200).json({ complaint: response, count: response.length });
     } else {
@@ -72,6 +71,17 @@ router.get("/getComplaint", async (req, res) => {
     }
   });
 });
+
+router.post("/getUserComplaint", verifyLoggin, (req, res) => {
+  userOperation.getUserComplaint(req.user.userid).then((response) => {
+    if (response) {
+      res.status(200).json({ complaint: response });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
 router.get("/getstatus/:id", (req, res, next) => {
   userOperation.getStatusDetails(req.params.id).then((result) => {
     try {
@@ -83,6 +93,47 @@ router.get("/getstatus/:id", (req, res, next) => {
       res.status(400).json({ message: error });
     }
   });
+});
+
+router.post("/changepass", verifyLoggin, async (req, res, next) => {
+  otpAuthentication.otpAuthentication(req.user.mobileno).then((response) => {
+    if (response) {
+      res.status(200).json({
+        message: "otp sended",
+        userid: req.user.userid,
+        mobile: req.user.mobileno,
+      });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
+router.post("/updatepassword", (req, res, next) => {
+  userOperation.updatePassword(req.body).then((result) => {
+    try {
+      if (result) {
+        res.status(200).json({
+          message: "updated",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
+router.post("/verify-passotp", async (req, res, next) => {
+  otpAuthentication
+    .otpVerification(req.body.otpcode, req.body.mobile)
+    .then((response) => {
+      try {
+        if (response) {
+          res.status(200).json({ verify: response });
+        }
+      } catch (error) {
+        res.status(401).json({ message: error });
+      }
+    });
 });
 
 module.exports = router;

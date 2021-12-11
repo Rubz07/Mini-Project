@@ -20,39 +20,29 @@ function Login() {
   const validPassword =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
-  const validateMobile = () => {
-    if (phnoChk.test(mobile)) {
-      setmobileError(false);
-    } else if (mobile == "") {
-      fullMobileError.innerText = "Field cannot be blank";
-      setmobileError(true);
-    } else {
-      fullMobileError.innerText = "Invalid mobile number";
-      setmobileError(true);
-    }
-  };
+  // const validateMobile = () => {
+  //   if (phnoChk.test(mobile)) {
+  //     setmobileError(false);
+  //   } else if (mobile == "") {
+  //     fullMobileError.innerText = "Field cannot be blank";
+  //     setmobileError(true);
+  //   } else {
+  //     fullMobileError.innerText = "Invalid mobile number";
+  //     setmobileError(true);
+  //   }
+  // };
 
-  const validatePassword = () => {
-    if (validPassword.test(password)) {
-      setPasswordError(false);
-    } else if (password == "") {
-      fullPasswordError.innerText = "Field cannot be blank";
-      setPasswordError(true);
-    } else {
-      fullPasswordError.innerText = "Invalid Password";
-      setPasswordError(true);
-    }
-  };
-
-  const submitval = () => {
-    if (mobileError == false && passwordError == false) {
-      regSubBtn.classList.remove("disabled");
-      buttonCursor.classList.remove("cursor-disabled");
-    } else {
-      regSubBtn.classList.add("disabled");
-      buttonCursor.classList.add("cursor-disabled");
-    }
-  };
+  // const validatePassword = () => {
+  //   if (validPassword.test(password)) {
+  //     setPasswordError(false);
+  //   } else if (password == "") {
+  //     fullPasswordError.innerText = "Field cannot be blank";
+  //     setPasswordError(true);
+  //   } else {
+  //     fullPasswordError.innerText = "Invalid Password";
+  //     setPasswordError(true);
+  //   }
+  // };
 
   //=========API CALLING====================//
 
@@ -65,7 +55,11 @@ function Login() {
     console.log(res);
     if (res.status === 200 && res.data.verify === true) {
       window.localStorage.setItem("auth-token", res.data.authToken);
-      history.push("/dashboard");
+      if (res.data.role === "admin") {
+        history.push("/Admindashboard");
+      } else {
+        history.push("/dashboard");
+      }
     } else {
       alert("Login failed");
     }
@@ -86,7 +80,7 @@ function Login() {
           {/* <img src={image1} alt="" class="image-1" /> */}
         </div>
         <div className="inner">
-          <form action="" id="reg-form" onKeyUp={submitval}>
+          <form action="" id="reg-form">
             <h3>Login</h3>
             <div className="form-holder mobile">
               <span className="lnr lnr-envelope"></span>
@@ -96,13 +90,7 @@ function Login() {
                 value={mobile}
                 placeholder="mobile"
                 onChange={(e) => setmobile(e.target.value)}
-                onKeyUp={validateMobile}
               />
-              <div
-                className={
-                  mobileError ? "error error-visible " : "error error-hidden"
-                }
-              ></div>
             </div>
 
             <div className="form-holder password">
@@ -113,21 +101,15 @@ function Login() {
                 value={password}
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
-                onKeyUp={validatePassword}
               />
-              <div
-                className={
-                  passwordError ? "error error-visible " : "error error-hidden"
-                }
-              ></div>
             </div>
 
-            <div className="button cursor-disable">
+            <div className="button">
               <input
                 type="button"
-                value="Register"
+                value="Login"
                 id="reg-btn"
-                class="btn1 primary-button disabled"
+                class="btn1 primary-button "
                 onClick={handleSubmit}
               ></input>
             </div>
