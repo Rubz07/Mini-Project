@@ -10,7 +10,7 @@ const officerSchema = new mongoose.Schema({
     type: String,
   },
   department: {
-    type: Number,
+    type: String,
     required: true,
   },
   complaints: { type: Array },

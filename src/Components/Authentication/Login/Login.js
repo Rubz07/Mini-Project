@@ -94,7 +94,6 @@ function Login() {
             </div>
 
             <div className="form-holder password">
-              <span className="lnr lnr-lock"></span>
               <input
                 type="password"
                 className="form-control"
@@ -112,6 +111,9 @@ function Login() {
                 class="btn1 primary-button "
                 onClick={handleSubmit}
               ></input>
+            </div>
+            <div className="loginErr loginErr-hidden ">
+              <p>Login failed</p>
             </div>
           </form>
         </div>

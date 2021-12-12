@@ -42,7 +42,7 @@ function SideBarAdmin() {
                 Users
               </li>
             </Link>
-            <Link to="/products" className="link">
+            <Link to="/complaints" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Complaints

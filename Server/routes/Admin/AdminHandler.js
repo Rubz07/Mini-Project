@@ -1,4 +1,5 @@
 var express = require("express");
+const AdminOperations = require("../../APP/ADMIN/AdminOperations");
 var router = express.Router();
 const adminOperations = require("../../APP/ADMIN/AdminOperations");
 router.get("/", function (req, res, next) {
@@ -98,4 +99,28 @@ router.post("/add-officer", function (req, res, next) {
     }
   });
 });
+
+router.get("/getComplaint", async (req, res) => {
+  AdminOperations.getAllComplaints().then((response) => {
+    if (response) {
+      res.status(200).json({ complaint: response, count: response.length });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
+router.post("/assign-complaint", function (req, res, next) {
+  console.log("bruuuu");
+  adminOperations.assignComplaint(req.body).then((response) => {
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
 module.exports = router;

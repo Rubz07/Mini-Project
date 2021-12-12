@@ -1,6 +1,7 @@
 const userSchema = require("../../model/userModel");
 const departmentSchema = require("../../model/departments");
 const officerSchema = require("../../model/OfficerModel");
+const complaintSchema = require("../../model/userComplaint");
 var generator = require("generate-password");
 var randomstring = require("randomstring");
 module.exports = {
@@ -130,10 +131,16 @@ module.exports = {
           status = "denied";
           resolve(status);
         } else {
+          const department = await departmentSchema.findOne({
+            registrationNo: data.department_id,
+          });
+          console.log(department);
           var officer = new officerSchema({
             name: data.name,
+
             mobile: data.mobile,
-            department: data.department_id,
+            department: department.departmentname,
+            userId: data.department_id,
             password: password,
           });
           var officerData = await officer.save();
@@ -142,6 +149,59 @@ module.exports = {
 
             resolve(status);
           }
+        }
+      } catch (error) {
+        console.log((err) => err.message);
+      }
+    });
+  },
+
+  getAllComplaints: () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await complaintSchema
+          .find({ status: "Pending" })
+          .exec()
+          .then((response) => {
+            if (response) {
+              resolve(response);
+            }
+          })
+          .catch((err) => console.log("error", err));
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
+
+  assignComplaint: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let status;
+        console.log(data.complaint_department);
+        const OfficerExist = await officerSchema.findOne({
+          userId: data.complaint_department,
+        });
+        if (OfficerExist) {
+          await officerSchema
+            .updateOne(
+              { _id: OfficerExist._id },
+              { $push: { complaints: data } }
+            )
+            .then(async () => {
+              console.log(data.complaint_id);
+              await complaintSchema.updateOne(
+                { _id: data.complaint_id },
+                { $set: { status: "Assigned" } }
+              );
+            })
+            .then(() => {
+              let status = "success";
+              resolve(status);
+            });
+        } else {
+          let status = "failed";
+          resolve(status);
         }
       } catch (error) {
         console.log((err) => err.message);

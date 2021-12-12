@@ -7,12 +7,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Userlist from "../AdminMain/UserList/Userlist";
 import User from "../AdminMain/user/User";
 import NewUser from "../AdminMain/newUser/NewUser";
-import Product from "../AdminMain/product/Product";
-import NewProduct from "../AdminMain/newProduct/NewProduct";
-import ProductList from "../AdminMain/productList/ProductList";
+
 import OfficerList from "../AdminMain/OfficerList/OfficerList";
 import Departments from "../AdminMain/Departments/Departments";
 import AddOfficer from "../AdminMain/Officer/AddOfficer";
+import Complaints from "../AdminMain/Complaints/Complaints";
 function AdminDashboard() {
   return (
     <Router>
@@ -35,14 +34,8 @@ function AdminDashboard() {
           <Route path="/newUser">
             <NewUser />
           </Route>
-          <Route path="/products">
-            <ProductList />
-          </Route>
-          <Route path="/product/:productId">
-            <Product />
-          </Route>
-          <Route path="/newproduct">
-            <NewProduct />
+          <Route path="/complaints">
+            <Complaints />
           </Route>
           <Route path="/departments">
             <Departments />

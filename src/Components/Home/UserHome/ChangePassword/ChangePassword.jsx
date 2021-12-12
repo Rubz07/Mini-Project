@@ -63,7 +63,7 @@ function ChangePassword() {
     console.log(response);
     if (response.status === 200 && response.data.verify === "approved") {
       otperr.classList.remove("otp-error");
-      otpVerify.classList.add("passmain-hidden");
+      otpVerify.classList.remove("passmain-hidden");
     } else {
       otpVerify.classList.add("passmain-hidden");
 
