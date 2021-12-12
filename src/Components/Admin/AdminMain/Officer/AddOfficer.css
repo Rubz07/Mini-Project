@@ -1,7 +1,7 @@
-.complaint-form {
+.Add-Officer {
   flex: 4;
 
-  transform: translate(14%, 0%);
+  transform: translate(19%, 1%);
 }
 .clearfix:after {
   content: "";
@@ -29,9 +29,9 @@
   display: block;
   visibility: hidden;
 }
-.comp_form_wrapper {
+.form_wrapper {
   background: #fff;
-  width: 600px;
+  width: 500px;
   max-width: 100%;
   box-sizing: border-box;
   padding: 25px;
@@ -51,42 +51,42 @@
   animation: expand 0.8s 0.6s ease-out forwards;
   opacity: 0;
 }
-.comp_form_wrapperr h2 {
+.form_wrapper h2 {
   font-size: 1.5em;
   line-height: 1.5em;
   margin: 0;
 }
-.comp_form_wrapper .title_container {
+.form_wrapper .title_container {
   text-align: center;
   padding-bottom: 15px;
 }
-.comp_form_wrapper h3 {
+.form_wrapper h3 {
   font-size: 1.1em;
   font-weight: normal;
   line-height: 1.5em;
   margin: 0;
 }
-.comp_form_wrapper label {
+.form_wrapper label {
   font-size: 12px;
 }
-.comp_form_wrapper .row {
+.form_wrapper .row {
   margin: 10px -15px;
 }
-.comp_form_wrapper .row > div {
+.form_wrapper .row > div {
   padding: 0 15px;
   box-sizing: border-box;
 }
-.comp_form_wrapper .col_half {
+.form_wrapper .col_half {
   width: 50%;
   float: left;
 }
-.comp_form_wrapper.input_field {
+.form_wrapper .input_field {
   position: relative;
   margin-bottom: 20px;
   -webkit-animation: bounce 0.6s ease-out;
   animation: bounce 0.6s ease-out;
 }
-.comp_form_wrapper .input_field > span {
+.form_wrapper .input_field > span {
   position: absolute;
   left: 0;
   top: 0;
@@ -96,15 +96,15 @@
   text-align: center;
   width: 30px;
 }
-.comp_form_wrapper .input_field > span > i {
+.form_wrapper .input_field > span > i {
   padding-top: 10px;
 }
-.comp_form_wrapper .textarea_field > span > i {
+.form_wrapper .textarea_field > span > i {
   padding-top: 10px;
 }
-.comp_form_wrapper input[type="text"],
-.comp_form_wrapper input[type="email"],
-.comp_form_wrapper input[type="tel"] {
+.form_wrapper input[type="text"],
+.form_wrapper input[type="email"],
+.form_wrapper input[type="tel"] {
   width: 100%;
   padding: 8px 10px 9px 35px;
   height: 35px;
@@ -117,14 +117,14 @@
   -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.comp_form_wrapper input[type="text"]:hover,
-.comp_form_wrapper input[type="email"]:hover,
-.comp_form_wrapper input[type="tel"]:hover {
+.form_wrapper input[type="text"]:hover,
+.form_wrapper input[type="email"]:hover,
+.form_wrapper input[type="tel"]:hover {
   background: #fafafa;
 }
-.comp_form_wrapper input[type="text"]:focus,
-.comp_form_wrapper input[type="email"]:focus,
-.comp_form_wrapper input[type="tel"]:focus {
+.form_wrapper input[type="text"]:focus,
+.form_wrapper input[type="email"]:focus,
+.form_wrapper input[type="tel"]:focus {
   border: 1px solid #000;
   background: #fafafa;
 }
@@ -312,7 +312,7 @@
   }
 }
 @media (max-width: 600px) {
-  .comp_form_wrapper .col_half {
+  .form_wrapper .col_half {
     width: 100%;
     float: none;
   }
@@ -326,16 +326,4 @@
   .remember_me {
     padding-bottom: 20px;
   }
-}
-
-textarea {
-  width: 100%;
-  height: 150px;
-  padding: 12px 20px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  font-size: 16px;
-  resize: none;
 }

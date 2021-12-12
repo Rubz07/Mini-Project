@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./ComplaintForm.css";
 import axios from "../../../../axios";
-import { Link, Route, useLocation, useHistory } from "react-router-dom";
+import { Close } from "@material-ui/icons";
+import { Link, useLocation } from "react-router-dom";
 import { userContext } from "../../../../AppContext";
 import Modal from "react-modal";
 function ComplaintForm() {
@@ -11,8 +12,8 @@ function ComplaintForm() {
   const [area, setArea] = useState();
   const [panchayat, setPanchayat] = useState();
   const [description, setDescription] = useState();
+  // const [regID, setRegId] = useState();
   const location = useLocation();
-  const history = useHistory();
   const { userdata } = useContext(userContext);
   console.log(userdata);
 
@@ -55,95 +56,129 @@ function ComplaintForm() {
 
     const res = await axios.post("/postcomplaint", data);
     if (res.status === 200) {
-      if (
-        window.confirm("Registration Successfull \n \n Do You want to go back?")
-      ) {
-        history.push("/dashboard");
-      } else {
-      }
+      // await setRegId(res.data.regno);
+      openModal();
     } else {
       alert("Some error occured");
     }
   };
   return (
-    <div className="complaintForm">
-      <div className="form-title">Complaint</div>
-      <form>
-        <div className="complaint-details">
-          <div className="input-box">
-            <span className="details">Select category</span>
-            <select
-              className="drp-control"
-              data-flag="true"
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="  " selected>
-                Select Category
-              </option>
-              <option>Payment Related</option>
-              <option>Employ Related</option>
-              <option>Otheres</option>
-            </select>
-          </div>
-
-          <div className="input-box">
-            <span className="details">Full name</span>
-            <input
-              type="text"
-              className="complaint-input"
-              value={userdata.username}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="input-box">
-            <span className="details">Area</span>
-            <input
-              type="text"
-              className="complaint-input"
-              placeholder="Enter Locality"
-              onChange={(e) => setArea(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="input-box">
-            <span className="details">Panchayat</span>
-            <input
-              type="text"
-              className="complaint-input"
-              placeholder="Enter Panchayat"
-              onChange={(e) => setPanchayat(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="input-box">
-            <span className="details">Description</span>
-            <textarea
-              placeholder="Enter Details"
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </div>
-
-          <div className="input-box">
-            <span className="details">
-              {" "}
-              Attach supporting documment(if any)
-            </span>
-            <input type="file" className="complaint-proof" name="" id="" />
-          </div>
-          <div className="complaint-submit">
-            <input
-              type="button"
-              className="complaint-submit"
-              value="Submit"
-              onClick={handleComplaint}
-            />
+    <div className="complaint-form">
+      <div class="comp_form_wrapper">
+        <div class="form_container">
+          <div class="row clearfix">
+            <div class="">
+              <form>
+                {" "}
+                <div class="row clearfix">
+                  <div class="col_half">
+                    <div class="input_field select_option">
+                      <select onChange={(e) => setCategory(e.target.value)}>
+                        <option value="  " selected>
+                          Select Category
+                        </option>
+                        <option>Payment Related</option>
+                        <option>Employ Related</option>
+                        <option>Otheres</option>
+                      </select>
+                      <div class="select_arrow"></div>
+                    </div>
+                  </div>
+                  <div class="col_half">
+                    <div class="input_field">
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Full name"
+                        value={userdata.username}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row clearfix">
+                  <div class="col_half">
+                    <div class="input_field">
+                      {" "}
+                      <input
+                        type="text"
+                        placeholder="Enter Locality"
+                        onChange={(e) => setArea(e.target.value)}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col_half">
+                    <div class="input_field">
+                      {" "}
+                      <input
+                        type="text"
+                        placeholder="Enter Panchayat"
+                        onChange={(e) => setPanchayat(e.target.value)}
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="input_field">
+                  {" "}
+                  <textarea
+                    placeholder="Enter Details"
+                    onChange={(e) => setDescription(e.target.value)}
+                  ></textarea>
+                </div>
+                <div class="input_field">
+                  {" "}
+                  <input
+                    type="file"
+                    className="complaint-proof"
+                    name=""
+                    id=""
+                  />
+                </div>
+                <input
+                  class="offcer-btn"
+                  type="button"
+                  value="Create"
+                  onClick={handleComplaint}
+                />
+                <div className="officerErr err-hidden">
+                  Officer Already Created
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </form>
+      </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="dep-header">
+          <div class="modal-close-btn">
+            <Close className="closeBtn" onClick={closeModal} />
+          </div>
+        </div>
+
+        <form>
+          <div className="title">
+            <h1>Complaint Registered Successfully</h1>
+          </div>
+          <div className="body">
+            <div className="username">
+              <p>Registration ID has been sended to your mobile number </p>
+            </div>
+          </div>
+          <div className="footer">
+            <Link to="/dashboard">
+              <button>Continue</button>
+            </Link>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }

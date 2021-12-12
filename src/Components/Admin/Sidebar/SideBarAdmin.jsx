@@ -66,10 +66,12 @@ function SideBarAdmin() {
         <div className="sidebarMenu">
           <h2 className="sidebarTitle">Officer</h2>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <AddCircleOutlineOutlined className="sidebarIcon" />
-              Add Officer
-            </li>
+            <Link to="/add-officer" className="link">
+              <li className="sidebarListItem">
+                <AddCircleOutlineOutlined className="sidebarIcon" />
+                Add Officer
+              </li>
+            </Link>
             <Link to="/officers" className="link">
               <li className="sidebarListItem">
                 <WorkOutline className="sidebarIcon" />

@@ -47,11 +47,7 @@ module.exports = {
               var complaint = await postcomplaint.save();
               if (complaint) {
                 console.log(complaint);
-                const response = {
-                  register_status: true,
-                  message: "complaint Registration successfull",
-                };
-                resolve(response);
+                resolve(complaint);
               }
             } else {
               console.log("network issue");

@@ -1,5 +1,7 @@
 const userSchema = require("../../model/userModel");
 const departmentSchema = require("../../model/departments");
+const officerSchema = require("../../model/OfficerModel");
+var generator = require("generate-password");
 var randomstring = require("randomstring");
 module.exports = {
   getAllUsers: () => {
@@ -110,6 +112,40 @@ module.exports = {
           }
         })
         .catch((err) => console.log("error", err));
+    });
+  },
+
+  createOfficer: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        var password = generator.generate({
+          length: 6,
+          numbers: true,
+        });
+        let status;
+        const OfficerExist = await officerSchema.findOne({
+          mobile: data.mobile,
+        });
+        if (OfficerExist) {
+          status = "denied";
+          resolve(status);
+        } else {
+          var officer = new officerSchema({
+            name: data.name,
+            mobile: data.mobile,
+            department: data.department_id,
+            password: password,
+          });
+          var officerData = await officer.save();
+          if (officerData) {
+            status = "Approved";
+
+            resolve(status);
+          }
+        }
+      } catch (error) {
+        console.log((err) => err.message);
+      }
     });
   },
 };

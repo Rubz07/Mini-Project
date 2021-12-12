@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DeleteOutline, Edit, Close } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+
 import axios from "../../../../axios";
 import "./Departments.css";
 

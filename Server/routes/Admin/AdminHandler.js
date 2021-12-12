@@ -86,4 +86,16 @@ router.post("/deleteUser/:id", (req, res, next) => {
     }
   });
 });
+
+router.post("/add-officer", function (req, res, next) {
+  adminOperations.createOfficer(req.body).then((response) => {
+    try {
+      if (response) {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
 module.exports = router;

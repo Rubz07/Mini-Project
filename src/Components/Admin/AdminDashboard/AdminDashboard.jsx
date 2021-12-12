@@ -12,6 +12,7 @@ import NewProduct from "../AdminMain/newProduct/NewProduct";
 import ProductList from "../AdminMain/productList/ProductList";
 import OfficerList from "../AdminMain/OfficerList/OfficerList";
 import Departments from "../AdminMain/Departments/Departments";
+import AddOfficer from "../AdminMain/Officer/AddOfficer";
 function AdminDashboard() {
   return (
     <Router>
@@ -45,6 +46,9 @@ function AdminDashboard() {
           </Route>
           <Route path="/departments">
             <Departments />
+          </Route>
+          <Route path="/add-officer">
+            <AddOfficer />
           </Route>
         </Switch>
       </div>
