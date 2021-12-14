@@ -1,34 +1,33 @@
 import React from "react";
 import "./OfficerCount.css";
 import { Save, ArrowUpward } from "@material-ui/icons";
-function OfficerCount() {
+function OfficerCount({ complaint }) {
   // var pendingCount = officer.filter(function (p) {
   //   return p.status == "Pending";
   // });
 
   return (
-    <div className="officerfeatured">
-      <div className="officerFeaturedItem">
-        <div className="officerFeaturedMoneyContainer">
-          <span className="officerFeaturedMoney">0</span>
-          <Save className="officerFeaturedIcon " />
+    <div className="featured">
+      <div className="featuredItem">
+        <div className="featuredMoneyContainer">
+          <Save className="featuredIcon " />
+          <span className="featuredMoney">0</span>
         </div>
-        <span className="officerFeaturedSub">Pending to Resolve</span>
+        <span className="featuredSub">Pending To Process</span>
       </div>
-      <div className="officerFeaturedItem">
-        <div className="officerFeaturedMoneyContainer">
-          <span className="officerFeaturedMoney">0</span>
-
-          <Save className="officerFeaturedIcon" />
+      <div className="featuredItem">
+        <div className="featuredMoneyContainer">
+          <Save className="featuredIcon" />
+          <span className="featuredMoney">0</span>
         </div>
-        <span className="officerFeaturedSub">Resolved Grievances</span>
+        <span className="featuredSub">On Process</span>
       </div>
-      <div className="officerFeaturedItem">
-        <div className="officerFeaturedMoneyContainer">
-          <span className="officerFeaturedMoney">0</span>
-          <ArrowUpward className="officerFeaturedIcon" />
+      <div className="featuredItem">
+        <div className="featuredMoneyContainer">
+          <Save className="featuredIcon" />
+          <span className="featuredMoney">0</span>
         </div>
-        <span className="officerFeaturedSub">Number of Grievances Closed</span>
+        <span className="featuredSub">Resolved Complaints</span>
       </div>
     </div>
   );

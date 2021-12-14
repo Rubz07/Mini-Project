@@ -6,6 +6,7 @@ const logger = require("morgan");
 const db = require("./dbconfig/dbconnection");
 const indexRouter = require("./routes/User/index");
 var adminRouter = require("./routes/Admin/AdminHandler");
+var officerRouter = require("./routes/Officer/officerHandler");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
+app.use("/officer", officerRouter);
 
 db.connect((err) => {
   if (err) console.log("connection error" + err);

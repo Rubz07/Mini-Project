@@ -1,4 +1,4 @@
-.sidebar {
+.officerSidebar {
   flex: 1;
   height: 100vh;
   background-color: rgb(251, 251, 255);
@@ -6,27 +6,27 @@
   top: 50px;
 }
 
-.sidebarWrapper {
+.officerSidebarWrapper {
   padding: 20px;
   color: #555;
 }
 
-.sidebarMenu {
+.officerSidebarMenu {
   margin-bottom: 10px;
 }
 
-.sidebarTitle {
+.officerSidebarTitle {
   font-size: 14px;
   font-weight: bold;
   color: rgb(94, 86, 86);
 }
 
-.sidebarList {
+.officerSidebarList {
   list-style: none;
   padding: 5px;
 }
 
-.sidebarListItem {
+.officerSidebarListItem {
   padding: 5px;
   cursor: pointer;
   display: flex;
@@ -34,12 +34,12 @@
   border-radius: 10px;
 }
 
-.sidebarListItem.active,
-.sidebarListItem:hover {
+.officerSidebarListItem.active,
+.officerSidebarListItem:hover {
   background-color: rgb(240, 240, 255);
 }
 
-.sidebarIcon {
+.officerSidebarIcon {
   margin-right: 5px;
   font-size: 20px !important;
 }

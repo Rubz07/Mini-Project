@@ -3,7 +3,7 @@ import "./ComplaintCount.css";
 import { Save, ArrowUpward } from "@material-ui/icons";
 function ComplaintCount({ complaint }) {
   var pendingCount = complaint.filter(function (p) {
-    return p.status == "Pending";
+    return p.status === "Pending";
   });
 
   return (

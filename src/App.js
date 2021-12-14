@@ -1,6 +1,7 @@
 import React from "react";
 import Register from "./Components/Authentication/Registration/Registration";
 import Login from "./Components/Authentication/Login/Login";
+import OfficerLogin from "./Components/Authentication/OfficerLogin/OfficerLogin";
 import OtpAuthentication from "./Components/Authentication/Otp/OtpAuthentication";
 
 import Dashboard from "./Components/Home/UserDashboard/Dashboard";
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/" component={OtpAuthentication} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/Officerlogin" component={OfficerLogin} />
           <Route exact path="/Admindashboard" component={AdminDashboard} />
           <Route exact path="/Officerdashboard" component={OfficerDashboard} />
         </Switch>
