@@ -15,7 +15,16 @@ router.get("/getUsers", async (req, res) => {
     }
   });
 });
-
+router.get("/getOfficers", async (req, res) => {
+  adminOperations.getAllOfficers().then((response) => {
+    if (response) {
+      console.log(response);
+      res.status(200).json({ officer: response });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
 router.post("/create-department", function (req, res, next) {
   adminOperations.createDepartment(req.body).then((response) => {
     try {

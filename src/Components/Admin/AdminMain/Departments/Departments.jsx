@@ -178,7 +178,7 @@ function Departments() {
             <div className="bttn">
               <input
                 type="button"
-                className="complaint-submit"
+                className="department-submit"
                 value="Create"
                 onClick={handleSubmit}
               />
@@ -216,7 +216,7 @@ function Departments() {
             <div className="bttn">
               <input
                 type="button"
-                className="complaint-submit"
+                className="department-submit"
                 value="UPDATE"
                 onClick={handleUpdate}
               />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../../axios";
 import "./Complaints.css";
-import { DeleteOutline } from "@material-ui/icons";
+
 function Complaints() {
   const [department, setDepartmentList] = useState(null);
   const [complaints, setComplaints] = useState(null);
@@ -57,6 +57,8 @@ function Complaints() {
             {complaints &&
               complaints.length > 0 &&
               complaints.map((data, index) => {
+                console.log("length", data.length);
+
                 return (
                   <tr key={data._id}>
                     <td>{index}</td>

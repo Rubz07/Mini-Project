@@ -96,13 +96,15 @@ function Userlist() {
                     <td width="176px">{data.adhaar}</td>
                     <td width="208px"></td>
                     <td width="240px">{data.status}</td>
-                    <td width="200px" className="action-sec">
+                    <td width="50px" className="action-sec">
                       <button
-                        className="productListEdit"
+                        className="userListEdit"
                         onClick={(e) => deactivateUser(e, data._id)}
                       >
                         block
                       </button>
+                    </td>
+                    <td>
                       <DeleteOutline
                         className="userListDelete"
                         onClick={(e) => openModal(data.name, data._id)}

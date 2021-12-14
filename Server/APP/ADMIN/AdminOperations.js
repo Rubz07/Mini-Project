@@ -2,6 +2,13 @@ const userSchema = require("../../model/userModel");
 const departmentSchema = require("../../model/departments");
 const officerSchema = require("../../model/OfficerModel");
 const complaintSchema = require("../../model/userComplaint");
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require("twilio")(accountSid, authToken);
+const dotenv = require("dotenv");
+dotenv.config();
+
 var generator = require("generate-password");
 var randomstring = require("randomstring");
 module.exports = {
@@ -123,9 +130,11 @@ module.exports = {
           length: 6,
           numbers: true,
         });
+        let Officermobile = `+${91}` + data.mobile;
+
         let status;
         const OfficerExist = await officerSchema.findOne({
-          mobile: data.mobile,
+          userId: data.department_id,
         });
         if (OfficerExist) {
           status = "denied";
@@ -134,21 +143,36 @@ module.exports = {
           const department = await departmentSchema.findOne({
             registrationNo: data.department_id,
           });
-          console.log(department);
-          var officer = new officerSchema({
-            name: data.name,
-
-            mobile: data.mobile,
-            department: department.departmentname,
-            userId: data.department_id,
-            password: password,
-          });
-          var officerData = await officer.save();
-          if (officerData) {
-            status = "Approved";
-
-            resolve(status);
-          }
+          console.log(Officermobile);
+          client.messages
+            .create({
+              body:
+                " Your credentials for CM-Portal is USERNAME " +
+                data.department_id +
+                " and PASSWORD " +
+                password,
+              from: "+19704382955",
+              to: "+919048317092",
+            })
+            .then(async (message, err) => {
+              if (err) {
+                console.log(err);
+              }
+              if (message) {
+                var officer = new officerSchema({
+                  name: data.name,
+                  mobile: data.mobile,
+                  department: department.departmentname,
+                  userId: data.department_id,
+                  password: password,
+                });
+                var officerData = await officer.save();
+                if (officerData) {
+                  status = "Approved";
+                  resolve(status);
+                }
+              }
+            });
         }
       } catch (error) {
         console.log((err) => err.message);
@@ -206,6 +230,22 @@ module.exports = {
       } catch (error) {
         console.log((err) => err.message);
       }
+    });
+  },
+
+  getAllOfficers: () => {
+    return new Promise(async (resolve, reject) => {
+      await officerSchema
+        .find()
+        .exec()
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          } else {
+            console.log("some error occured");
+          }
+        })
+        .catch((err) => console.log("error", err));
     });
   },
 };

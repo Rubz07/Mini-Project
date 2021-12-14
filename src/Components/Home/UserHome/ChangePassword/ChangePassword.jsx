@@ -62,8 +62,8 @@ function ChangePassword() {
     let response = await axios.post(`verify-passotp`, data);
     console.log(response);
     if (response.status === 200 && response.data.verify === "approved") {
-      otperr.classList.remove("otp-error");
       otpVerify.classList.remove("passmain-hidden");
+      otperr.classList.remove("otp-error");
     } else {
       otpVerify.classList.add("passmain-hidden");
 

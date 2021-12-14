@@ -24,13 +24,13 @@ module.exports = {
         });
 
         client.messages
-          .create({
-            body:
-              "Your complaint is registered successfully and you register number is " +
-              regno,
-            from: "+19704382955",
-            to: usermobile,
-          })
+        .create({
+          body:
+            "Your complaint is registered successfully and you register number is " +
+            regno,
+          from: "+19704382955",
+          to: usermobile,
+        })
           .then(async (message) => {
             if (message) {
               console.log(message.sid);

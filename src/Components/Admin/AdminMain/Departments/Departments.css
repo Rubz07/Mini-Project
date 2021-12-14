@@ -150,7 +150,7 @@ td {
 .department-input :focus {
   border-color: #9b58b6;
 }
-.bttn {
+.department-submit {
   background: darkblue;
   color: #fff;
   font-family: "Gilroy_B";
@@ -164,7 +164,7 @@ td {
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
 }
-.bttn:active {
+.department-submit:active {
   -webkit-transform: scale(0.99);
   transform: scale(0.99);
   background: #3425a5;
