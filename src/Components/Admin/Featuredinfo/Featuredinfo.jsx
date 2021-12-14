@@ -1,27 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Save } from "@material-ui/icons";
 import "./Featuredinfo.css";
-function Featuredinfo() {
+function Featuredinfo({ complaint }) {
+  var pendingCount = complaint.filter(function (p) {
+    return p.status === "Pending";
+  });
+
+  var processingCount = complaint.filter(function (p) {
+    return p.status === "Assigned";
+  });
+  var ResolvedCount = complaint.filter(function (p) {
+    return p.status === "Resolved";
+  });
   return (
     <div className="featured">
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon " />
-          <span className="featuredMoney">0</span>
+          <span className="featuredMoney">{pendingCount.length}</span>
         </div>
         <span className="featuredSub">Pending To Assign</span>
       </div>
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon" />
-          <span className="featuredMoney">0</span>
+          <span className="featuredMoney">{processingCount.length}</span>
         </div>
-        <span className="featuredSub">Assigned Complaints</span>
+        <span className="featuredSub">On Process</span>
       </div>
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon" />
-          <span className="featuredMoney">0</span>
+          <span className="featuredMoney">{ResolvedCount.length}</span>
         </div>
         <span className="featuredSub">Resolved Complaints</span>
       </div>

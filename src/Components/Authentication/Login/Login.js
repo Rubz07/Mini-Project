@@ -5,20 +5,12 @@ import { Route, useHistory, Redirect } from "react-router-dom";
 import "./Login.css";
 function Login() {
   const history = useHistory();
-  const fullMobileError = document.querySelector(".mobile .error");
-  const fullPasswordError = document.querySelector(".password .error");
-  const regSubBtn = document.querySelector("#reg-btn");
-  const buttonCursor = document.querySelector(".button");
 
-  const [loginError, setLogginError] = useState("login failed");
+  const loginErr = document.querySelector(".loginErr");
+
   const [password, setPassword] = useState();
-  const [passwordError, setPasswordError] = useState();
-  const [mobile, setmobile] = useState();
-  const [mobileError, setmobileError] = useState();
 
-  var phnoChk = /^([0-9_\-]{10})+$/;
-  const validPassword =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+  const [mobile, setmobile] = useState();
 
   // const validateMobile = () => {
   //   if (phnoChk.test(mobile)) {
@@ -52,16 +44,20 @@ function Login() {
       password: password,
     };
     const res = await axios.post("/login", data);
-    console.log(res);
-    if (res.status === 200 && res.data.verify === true) {
-      window.localStorage.setItem("auth-token", res.data.authToken);
-      if (res.data.role === "admin") {
-        history.push("/Admindashboard");
+    try {
+      if (res.status === 200 && res.data.verify === true) {
+        window.localStorage.setItem("auth-token", res.data.authToken);
+        if (res.data.role === "admin") {
+          history.push("/Admindashboard");
+        } else {
+          history.push("/dashboard");
+        }
       } else {
-        history.push("/dashboard");
+        console.log("hii");
+        loginErr.classList.remove("loginErr-hidden");
       }
-    } else {
-      alert("Login failed");
+    } catch (error) {
+      console.log("hiiiii");
     }
   };
 

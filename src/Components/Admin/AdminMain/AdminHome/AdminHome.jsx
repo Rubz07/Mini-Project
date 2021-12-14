@@ -14,6 +14,7 @@ function AdminHome() {
   async function getComplaints() {
     let response = await axios.get(`/getComplaint`);
     if (response.status === 200) {
+      console.log(response.data.complaint);
       setComplaints(response.data.complaint);
     }
   }
@@ -25,7 +26,7 @@ function AdminHome() {
     <Router>
       <Switch>
         <div className="adminHome">
-          <Featuredinfo />
+          <Featuredinfo complaint={complaints} />
           <div className="homeWidgets">
             <WidgetSmall />
             <WidgetLarge />

@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 module.exports = async (req, res, next) => {
   try {
     //validation
+
     if (!req.body.mobile || !req.body.password)
       return res.status(400).json({
         status: false,

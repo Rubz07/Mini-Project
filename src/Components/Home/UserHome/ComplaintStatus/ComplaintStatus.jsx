@@ -6,12 +6,14 @@ function ComplaintStatus() {
 
   const [regno, setRegNO] = useState();
   const [statusdata, setStatus] = useState({});
+  const [officerdata, setOfficerdata] = useState({});
 
   const fetchStatus = async (e) => {
     e.preventDefault();
     const res = await axios.get("/getstatus/" + regno);
     console.log(res);
     if (res.status === 200) {
+      setOfficerdata(res.data.statusdetails.officer);
       setStatus(res.data.statusdetails);
       statusdetail.classList.remove("statuslist-hide");
     }
@@ -45,11 +47,11 @@ function ComplaintStatus() {
           <div class="data">
             <table>
               <tr>
-                <th style={{ padding: "20px" }}>Sl.No</th>
+                <th style={{ padding: "20px" }}>Complaint ID</th>
                 <th>Status</th>
                 <th>Department</th>
                 <th>officer</th>
-                <th>Contact Details</th>
+                <th>Office No</th>
                 <th>Comments</th>
               </tr>
 
@@ -57,8 +59,8 @@ function ComplaintStatus() {
                 <td width="200px">1</td>
                 <td width="200px"> {statusdata.status}</td>
                 <td width="200px"> {statusdata.department}</td>
-                <td width="200px">P.Radhakrishnan</td>
-                <td width="200px">8863478965</td>
+                <td width="200px">{officerdata.name}</td>
+                <td width="200px">{officerdata.mobile}</td>
                 <td width="200px">Processing</td>
               </tr>
             </table>

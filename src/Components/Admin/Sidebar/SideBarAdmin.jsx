@@ -6,6 +6,7 @@ import {
   Timeline,
   TrendingUp,
   PermIdentity,
+  NotificationsNone,
   Storefront,
   AttachMoney,
   BarChart,
@@ -46,6 +47,7 @@ function SideBarAdmin() {
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Complaints
+                {/* <span className="topIconBadge">2</span> */}
               </li>
             </Link>
 

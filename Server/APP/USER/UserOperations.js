@@ -12,7 +12,6 @@ module.exports = {
   postComplaint: (data) => {
     try {
       return new Promise(async (resolve, reject) => {
-        console.log(data.userid);
         let user = await userSchema.find({
           _id: data.userid,
         });
@@ -24,13 +23,13 @@ module.exports = {
         });
 
         client.messages
-        .create({
-          body:
-            "Your complaint is registered successfully and you register number is " +
-            regno,
-          from: "+19704382955",
-          to: usermobile,
-        })
+          .create({
+            body:
+              "Your complaint is registered successfully and you register number is " +
+              regno,
+            from: "+19704382955",
+            to: usermobile,
+          })
           .then(async (message) => {
             if (message) {
               console.log(message.sid);
@@ -114,15 +113,14 @@ module.exports = {
 
   getStatusDetails: (regno) => {
     return new Promise(async (resolve, reject) => {
-      await complaintSchema
+      var status = await complaintSchema
         .findOne({ registrationNo: regno })
-        .then((response) => {
-          if (response) {
-            console.log(response);
-            resolve(response);
+        .populate("officer", "name mobile")
+        .exec((err, posts) => {
+          if (posts) {
+            resolve(posts);
           }
-        })
-        .catch((err) => console.log("error", err));
+        });
     });
   },
   updatePassword: (data) => {

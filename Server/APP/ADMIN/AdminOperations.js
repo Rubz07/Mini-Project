@@ -216,7 +216,7 @@ module.exports = {
               console.log(data.complaint_id);
               await complaintSchema.updateOne(
                 { _id: data.complaint_id },
-                { $set: { status: "Assigned" } }
+                { $set: { status: "Assigned", officer: OfficerExist._id } }
               );
             })
             .then(() => {
