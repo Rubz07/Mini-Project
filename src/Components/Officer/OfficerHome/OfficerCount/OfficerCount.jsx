@@ -2,16 +2,16 @@ import React from "react";
 import "./OfficerCount.css";
 import { Save, ArrowUpward } from "@material-ui/icons";
 function OfficerCount({ complaint }) {
-  // var pendingCount = officer.filter(function (p) {
-  //   return p.status == "Pending";
-  // });
-
+  var pendingCount = complaint.filter(function (p) {
+    return p.complaint_status === "Assigned";
+  });
+  console.log(pendingCount);
   return (
     <div className="featured">
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon " />
-          <span className="featuredMoney">0</span>
+          <span className="featuredMoney">{pendingCount.length}</span>
         </div>
         <span className="featuredSub">Pending To Process</span>
       </div>

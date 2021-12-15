@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Userlist from "../AdminMain/UserList/Userlist";
 import User from "../AdminMain/user/User";
 import NewUser from "../AdminMain/newUser/NewUser";
-
+import Login from "../../Authentication/Login/Login";
 import OfficerList from "../AdminMain/OfficerList/OfficerList";
 import Departments from "../AdminMain/Departments/Departments";
 import AddOfficer from "../AdminMain/Officer/AddOfficer";
@@ -15,6 +15,7 @@ import Complaints from "../AdminMain/Complaints/Complaints";
 function AdminDashboard() {
   return (
     <Router>
+      <Route path="/login" component={Login} />
       <Topbar />
       <div className="AdminWrapper">
         <SidebarAdmin />

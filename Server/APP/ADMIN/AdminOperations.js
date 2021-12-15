@@ -207,6 +207,8 @@ module.exports = {
           userId: data.complaint_department,
         });
         if (OfficerExist) {
+          data.complaint_status = "Assigned";
+
           await officerSchema
             .updateOne(
               { _id: OfficerExist._id },

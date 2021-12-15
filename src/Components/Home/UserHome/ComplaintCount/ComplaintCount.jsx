@@ -23,18 +23,14 @@ function ComplaintCount({ complaint }) {
 
           <Save className="complaintFeaturedIcon" />
         </div>
-        <span className="complaintFeaturedSub">
-          Number of Grievances Pending
-        </span>
+        <span className="complaintFeaturedSub">Grievance Under Processing</span>
       </div>
       <div className="complaintFeaturedItem">
         <div className="complaintFeaturedMoneyContainer">
           <span className="complaintFeaturedMoney">0</span>
           <ArrowUpward className="complaintFeaturedIcon" />
         </div>
-        <span className="complaintFeaturedSub">
-          Number of Grievances Closed
-        </span>
+        <span className="complaintFeaturedSub">Resolved Grievances</span>
       </div>
     </div>
   );

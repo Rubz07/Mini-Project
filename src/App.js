@@ -22,8 +22,8 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/Officerlogin" component={OfficerLogin} />
           <Route exact path="/Admindashboard" component={AdminDashboard} />
-          <Route exact path="/Officerdashboard" component={OfficerDashboard} />
         </Switch>
+        <Route exact path="/Officerdashboard" component={OfficerDashboard} />
       </Router>
     </app>
   );

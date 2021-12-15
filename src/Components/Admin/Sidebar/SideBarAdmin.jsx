@@ -10,14 +10,16 @@ import {
   Storefront,
   AttachMoney,
   BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
+  ExitToApp,
   WorkOutline,
   Report,
   AddCircleOutlineOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+
+const termination = () => {
+  window.localStorage.removeItem("auth-token");
+};
 function SideBarAdmin() {
   return (
     <div className="sidebar">
@@ -88,20 +90,14 @@ function SideBarAdmin() {
         </div>
 
         <div className="sidebarMenu">
-          <h2 className="sidebarTitle">Notifications</h2>
+          <h2 className="sidebarTitle"></h2>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <MailOutline className="sidebarIcon" />
-              Mail
-            </li>
-            <li className="sidebarListItem">
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
-            </li>
-            <li className="sidebarListItem">
-              <ChatBubbleOutline className="sidebarIcon" />
-              Messages
-            </li>
+            <Link to="/login" className="link">
+              <li className="sidebarListItem" onClick={termination}>
+                <ExitToApp className="sidebarIcon" />
+                Logout
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { LineStyle, ExitToApp } from "@material-ui/icons";
 
 function officerSidebar() {
   const termination = () => {
-    window.localStorage.removeItem("auth-token");
+    window.localStorage.removeItem("officer-token");
   };
   return (
     <div className="officerSidebar">
@@ -58,7 +58,7 @@ function officerSidebar() {
         <div className="officerSidebarMenu">
           <h2 className="officerSidebarTitle"></h2>
           <ul className="officerSidebarList">
-            <Link to="/login" className="link">
+            <Link to="/Officerlogin" className="link">
               <li className="officerSidebarListItem" onClick={termination}>
                 <ExitToApp className="officerSidebarIcon" />
                 Logout

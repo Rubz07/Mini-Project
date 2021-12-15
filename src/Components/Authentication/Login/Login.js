@@ -61,12 +61,12 @@ function Login() {
     }
   };
 
-  useEffect(() => {
-    const isToken = localStorage.getItem("auth-token");
-    if (isToken) {
-      history.push("/dashboard");
-    }
-  }, [history]);
+  // useEffect(() => {
+  //   const isToken = localStorage.getItem("auth-token");
+  //   if (isToken) {
+  //     history.push("/dashboard");
+  //   }
+  // }, [history]);
 
   return (
     <Route>

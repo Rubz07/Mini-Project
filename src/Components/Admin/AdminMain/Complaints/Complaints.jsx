@@ -6,13 +6,14 @@ function Complaints() {
   const [department, setDepartmentList] = useState(null);
   const [complaints, setComplaints] = useState(null);
 
-  async function handleChange(e, id, regid, description) {
+  async function handleChange(e, id, regid, description, status) {
     console.log(id, regid, description);
     const data = {
       complaint_department: e.target.value,
       complaint_id: id,
       complaint_regid: regid,
       complaint_description: description,
+      complaint_status: status,
     };
 
     let response = await axios.post(`admin/assign-complaint`, data);
@@ -74,7 +75,8 @@ function Complaints() {
                               e,
                               data._id,
                               data.registrationNo,
-                              data.description
+                              data.description,
+                              data.status
                             )
                           }
                         >

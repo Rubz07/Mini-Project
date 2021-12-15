@@ -253,7 +253,7 @@ h3 {
   cursor: pointer;
   user-select: none;
   font-family: "NunitoSB";
-  background: #51bde4;
+  background: darkblue;
   box-shadow: 0px 8px 16px rgba(71, 151, 255, 0.16);
   border-radius: 7px;
   transition: 0.2s;
