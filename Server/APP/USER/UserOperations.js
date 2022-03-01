@@ -27,7 +27,7 @@ module.exports = {
             body:
               "Your complaint is registered successfully and you register number is " +
               regno,
-            from: "+19704382955",
+            from: "+19108389090",
             to: usermobile,
           })
           .then(async (message) => {
@@ -38,6 +38,7 @@ module.exports = {
                 department: data.department,
                 userId: data.userid,
                 name: user[0].name,
+                userContact: user[0].mobile,
                 description: data.description,
                 complaint_type: data.category,
                 panchayat: data.panchayat,

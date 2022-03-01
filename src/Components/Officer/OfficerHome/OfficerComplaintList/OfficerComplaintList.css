@@ -2,6 +2,16 @@
   max-height: 70px;
 }
 
+.prioritycmpselect_option select {
+  width: 80%;
+  height: 30px;
+  padding: 0px 15px;
+  cursor: pointer;
+  color: #000000;
+  border: 1px solid rgb(87, 87, 99);
+  border-radius: 10px;
+}
+
 .officerComplaintUpdate {
   font-size: 1.3541666666666667vw;
   color: #fff;

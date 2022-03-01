@@ -1,15 +1,16 @@
 const OfficerSchema = require("../../model/OfficerModel");
-
+const complaintSchema = require("../../model/userComplaint");
 module.exports = {
-  getOfficerComplaint: (id) => {
+  getOfficerComplaint: (department) => {
     return new Promise(async (resolve, reject) => {
       try {
-        await OfficerSchema.find({ _id: id })
+        await complaintSchema
+          .find({ department: department })
           .then((response) => {
             if (response) {
               //   complaints
               var officerComplaint = response.map((p) => {
-                return p.complaints;
+                return p;
               });
 
               console.log(officerComplaint);

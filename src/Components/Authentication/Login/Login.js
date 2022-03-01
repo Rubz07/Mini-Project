@@ -85,6 +85,7 @@ function Login() {
                 className="form-control"
                 value={mobile}
                 placeholder="mobile"
+                autocomplete="off"
                 onChange={(e) => setmobile(e.target.value)}
               />
             </div>
@@ -94,6 +95,7 @@ function Login() {
                 type="password"
                 className="form-control"
                 value={password}
+                autocomplete="off"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
               />

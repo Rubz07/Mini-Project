@@ -118,7 +118,7 @@ function OtpAuthentication() {
     if (otpError == true) {
       history.push({
         pathname: "/register",
-
+        
         state: { mobile: mobile },
       });
     } else {

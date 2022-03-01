@@ -10,14 +10,13 @@ router.get("/", function (req, res, next) {
 router.post("/login", Login);
 
 router.post("/getOfficerComplaint", verifyOfficer, (req, res) => {
-
-    OfficerOperation.getOfficerComplaint(req.user.officerid).then((response) => {
-      if (response) {
-        res.status(200).json({ complaint: response });
-      } else {
-        res.status(401).json({ message: "some error occured" });
-      }
-    });
+  OfficerOperation.getOfficerComplaint(req.user.department).then((response) => {
+    if (response) {
+      res.status(200).json({ complaint: response });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
 });
 
 module.exports = router;

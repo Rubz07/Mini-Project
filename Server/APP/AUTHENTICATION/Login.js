@@ -23,6 +23,7 @@ module.exports = async (req, res, next) => {
         });
 
       const pwdMatch = await bcrypt.compare(req.body.password, user.password);
+
       if (!pwdMatch)
         return res.status(401).json({
           status: false,

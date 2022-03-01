@@ -9,13 +9,12 @@ function OfficerMain() {
 
   async function getOfficerComplaints() {
     const token = localStorage.getItem("officer-token");
-    console.log(token);
+
     let response = await axios.post(`officer/getOfficerComplaint`, {
       headers: { Authorization: token },
     });
     if (response.status === 200) {
-   
-      setComplaints(response.data.complaint[0]);
+      setComplaints(response.data.complaint);
     }
   }
 

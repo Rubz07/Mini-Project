@@ -15,6 +15,11 @@ const complaintSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userContact: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
   department: { type: String, ref: "departments" },
   complaint_type: { type: String, required: true },
   officer: { type: mongoose.Schema.Types.ObjectId, ref: "officerModel" },

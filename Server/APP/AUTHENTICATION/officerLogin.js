@@ -28,6 +28,7 @@ module.exports = async (req, res, next) => {
             officerid: officer._id,
             name: officer.email,
             mobile: officer.mobile,
+            department: officer.department,
           },
           process.env.SECRET_CODE,
           { expiresIn: "1d" }
