@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./OfficerComplaintList.css";
-function OfficerComplaintList({ complaint }) {
+function OfficerComplaintList({ complaint, officerDetails }) {
+  console.log(officerDetails);
   return (
     <div className="complaintDetails">
       <div className="complaintTitle">Complaints</div>
@@ -57,40 +58,13 @@ function OfficerComplaintList({ complaint }) {
                     <td width="250px">
                       <div class="priority">
                         <select
-                        // onChange={(e) =>
-                        //   handleChange(
-                        //     e,
-                        //     data._id,
-                        //     data.registrationNo,
-                        //     data.description,
-                        //     data.status
-                        //   )
-                        // }
+                        //  onChange={(e) => handleChange(e.target.value)}
                         >
-                          <option value="Alappuzha">(AL) ABC</option>
-                          <option value="Ernakulam">(ER) ABC</option>
-                          <option value="Idukki">(ID) ABC</option>
-                          <option value="Kannur">(KN) ABC</option>
-                          <option value="Kasargod">(KS) ABC</option>
-                          <option value="Kollam">(KL) ABC</option>
-                          <option value="Kottayam">(KT) ABC</option>
-                          <option value="Kozhikode">(KZ) ABC</option>
-                          <option value="Malappuram">(MA) ABC</option>
-                          <option value="Palakkad">(PL) ABC</option>
-                          <option value="Pathanamthitta">(PT) ABC</option>
-                          <option value="Thiruvananthapuram">(TV) ABC</option>
-                          <option value="Thrissur">(TS) ABC</option>
-                          <option value="Wayanad">(WA) ABC</option>
-
-                          {/* {department &&
-                            department.length > 0 &&
-                            department.map((p) => {
-                              return (
-                                <option value={p.registrationNo}>
-                                  {p.departmentname}
-                                </option>
-                              );
-                            })} */}
+                          {officerDetails &&
+                            officerDetails.length > 0 &&
+                            officerDetails.map((p) => {
+                              return <option value={p}>{p}</option>;
+                            })}
                         </select>
                       </div>
                     </td>

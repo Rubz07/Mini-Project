@@ -19,5 +19,13 @@ const officerSchema = new mongoose.Schema({
     enum: ["0", "1"],
     default: "1",
   },
+  role: {
+    type: String,
+    enum: ["main", "sub"],
+    default: "sub",
+  },
+  district: {
+    type: String,
+  },
 });
 module.exports = mongoose.model("officerModel", officerSchema);

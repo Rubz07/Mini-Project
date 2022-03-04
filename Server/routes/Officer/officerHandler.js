@@ -19,4 +19,30 @@ router.post("/getOfficerComplaint", verifyOfficer, (req, res) => {
   });
 });
 
+router.post("/getOfficerDetails", verifyOfficer, (req, res) => {
+  OfficerOperation.getOfficerDetails(req.user.department).then((response) => {
+    if (response) {
+      res.status(200).json({ districts: response });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
+router.post("/add-Subofficer", function (req, res, next) {
+  OfficerOperation.createOfficer(req.body).then((response) => {
+    try {
+      if (response) {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
+router.post("/get-DepartmentDetails", verifyOfficer, function (req, res, next) {
+  res.status(200).json({ data: req.user });
+});
+
 module.exports = router;

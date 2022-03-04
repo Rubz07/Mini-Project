@@ -12,6 +12,7 @@ import {
   Redirect,
   useHistory,
 } from "react-router-dom";
+import SubOfficers from "../OfficerHome/SubOfficers/SubOfficers";
 
 function OfficerDashboard() {
   return (
@@ -24,6 +25,9 @@ function OfficerDashboard() {
           <Switch>
             <Route exact path="/Officerdashboard">
               <OfficerMain />
+            </Route>
+            <Route path="/add-subofficer">
+              <SubOfficers/>
             </Route>
           </Switch>
         </div>

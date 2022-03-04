@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./OfficerSidebar.css";
-import { LineStyle, ExitToApp } from "@material-ui/icons";
+import {
+  LineStyle,
+  ExitToApp,
+  WorkOutline,
+  AddCircleOutlineOutlined,
+} from "@material-ui/icons";
 
 function officerSidebar() {
   const termination = () => {
@@ -17,6 +22,23 @@ function officerSidebar() {
               <li className="officerSidebarListItem active">
                 <LineStyle className="officerSidebarIcon" />
                 Home
+              </li>
+            </Link>
+          </ul>
+        </div>
+        <div className="sidebarMenu">
+          <h2 className="sidebarTitle">Officer</h2>
+          <ul className="sidebarList">
+            <Link to="/add-subofficer" className="link">
+              <li className="sidebarListItem">
+                <AddCircleOutlineOutlined className="sidebarIcon" />
+                Add Officer
+              </li>
+            </Link>
+            <Link to="/officers" className="link">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Manage
               </li>
             </Link>
           </ul>
