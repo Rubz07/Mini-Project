@@ -31,10 +31,16 @@ const complaintSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  comment: {
+    type: String,
+  },
   status: {
     type: String,
     enum: ["Pending", "Approved", "Assigned", "Resolved"],
     default: "Pending",
+  },
+  priority: {
+    type: String,
   },
   date: {
     type: Date,

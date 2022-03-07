@@ -55,12 +55,10 @@ router.post("/isAuthenticated", verifyLoggin, (req, res) => {
 router.post("/postcomplaint", async (req, res) => {
   userOperation.postComplaint(req.body).then((response) => {
     if (response) {
-      res
-        .status(200)
-        .json({
-          message: "complaint registered successfully",
-          regno: response.registrationNo,
-        });
+      res.status(200).json({
+        message: "complaint registered successfully",
+        regno: response.registrationNo,
+      });
     } else {
       res.status(401).json({ message: "some error occured" });
     }
@@ -89,6 +87,7 @@ router.post("/getUserComplaint", verifyLoggin, (req, res) => {
 
 router.get("/getstatus/:id", (req, res, next) => {
   userOperation.getStatusDetails(req.params.id).then((result) => {
+    console.log(result);
     try {
       res.status(200).json({
         statusdetails: result,

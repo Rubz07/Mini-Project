@@ -14,14 +14,13 @@ module.exports = async (req, res, next) => {
     const officer = await officerSchema.findOne({
       userId: req.body.officerId,
     });
-    console.log(officer);
     if (officer.status === "1") {
       if (!officer)
         return res.status(404).json({
           status: false,
           message: "User does not exist",
         });
-
+      console.log(req.body.password, officer.password);
       if (req.body.password === officer.password) {
         const token = jwt.sign(
           {

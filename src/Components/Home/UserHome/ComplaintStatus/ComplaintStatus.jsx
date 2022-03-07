@@ -11,7 +11,6 @@ function ComplaintStatus() {
   const fetchStatus = async (e) => {
     e.preventDefault();
     const res = await axios.get("/getstatus/" + regno);
-    console.log(res);
     if (res.status === 200) {
       setOfficerdata(res.data.statusdetails.officer);
       setStatus(res.data.statusdetails);
@@ -36,7 +35,7 @@ function ComplaintStatus() {
             <input
               type="button"
               className="status-submitbtn"
-              value="Submit"
+              value="Check"
               onClick={(e) => fetchStatus(e)}
             />
           </div>
@@ -61,7 +60,7 @@ function ComplaintStatus() {
                 <td width="200px"> {statusdata.department}</td>
                 <td width="200px">{officerdata.name}</td>
                 <td width="200px">{officerdata.mobile}</td>
-                <td width="200px">Processing</td>
+                <td width="200px">{statusdata.comment}</td>
               </tr>
             </table>
           </div>

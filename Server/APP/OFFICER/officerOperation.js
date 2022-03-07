@@ -38,7 +38,7 @@ module.exports = {
             console.log(response);
             if (response) {
               var officerDetails = response.map((p) => {
-                return p.district;
+                return p;
               });
               resolve(officerDetails);
             }
@@ -97,6 +97,28 @@ module.exports = {
                 }
               }
             });
+        }
+      } catch (error) {
+        console.log((err) => err.message);
+      }
+    });
+  },
+  assignSubOfficer: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let status;
+        const complaintDetails = await complaintSchema.findOne({
+          registrationNo: data.complaintRegistrationID,
+        });
+
+        if (complaintDetails) {
+          complaintDetails.updateOne(data).then(async () => {
+            let status = "success";
+            resolve(status);
+          });
+        } else {
+          let status = "failed";
+          resolve(status);
         }
       } catch (error) {
         console.log((err) => err.message);

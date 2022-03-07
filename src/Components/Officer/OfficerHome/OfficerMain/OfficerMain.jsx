@@ -40,10 +40,7 @@ function OfficerMain() {
         <div className="officerHome">
           <OfficerCount complaint={complaints} />
           <div className="complaintTable">
-            <OfficerComplaintList
-              complaint={complaints}
-              officerDetails={officerDetatls}
-            />
+            <OfficerComplaintList officerDetails={officerDetatls} />
           </div>
         </div>
       </Switch>

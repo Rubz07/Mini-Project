@@ -13,7 +13,7 @@ const officerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  complaints: { type: Array },
+  // complaints: { type: Array },
   status: {
     type: String,
     enum: ["0", "1"],

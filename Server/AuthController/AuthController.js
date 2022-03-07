@@ -15,6 +15,7 @@ const verifyLoggin = (req, res, next) => {
 
 const verifyOfficer = (req, res, next) => {
   const token = req.body.headers.Authorization;
+  console.log(token);
 
   if (!token) return res.status(401).send("Access denied");
   try {
