@@ -1,8 +1,7 @@
 import React from "react";
 
-import "./OfficerNavbar.css";
-
-function OfficerNavbar() {
+import "./SubOfficerNavbar.css";
+function SubOfficerNavbar() {
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -15,4 +14,4 @@ function OfficerNavbar() {
   );
 }
 
-export default OfficerNavbar;
+export default SubOfficerNavbar;

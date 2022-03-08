@@ -1,0 +1,45 @@
+.subOfficerSidebar {
+  flex: 1;
+  height: 100vh;
+  background-color: rgb(251, 251, 255);
+  position: sticky;
+  top: 50px;
+}
+
+.subOfficerSidebarWrapper {
+  padding: 20px;
+  color: #555;
+}
+
+.subOfficerSidebarMenu {
+  margin-bottom: 10px;
+}
+
+.subOfficerSidebarTitle {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(94, 86, 86);
+}
+
+.subOfficerSidebarList {
+  list-style: none;
+  padding: 5px;
+}
+
+.subOfficerSidebarListItem {
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.subOfficerSidebarListItem.active,
+.subOfficerSidebarListItem:hover {
+  background-color: rgb(240, 240, 255);
+}
+
+.subOfficerSidebarIcon {
+  margin-right: 5px;
+  font-size: 20px !important;
+}

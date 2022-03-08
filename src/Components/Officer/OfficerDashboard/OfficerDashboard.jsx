@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./OfficerDashboard.css";
-import axios from "../../../axios";
+
 import Navbar from "../OfficerNavbar/OfficerNavbar";
 import Sidebar from "../OfficerSidebar/OfficerSidebar";
 import OfficerMain from "../OfficerHome/OfficerMain/OfficerMain";
 import OfficerLogin from "../../Authentication/OfficerLogin/OfficerLogin";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SubOfficers from "../OfficerHome/SubOfficers/SubOfficers";
 
 function OfficerDashboard() {
@@ -27,7 +21,7 @@ function OfficerDashboard() {
               <OfficerMain />
             </Route>
             <Route path="/add-subofficer">
-              <SubOfficers/>
+              <SubOfficers />
             </Route>
           </Switch>
         </div>

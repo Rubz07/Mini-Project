@@ -10,6 +10,8 @@ import OfficerDashboard from "./Components/Officer/OfficerDashboard/OfficerDashb
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
+import SubOfficerLogin from "./Components/Authentication/SubOfficerLogin/SubOfficerLogin";
+import SubOfficerDashboard from "./Components/Subofficer/SubOfficerDashboard/SubOfficerDashboard";
 
 function App() {
   return (
@@ -21,9 +23,15 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/Officerlogin" component={OfficerLogin} />
+          <Route exact path="/SubOfficerlogin" component={SubOfficerLogin} />
           <Route exact path="/Admindashboard" component={AdminDashboard} />
         </Switch>
         <Route exact path="/Officerdashboard" component={OfficerDashboard} />
+        <Route
+          exact
+          path="/SubOfficerdashboard"
+          component={SubOfficerDashboard}
+        />
       </Router>
     </app>
   );

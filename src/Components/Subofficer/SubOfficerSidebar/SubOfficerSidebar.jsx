@@ -1,26 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./OfficerSidebar.css";
+import "./SubOfficerSidebar.css";
 import {
   LineStyle,
   ExitToApp,
   WorkOutline,
   AddCircleOutlineOutlined,
 } from "@material-ui/icons";
-
-function officerSidebar() {
+function SubOfficerSidebar() {
   const termination = () => {
-    window.localStorage.removeItem("officer-token");
+    window.localStorage.removeItem("Subofficer-token");
   };
   return (
-    <div className="officerSidebar">
-      <div className="officerSidebarWrapper">
-        <div className="officerSidebarMenu">
-          <h2 className="officerSidebarTitle">Dashboard</h2>
-          <ul className="officerSidebarList">
+    <div className="subOfficerSidebar">
+      <div className="subOfficerSidebarWrapper">
+        <div className="subOfficerSidebarMenu">
+          <h2 className="subOfficerSidebarTitle">Dashboard</h2>
+          <ul className="subOfficerSidebarList">
             <Link to="/Officerdashboard" className="link">
-              <li className="officerSidebarListItem active">
-                <LineStyle className="officerSidebarIcon" />
+              <li className="subOfficerSidebarListItem active">
+                <LineStyle className="subOfficerSidebarIcon" />
                 Home
               </li>
             </Link>
@@ -43,13 +42,13 @@ function officerSidebar() {
             </Link>
           </ul>
         </div>
-       
-        <div className="officerSidebarMenu">
-          <h2 className="officerSidebarTitle"></h2>
-          <ul className="officerSidebarList">
-            <Link to="/Officerlogin" className="link">
-              <li className="officerSidebarListItem" onClick={termination}>
-                <ExitToApp className="officerSidebarIcon" />
+
+        <div className="subOfficerSidebarMenu">
+          <h2 className="subOfficerSidebarTitle"></h2>
+          <ul className="subOfficerSidebarList">
+            <Link to="/SubOfficerlogin" className="link">
+              <li className="subOfficerSidebarListItem" onClick={termination}>
+                <ExitToApp className="subOfficerSidebarIcon" />
                 Logout
               </li>
             </Link>
@@ -60,4 +59,4 @@ function officerSidebar() {
   );
 }
 
-export default officerSidebar;
+export default SubOfficerSidebar;

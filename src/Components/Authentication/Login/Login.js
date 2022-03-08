@@ -47,6 +47,7 @@ function Login() {
     try {
       if (res.status === 200 && res.data.verify === true) {
         window.localStorage.setItem("auth-token", res.data.authToken);
+        console.log(res.data.role);
         if (res.data.role === "admin") {
           history.push("/Admindashboard");
         } else {

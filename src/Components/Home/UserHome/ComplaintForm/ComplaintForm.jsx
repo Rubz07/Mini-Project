@@ -103,7 +103,7 @@ function ComplaintForm() {
                       {" "}
                       <input
                         type="text"
-                        placeholder="Enter Locality"
+                        placeholder="Name of the office or locality"
                         onChange={(e) => setArea(e.target.value)}
                         required
                       />

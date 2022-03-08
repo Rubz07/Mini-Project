@@ -106,7 +106,7 @@
 .comp_form_wrapper input[type="email"],
 .comp_form_wrapper input[type="tel"] {
   width: 100%;
-  padding: 8px 10px 9px 35px;
+  padding: 4px 2px 2px 5px;
   height: 35px;
   border: 1px solid #ccc;
   border-radius: 5px;
