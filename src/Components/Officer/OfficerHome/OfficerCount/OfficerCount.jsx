@@ -2,23 +2,27 @@ import React from "react";
 import "./OfficerCount.css";
 import { Save, ArrowUpward } from "@material-ui/icons";
 function OfficerCount({ complaint }) {
-  // var pendingCount = complaint.filter(function (p) {
-  //   return p.complaint_status === "Pending";
-  // });
-  // console.log(pendingCount);
+  var AssignedCount = complaint.filter(function (p) {
+    return p.status === "Assigned";
+  });
+
+  var PendingCount = complaint.filter(function (p) {
+    return p.status === "Pending";
+  });
+
   return (
     <div className="featured">
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon " />
-          <span className="featuredMoney">0</span>
+          <span className="featuredMoney">{PendingCount.length}</span>
         </div>
         <span className="featuredSub">Pending To Process</span>
       </div>
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon" />
-          <span className="featuredMoney">0</span>
+          <span className="featuredMoney">{AssignedCount.length}</span>
         </div>
         <span className="featuredSub">On Process</span>
       </div>

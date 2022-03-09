@@ -162,6 +162,7 @@ module.exports = {
                 var officer = new officerSchema({
                   name: data.name,
                   mobile: data.mobile,
+                  role: data.role,
                   department: department.departmentname,
                   userId: data.department_id,
                   password: password,

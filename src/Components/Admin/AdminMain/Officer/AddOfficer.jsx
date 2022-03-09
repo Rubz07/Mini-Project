@@ -38,6 +38,7 @@ function AddOfficer() {
       department_id: depId,
       name: name,
       mobile: mobile,
+      role: "main",
     };
     let response = await axios.post(`admin/add-officer`, data);
     if (response.status === 200 && response.data.verify === "Approved") {
