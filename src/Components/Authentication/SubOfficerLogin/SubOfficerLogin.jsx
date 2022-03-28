@@ -11,7 +11,7 @@ function SubOfficerLogin() {
       officerId: officerId,
       password: password,
     };
-    const res = await axios.post("officer/login", data);
+    const res = await axios.post("subofficer/login", data);
     try {
       if (res.status === 200 && res.data.verify === true) {
         window.localStorage.setItem("Subofficer-token", res.data.authToken);

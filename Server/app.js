@@ -7,6 +7,7 @@ const db = require("./dbconfig/dbconnection");
 const indexRouter = require("./routes/User/index");
 var adminRouter = require("./routes/Admin/AdminHandler");
 var officerRouter = require("./routes/Officer/officerHandler");
+var subofficerRouter = require("./routes/SubOfficer/SubOfficerHandler");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
 app.use("/officer", officerRouter);
+app.use("/subofficer", subofficerRouter);
 
 db.connect((err) => {
   if (err) console.log("connection error" + err);

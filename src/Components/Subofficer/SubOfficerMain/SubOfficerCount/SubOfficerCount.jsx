@@ -1,28 +1,23 @@
 import React from "react";
-import "./OfficerCount.css";
+import "./SubOfficerCount.css";
 import { Save } from "@material-ui/icons";
-function OfficerCount({ complaint }) {
+function SubOfficerCount({ complaint }) {
   var AssignedCount = complaint.filter(function (p) {
     return p.status === "Assigned";
   });
-
-  var PendingCount = complaint.filter(function (p) {
-    return p.status === "Pending";
-  });
-
   return (
     <div className="featured">
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon " />
-          <span className="featuredMoney">{PendingCount.length}</span>
+          <span className="featuredMoney">{AssignedCount.length}</span>
         </div>
         <span className="featuredSub">Pending To Process</span>
       </div>
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon" />
-          <span className="featuredMoney">{AssignedCount.length}</span>
+          <span className="featuredMoney">0</span>
         </div>
         <span className="featuredSub">On Process</span>
       </div>
@@ -37,4 +32,4 @@ function OfficerCount({ complaint }) {
   );
 }
 
-export default OfficerCount;
+export default SubOfficerCount;
