@@ -49,18 +49,18 @@ function ComplaintStatus() {
                 <th style={{ padding: "20px" }}>Complaint ID</th>
                 <th>Status</th>
                 <th>Department</th>
-                <th>officer</th>
-                <th>Office No</th>
+                <th>Officer</th>
                 <th>Comments</th>
+                <th>Action Date</th>
               </tr>
 
               <tr>
-                <td width="200px">1</td>
+                <td width="200px">{statusdata.registrationNo}</td>
                 <td width="200px"> {statusdata.status}</td>
                 <td width="200px"> {statusdata.department}</td>
                 <td width="200px">{officerdata.name}</td>
-                <td width="200px">{officerdata.mobile}</td>
-                <td width="200px">{statusdata.comment}</td>
+                <td width="200px">{statusdata.subcomment}</td>
+                <td width="200px">{statusdata.actiondate}</td>
               </tr>
             </table>
           </div>

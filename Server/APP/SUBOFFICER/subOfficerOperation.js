@@ -27,4 +27,50 @@ module.exports = {
       }
     });
   },
+  complaintAction: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let update;
+        const action = {
+          subcomment: data.sub_comment,
+          status: data.action,
+          actiondate: Date.now(),
+        };
+        await complaintSchema
+          .find({ _id: data.complaint_id })
+          .then((response) => {
+            let Officermobile = `+${91}` + response[0].userContact;
+            client.messages
+              .create({
+                body:
+                  " Your complaint ID " +
+                  response[0].registrationNo +
+                  " is " +
+                  data.action,
+                from: "+19108389090",
+                to: Officermobile,
+              })
+              .then(async (message) => {
+                if (message.status === "queued") {
+                  let res = await complaintSchema.findByIdAndUpdate(
+                    data.complaint_id,
+                    action,
+                    {
+                      new: true,
+                      runValidators: true,
+                      useFindAndModify: false,
+                    }
+                  );
+                  if (res) {
+                    update = "success";
+                    resolve(update);
+                  }
+                }
+              });
+          });
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
 };

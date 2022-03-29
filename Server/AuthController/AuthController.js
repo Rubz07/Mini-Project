@@ -20,7 +20,7 @@ const verifyOfficer = (req, res, next) => {
     const verified = jwt.verify(token, process.env.SECRET_CODE);
 
     req.user = verified;
-    console.log(req.user);
+
     next();
   } catch (error) {
     console.log(error);

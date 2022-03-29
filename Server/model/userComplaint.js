@@ -34,9 +34,19 @@ const complaintSchema = new mongoose.Schema({
   comment: {
     type: String,
   },
+  subcomment: {
+    type: String,
+  },
   status: {
     type: String,
-    enum: ["Pending", "Approved", "Assigned", "Resolved","Processing","Rejected"],
+    enum: [
+      "Pending",
+      "Approved",
+      "Assigned",
+      "Resolved",
+      "Processing",
+      "Rejected",
+    ],
     default: "Pending",
   },
   priority: {
@@ -45,6 +55,9 @@ const complaintSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now,
+  },
+  actiondate: {
+    type: Date,
   },
 });
 module.exports = mongoose.model("complaints", complaintSchema);

@@ -5,7 +5,8 @@ import { Close } from "@material-ui/icons";
 import Modal from "react-modal";
 function SubOfficerComplaintList() {
   const [complaints, setComplaints] = useState([]);
-
+  const [comments, setComments] = useState();
+  const [complaintStatus, setComplaintStatus] = useState();
   const customStyles = {
     content: {
       top: "45%",
@@ -23,7 +24,6 @@ function SubOfficerComplaintList() {
   function closeModal() {
     setIsOpen(false);
   }
-
   const [modalIsOpen, setIsOpen] = useState(false);
 
   async function getOfficerComplaints() {
@@ -32,7 +32,24 @@ function SubOfficerComplaintList() {
       headers: { Authorization: token },
     });
     if (response.status === 200) {
-      setComplaints(response.data.complaint);
+      const result = response.data.complaint.filter(
+        (response) => response.status == "Assigned"
+      );
+      setComplaints(result);
+    }
+  }
+
+  async function ComplaintAction(e, id) {
+    e.preventDefault();
+    const data = {
+      complaint_id: id,
+      sub_comment: comments,
+      action: complaintStatus,
+    };
+    let response = await axios.post(`subofficer/complaintAction`, data);
+    if (response.status === 200 && response.data.verify === "success") {
+      getOfficerComplaints();
+      closeModal();
     }
   }
 
@@ -143,7 +160,9 @@ function SubOfficerComplaintList() {
                                     <div class="input_field cmpselect_option">
                                       <textarea
                                         className="officer-comments"
-                                        //   onChange={(e) => setComment(e.target.value)}
+                                        onChange={(e) =>
+                                          setComments(e.target.value)
+                                        }
                                       ></textarea>
                                     </div>
                                   </td>
@@ -154,7 +173,11 @@ function SubOfficerComplaintList() {
                                   <td>
                                     {" "}
                                     <div class="input_field cmpselect_option">
-                                      <select>
+                                      <select
+                                        onChange={(e) =>
+                                          setComplaintStatus(e.target.value)
+                                        }
+                                      >
                                         <option value="Processing">
                                           Processing
                                         </option>
@@ -176,20 +199,15 @@ function SubOfficerComplaintList() {
                       <button
                         className="officerComplaintUpdate"
                         style={{ marginTop: "25px" }}
+                        onClick={(e) => ComplaintAction(e, data._id)}
                       >
-                        Details
+                        Update
                       </button>
                     </div>
                   </div>
                 </div>
               );
             })}
-
-          <div className="footer">
-            {/* <Link to="/Officerdashboard">
-              <button>Continue</button>
-            </Link> */}
-          </div>
         </form>
       </Modal>
     </div>
