@@ -1,0 +1,138 @@
+.complaintList {
+  flex: 4;
+  margin: 20px;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.complaintListUser {
+  display: flex;
+  align-items: center;
+}
+
+.complaintListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.complaintListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+.complaintTitle {
+  margin-bottom: 20px;
+  font-weight: bold;
+  padding: 7px;
+  background-color: rgb(240, 240, 255);
+  color: black;
+}
+
+.complaintListItem {
+  display: flex;
+  align-items: center;
+}
+
+.complaintListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.complaintListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.complaintListDelete {
+  color: red;
+  border: none;
+
+  cursor: pointer;
+  margin-left: 20px;
+}
+.complaintHeadings {
+  margin: 36px 16px 0 16px;
+  font-family: "Gilroy_SB";
+  font-size: 20px;
+
+  color: black;
+  justify-content: space-between;
+  display: flex;
+}
+.complaintDatas {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+.complaintData {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  font-family: "Gilroy_M";
+  font-size: 18px;
+  color: black;
+}
+td {
+  vertical-align: top;
+  text-align: center;
+}
+
+.cmpselect_option {
+  position: relative;
+  width: 100%;
+}
+.cmpselect_option select {
+  display: inline-block;
+  width: 90%;
+  height: 30px;
+  padding: 0px 15px;
+  cursor: pointer;
+  color: #7b7b7b;
+  border: 1px solid rgb(87, 87, 99);
+  border-radius: 10px;
+  background: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.2s ease;
+}
+.cmpselect_option select::-ms-expand {
+  display: none;
+}
+.cmpselect_option select:hover,
+.cmpselect_option select:focus {
+  color: #000;
+  background: #fafafa;
+  border-color: #000;
+  outline: none;
+}
+.select_arrow {
+  position: absolute;
+  top: calc(50% - 4px);
+  right: 15px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-width: 8px 5px 0 5px;
+  border-style: solid;
+  border-color: #7b7b7b transparent transparent transparent;
+}
+.cmpselect_option select:hover + .select_arrow,
+.cmpselect_option select:focus + .select_arrow {
+  border-top-color: #000;
+}

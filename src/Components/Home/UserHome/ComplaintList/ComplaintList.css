@@ -1,0 +1,64 @@
+.complaintDetails {
+  flex: 4;
+  margin: 20px;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+.ComplaintList {
+  height: 28vw;
+}
+.complaintTitle {
+  margin-bottom: 20px;
+  background-color: rgb(240, 240, 255);
+  padding: 4px;
+  font-weight: bold;
+  color: black;
+}
+
+.complaintListItem {
+  display: flex;
+  align-items: center;
+}
+
+.complaintListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.complaintListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.complaintListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+.datas {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+.data {
+  padding: 1.2px;
+  background: white;
+  border-radius: 10px;
+  font-family: "Gilroy_M";
+  font-size: 18px;
+  color: black;
+}
+td {
+  padding: 5px;
+  vertical-align: top;
+  text-align: left;
+}

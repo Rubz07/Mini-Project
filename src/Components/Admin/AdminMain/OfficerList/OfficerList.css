@@ -1,0 +1,93 @@
+.officerList {
+  flex: 4;
+  margin: 20px;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.officerListUser {
+  display: flex;
+  align-items: center;
+}
+
+.officerListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.officerListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+.officerTitle {
+  margin-bottom: 20px;
+  font-weight: bold;
+  padding: 7px;
+  background-color: rgb(240, 240, 255);
+  color: black;
+}
+
+.officerListItem {
+  display: flex;
+  align-items: center;
+}
+
+.officerListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.officerListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.officerListDelete {
+  color: red;
+  border: none;
+
+  cursor: pointer;
+  margin-left: 20px;
+}
+.officerHeadings {
+  margin: 36px 16px 0 16px;
+  font-family: "Gilroy_SB";
+  font-size: 20px;
+
+  color: black;
+  justify-content: space-between;
+  display: flex;
+}
+.officerDatas {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+.officerData {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  font-family: "Gilroy_M";
+  font-size: 18px;
+  color: black;
+}
+td {
+  vertical-align: top;
+  text-align: center;
+}

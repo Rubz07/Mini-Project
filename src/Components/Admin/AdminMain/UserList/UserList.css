@@ -1,0 +1,154 @@
+.userList {
+  flex: 4;
+  margin: 20px;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.userListUser {
+  display: flex;
+  align-items: center;
+}
+
+.userListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.userListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.userListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+.userTitle {
+  margin-bottom: 20px;
+  font-weight: bold;
+  padding: 7px;
+  background-color: rgb(240, 240, 255);
+  color: black;
+}
+
+.complaintListItem {
+  display: flex;
+  align-items: center;
+}
+
+.complaintListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.userListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #fc0000;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.userListDelete {
+  color: red;
+  border: none;
+
+  cursor: pointer;
+  margin-left: 20px;
+}
+.userHeadings {
+  margin: 36px 16px 0 16px;
+  font-family: "Gilroy_SB";
+  font-size: 20px;
+  color: black;
+  display: flex;
+}
+.userDatas {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+.Data {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  font-family: "Gilroy_M";
+  font-size: 18px;
+  color: black;
+}
+td {
+  vertical-align: top;
+  text-align: center;
+}
+.action-sec {
+  display: flex;
+  margin: 0;
+}
+
+.title {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+  color: black;
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.body {
+  flex: 50%;
+  display: flex;
+  color: black;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  text-align: center;
+}
+.footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer button {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background-color: crimson;
+}

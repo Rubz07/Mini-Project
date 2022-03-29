@@ -1,14 +1,39 @@
 import React from "react";
-import Nav from "./Components/Nav/Nav";
+import Register from "./Components/Authentication/Registration/Registration";
+import Login from "./Components/Authentication/Login/Login";
+import OfficerLogin from "./Components/Authentication/OfficerLogin/OfficerLogin";
+import OtpAuthentication from "./Components/Authentication/Otp/OtpAuthentication";
+
+import Dashboard from "./Components/Home/UserDashboard/Dashboard";
+import AdminDashboard from "./Components/Admin/AdminDashboard/AdminDashboard";
+import OfficerDashboard from "./Components/Officer/OfficerDashboard/OfficerDashboard";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
+import SubOfficerLogin from "./Components/Authentication/SubOfficerLogin/SubOfficerLogin";
+import SubOfficerDashboard from "./Components/Subofficer/SubOfficerDashboard/SubOfficerDashboard";
 
 function App() {
   return (
-    <div>
-   
-      <Nav />
-    </div>
+    <app>
+      <Router>
+        <Switch>
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/" component={OtpAuthentication} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/Officerlogin" component={OfficerLogin} />
+          <Route exact path="/SubOfficerlogin" component={SubOfficerLogin} />
+          <Route exact path="/Admindashboard" component={AdminDashboard} />
+        </Switch>
+        <Route exact path="/Officerdashboard" component={OfficerDashboard} />
+        <Route
+          exact
+          path="/SubOfficerdashboard"
+          component={SubOfficerDashboard}
+        />
+      </Router>
+    </app>
   );
 }
 

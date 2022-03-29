@@ -1,0 +1,45 @@
+.officerSidebar {
+  flex: 1;
+  height: 100vh;
+  background-color: rgb(251, 251, 255);
+  position: sticky;
+  top: 50px;
+}
+
+.officerSidebarWrapper {
+  padding: 20px;
+  color: #555;
+}
+
+.officerSidebarMenu {
+  margin-bottom: 10px;
+}
+
+.officerSidebarTitle {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(94, 86, 86);
+}
+
+.officerSidebarList {
+  list-style: none;
+  padding: 5px;
+}
+
+.officerSidebarListItem {
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.officerSidebarListItem.active,
+.officerSidebarListItem:hover {
+  background-color: rgb(240, 240, 255);
+}
+
+.officerSidebarIcon {
+  margin-right: 5px;
+  font-size: 20px !important;
+}

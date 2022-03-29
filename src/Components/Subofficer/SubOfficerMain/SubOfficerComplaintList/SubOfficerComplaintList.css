@@ -1,0 +1,29 @@
+.officer-comments {
+  max-height: 70px;
+}
+
+.prioritycmpselect_option select {
+  width: 80%;
+  height: 30px;
+  padding: 0px 15px;
+  cursor: pointer;
+  color: #000000;
+  border: 1px solid rgb(87, 87, 99);
+  border-radius: 10px;
+}
+
+.officerComplaintUpdate {
+  font-size: 1.3541666666666667vw;
+  color: #fff;
+  padding: 0.5208333333333334vw 2.0833333333333335vw;
+  border: none;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  font-family: "NunitoSB";
+  background: darkblue;
+  box-shadow: 0px 8px 16px rgba(71, 151, 255, 0.16);
+  border-radius: 10px;
+  transition: 0.2s;
+}
