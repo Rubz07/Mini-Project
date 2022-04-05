@@ -3,14 +3,7 @@ import "./LandingPage.css";
 import shape from "../../Assets/images/shape.png";
 import logo from "../../Assets/images/logo.png";
 import person from "../../Assets/images/aa.png";
-import {
-  Link,
-  Route,
-  Router,
-  useLocation,
-  useHistory,
-  Redirect,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 function LandingPage() {
   return (
     <main>
@@ -35,9 +28,9 @@ function LandingPage() {
                   <a href="#">Testimonials</a>
                 </li>
                 <li>
-                  <a href="#" class="btn">
+                  <Link to="/login" className="btn">
                     Login
-                  </a>
+                  </Link>
                   <Link to="/otpauth" className="btn">
                     Sign up
                   </Link>

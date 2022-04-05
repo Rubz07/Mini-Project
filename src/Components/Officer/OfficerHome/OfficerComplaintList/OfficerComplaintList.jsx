@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../../axios";
 import "./OfficerComplaintList.css";
-function OfficerComplaintList({ complaint, officerDetails }) {
+function OfficerComplaintList({ officerDetails }) {
   const [priority, setPriority] = useState();
   const [officer, setOfficer] = useState();
   const [comment, setComment] = useState();
@@ -14,7 +14,10 @@ function OfficerComplaintList({ complaint, officerDetails }) {
       headers: { Authorization: token },
     });
     if (response.status === 200) {
-      setComplaints(response.data.complaint);
+      const result = response.data.complaint.filter(
+        (response) => response.status == "Pending"
+      );
+      setComplaints(result);
     }
   }
 
@@ -30,7 +33,7 @@ function OfficerComplaintList({ complaint, officerDetails }) {
 
     const res = await axios.post("officer/assigncomplaint", data);
     if (res.status === 200 && res.data.verify === "success") {
-      console.log("done");
+      getOfficerComplaints();
     } else {
       alert("Some error occured");
     }

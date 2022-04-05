@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../axios";
-import { useHistory } from "react-router-dom";
+import { Route,useHistory } from "react-router-dom";
 function SubOfficerLogin() {
   const [password, setPassword] = useState();
   const history = useHistory();
   const [officerId, setOfficerId] = useState();
+
+   // NAV BAR
+   const diffLogin = (e) => {
+    history.push(`/${e}`);
+  };
+    // NAV BAR
 
   const handleSubmit = async () => {
     const data = {
@@ -30,6 +36,36 @@ function SubOfficerLogin() {
     }
   }, [history]);
   return (
+    <Route>
+{/* NAV BAR */}
+
+<header>
+        <div class="container">
+          <div class="logo">
+            <p className="logo-title">CM-Portal</p>
+          </div>
+
+          <div class="links">
+            <select
+              className="btn5"
+              onChange={(e) => diffLogin(e.target.value)}
+            >
+              <option value="">SubOfficer</option>
+              <option value="login">User</option>
+              <option value="Officerlogin">Officer</option>
+            </select>
+          </div>
+
+          <div class="overlay"></div>
+
+          <div class="hamburger-menu">
+            <div class="bar"></div>
+          </div>
+        </div>
+      </header>
+
+      {/* NAV BAR */}
+      
     <div className="wrapper">
       <div className="img1">
         {" "}
@@ -74,6 +110,7 @@ function SubOfficerLogin() {
         </form>
       </div>
     </div>
+    </Route>
   );
 }
 

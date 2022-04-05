@@ -10,6 +10,10 @@ function OfficerCount({ complaint }) {
     return p.status === "Pending";
   });
 
+  var ResolvedCount = complaint.filter(function (p) {
+    return p.status === "Resolved";
+  });
+
   return (
     <div className="featured">
       <div className="featuredItem">
@@ -29,7 +33,7 @@ function OfficerCount({ complaint }) {
       <div className="featuredItem">
         <div className="featuredMoneyContainer">
           <Save className="featuredIcon" />
-          <span className="featuredMoney">0</span>
+          <span className="featuredMoney">{ResolvedCount.length}</span>
         </div>
         <span className="featuredSub">Resolved Complaints</span>
       </div>

@@ -320,6 +320,16 @@ button:hover:after {
     background: none;
   }
 }
+.btn5 {
+  display: inline-block;
+  padding: 0.4rem 1.9rem;
+  color: #fff !important;
+  background-color: darkblue;
+  border-radius: 16px;
+  text-transform: capitalize;
+  transition: 0.3s;
+}
+
 .error {
   position: absolute;
 

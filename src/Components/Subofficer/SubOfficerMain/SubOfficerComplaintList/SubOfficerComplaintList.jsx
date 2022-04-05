@@ -123,40 +123,54 @@ function SubOfficerComplaintList() {
                             return (
                               <>
                                 <tr>
-                                  <th>Complaint Id</th>
-                                  <td>: {data.registrationNo}</td>
+                                  <th width="200">Complaint Id</th>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.registrationNo}
+                                  </td>
                                 </tr>
 
                                 <tr>
                                   <th>User Name</th>
-                                  <td>: {data.name}</td>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.name}
+                                  </td>
                                 </tr>
                                 <tr>
                                   <th>User Number</th>
-                                  <td>: {data.userContac}</td>
+                                  <td style={{ textAlign: "left" }}>
+                                    : 9048317092
+                                  </td>
                                 </tr>
 
                                 <tr>
                                   <th>Description</th>
-                                  <td>: {data.description}</td>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.description}
+                                  </td>
                                 </tr>
 
                                 <tr>
                                   <th>Complaint Type</th>
-                                  <td>: {data.complaint_type}</td>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.complaint_type}
+                                  </td>
                                 </tr>
 
                                 <tr>
                                   <th>Panchayat</th>
-                                  <td>: {data.panchayat}</td>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.panchayat}
+                                  </td>
                                 </tr>
                                 <tr>
                                   <th>Posted Date</th>
-                                  <td>: {data.date}</td>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.date}
+                                  </td>
                                 </tr>
                                 <tr>
                                   <th>Add comment</th>
-                                  <td>
+                                  <td style={{ textAlign: "left" }}>
                                     <div class="input_field cmpselect_option">
                                       <textarea
                                         className="officer-comments"

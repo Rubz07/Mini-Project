@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import image1 from "../../../Assets/images/image-1.png";
 import axios from "../../../axios";
 import { Route, useHistory, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 function Login() {
   const history = useHistory();
@@ -12,6 +13,11 @@ function Login() {
 
   const [mobile, setmobile] = useState();
 
+  // NAV BAR
+  const diffLogin = (e) => {
+    history.push(`/${e}`);
+  };
+    // NAV BAR
   // const validateMobile = () => {
   //   if (phnoChk.test(mobile)) {
   //     setmobileError(false);
@@ -71,6 +77,37 @@ function Login() {
 
   return (
     <Route>
+
+      {/* NAV BAR */}
+
+      <header>
+        <div class="container">
+          <div class="logo">
+            <p className="logo-title">CM-Portal</p>
+          </div>
+
+          <div class="links">
+            <select
+              className="btn5"
+              onChange={(e) => diffLogin(e.target.value)}
+            >
+              <option value="">user</option>
+              <option value="Officerlogin">Officer</option>
+              <option value="SubOfficerlogin">Sub Officer</option>
+            </select>
+          </div>
+
+          <div class="overlay"></div>
+
+          <div class="hamburger-menu">
+            <div class="bar"></div>
+          </div>
+        </div>
+      </header>
+
+
+{/* NAV BAR */}
+
       <div className="wrapper">
         <div className="img1">
           {" "}
