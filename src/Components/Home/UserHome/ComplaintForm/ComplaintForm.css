@@ -153,9 +153,12 @@
 }
 
 .select_option {
-  position: relative;
+  position: absolute;
   width: 100%;
 }
+/* .bank_category{
+  position: absolute;
+} */
 .select_option select {
   display: inline-block;
   width: 100%;
@@ -196,7 +199,10 @@
 .select_option select:focus + .select_arrow {
   border-top-color: #000;
 }
-
+.autoshow{
+  display: block;
+  visibility: hidden
+}
 @-webkit-keyframes check {
   0% {
     height: 0;

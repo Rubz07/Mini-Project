@@ -21,13 +21,24 @@ const complaintSchema = new mongoose.Schema({
     unique: true,
   },
   department: { type: String, ref: "departments" },
-  complaint_type: { type: String, required: true },
+  main_complaint_type: { type: String, required: true },
+  sub_complaint_type: { type: String, required: true },
+  bank_name: { type: String, required: true },
+  bank_branch: { type: String, required: true },
   officer: { type: mongoose.Schema.Types.ObjectId, ref: "officerModel" },
-  area: {
+  address: {
     type: String,
     required: true,
   },
-  panchayat: {
+  district: {
+    type: String,
+    required: true,
+  },
+  userPincode: {
+    type: Number,
+    required: true,
+  },
+  userEmail: {
     type: String,
     required: true,
   },

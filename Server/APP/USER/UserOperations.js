@@ -35,14 +35,20 @@ module.exports = {
               console.log(message.sid);
               var postcomplaint = new complaintSchema({
                 registrationNo: regno,
-                department: data.department,
+
                 userId: data.userid,
+                main_complaint_type: data.mainCategory,
+                sub_complaint_type: data.subCategory,
+                bank_name: data.bankName,
+                bank_branch: data.bankBranch,
+                description: data.description,
+                department: data.department,
                 name: user[0].name,
                 userContact: user[0].mobile,
-                description: data.description,
-                complaint_type: data.category,
-                panchayat: data.panchayat,
-                area: data.area,
+                district: user[0].district,
+                address: user[0].address,
+                userPincode: user[0].pincode,
+                userEmail: user[0].email,
               });
               var complaint = await postcomplaint.save();
               if (complaint) {
