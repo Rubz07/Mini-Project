@@ -40,7 +40,7 @@ module.exports = async (req, res, next) => {
         { expiresIn: "1d" }
       );
       return res.status(200).json({
-        verify: true,
+        message: "success",
         authToken: token,
         role: user.role,
       });

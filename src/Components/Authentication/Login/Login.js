@@ -17,7 +17,7 @@ function Login() {
   const diffLogin = (e) => {
     history.push(`/${e}`);
   };
-    // NAV BAR
+  // NAV BAR
   // const validateMobile = () => {
   //   if (phnoChk.test(mobile)) {
   //     setmobileError(false);
@@ -49,23 +49,26 @@ function Login() {
       mobile: mobile,
       password: password,
     };
-    const res = await axios.post("/login", data);
-    try {
-      if (res.status === 200 && res.data.verify === true) {
-        window.localStorage.setItem("auth-token", res.data.authToken);
-        console.log(res.data.role);
-        if (res.data.role === "admin") {
-          history.push("/Admindashboard");
-        } else {
-          history.push("/dashboard");
-        }
+    await axios.post("/login", data).then((res) => {
+      if (res.status == 400) {
+        console.log("huuuuuuuuuuuuuuu");
       } else {
-        console.log("hii");
-        loginErr.classList.remove("loginErr-hidden");
+        console.log("gjjjjjjjjjjjjjjjjj");
       }
-    } catch (error) {
-      console.log("hiiiii");
-    }
+    });
+
+    // if (res.status === 200 && res.data.verify === true) {
+    //   window.localStorage.setItem("auth-token", res.data.authToken);
+    //   console.log(res.data.role);
+    //   if (res.data.role === "admin") {
+    //     history.push("/Admindashboard");
+    //   } else {
+    //     history.push("/dashboard");
+    //   }
+    // } else {
+    //   console.log("hii");
+    //   loginErr.classList.remove("loginErr-hidden");
+    // }
   };
 
   // useEffect(() => {
@@ -77,7 +80,6 @@ function Login() {
 
   return (
     <Route>
-
       {/* NAV BAR */}
 
       <header>
@@ -105,8 +107,7 @@ function Login() {
         </div>
       </header>
 
-
-{/* NAV BAR */}
+      {/* NAV BAR */}
 
       <div className="wrapper">
         <div className="img1">

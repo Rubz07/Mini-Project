@@ -7,7 +7,7 @@ function OfficerCount({ complaint }) {
   });
 
   var PendingCount = complaint.filter(function (p) {
-    return p.status === "Pending";
+    return p.status === "Reported";
   });
 
   var ResolvedCount = complaint.filter(function (p) {
