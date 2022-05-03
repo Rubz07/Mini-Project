@@ -14,10 +14,11 @@ function OfficerComplaintList({ officerDetails }) {
       headers: { Authorization: token },
     });
     if (response.status === 200) {
-      const result = response.data.complaint.filter(
-        (response) => response.status == "Pending"
-      );
-      setComplaints(result);
+      console.log(response.data.complaint);
+      // const result = response.data.complaint.filter(
+      //   (response) => response.status === "Reported"
+      // );
+      setComplaints(response.data.complaint);
     }
   }
 

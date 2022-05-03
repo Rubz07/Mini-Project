@@ -41,6 +41,7 @@ module.exports = {
                 sub_complaint_type: data.subCategory,
                 bank_name: data.bankName,
                 bank_branch: data.bankBranch,
+                bank_district: data.bankDistrict,
                 description: data.description,
                 department: data.department,
                 name: user[0].name,

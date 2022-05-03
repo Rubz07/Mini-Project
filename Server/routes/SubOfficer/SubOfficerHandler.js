@@ -12,7 +12,7 @@ router.post("/login", Login);
 
 router.post("/getSubOfficerComplaint", verifyOfficer, (req, res) => {
   subOfficerOperation
-    .getSubOfficerComplaint(req.user.officerid)
+    .getSubOfficerComplaint(req.user.district)
     .then((response) => {
       if (response) {
         res.status(200).json({ complaint: response });
@@ -24,6 +24,19 @@ router.post("/getSubOfficerComplaint", verifyOfficer, (req, res) => {
 
 router.post("/complaintAction", (req, res) => {
   subOfficerOperation.complaintAction(req.body).then((response) => {
+    console.log(response);
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
+router.post("/reportAction", (req, res) => {
+  subOfficerOperation.sendReport(req.body).then((response) => {
     console.log(response);
     try {
       if (response === "success") {

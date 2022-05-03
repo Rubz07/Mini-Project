@@ -7,14 +7,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 module.exports = {
-  getSubOfficerComplaint: (id) => {
+  getSubOfficerComplaint: (district) => {
     return new Promise(async (resolve, reject) => {
       try {
         await complaintSchema
-          .find({ officer: id })
+          .find({ bank_district: district })
           .then((response) => {
             if (response) {
-              //   complaints
               var officerComplaint = response.map((p) => {
                 return p;
               });
@@ -30,6 +29,7 @@ module.exports = {
   complaintAction: (data) => {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log(data);
         let update;
         const action = {
           subcomment: data.sub_comment,
@@ -68,6 +68,36 @@ module.exports = {
                 }
               });
           });
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
+  sendReport: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log(data);
+        let update;
+        const action = {
+          comment: data.sub_comment,
+          priority: data.priority,
+          Reported: true,
+          status: "Reported",
+          actiondate: Date.now(),
+        };
+        let res = await complaintSchema.findByIdAndUpdate(
+          data.complaint_id,
+          action,
+          {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false,
+          }
+        );
+        if (res) {
+          update = "success";
+          resolve(update);
+        }
       } catch (error) {
         console.log(error.message);
       }

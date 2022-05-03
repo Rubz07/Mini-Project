@@ -13,7 +13,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         await complaintSchema
-          .find({ department: department })
+          .find({ department: department } && { Reported: true })
           .then((response) => {
             if (response) {
               //   complaints

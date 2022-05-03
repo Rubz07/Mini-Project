@@ -28,6 +28,7 @@ module.exports = async (req, res, next) => {
             officerid: officer._id,
             name: officer.email,
             mobile: officer.mobile,
+            district: officer.district,
             department: officer.department,
             departmentId: officer.userId,
           },

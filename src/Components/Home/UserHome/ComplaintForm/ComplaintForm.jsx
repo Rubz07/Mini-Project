@@ -11,6 +11,8 @@ function ComplaintForm() {
   const [subCategory, setSubCategory] = useState();
   const [bankName, setBankName] = useState();
   const [bankBranch, setBankBranch] = useState();
+  const [bankDistrict, setBankDistrict] = useState();
+
   const [description, setDescription] = useState();
   // const [regID, setRegId] = useState();
   const location = useLocation();
@@ -49,6 +51,7 @@ function ComplaintForm() {
       document.getElementById("bankLocker").style.display = "block";
       document.getElementById("banks").style.display = "block";
       document.getElementById("branch").style.display = "block";
+      document.getElementById("district").style.display = "block";
     }
 
     if (
@@ -58,12 +61,14 @@ function ComplaintForm() {
       document.getElementById("customerService").style.display = "block";
       document.getElementById("banks").style.display = "block";
       document.getElementById("branch").style.display = "block";
+      document.getElementById("district").style.display = "block";
     }
 
     if (document.getElementById("cat").value === "Housing Lone Related") {
       document.getElementById("housingLoan").style.display = "block";
       document.getElementById("banks").style.display = "block";
       document.getElementById("branch").style.display = "block";
+      document.getElementById("district").style.display = "block";
     }
 
     if (
@@ -72,6 +77,7 @@ function ComplaintForm() {
       document.getElementById("cards").style.display = "block";
       document.getElementById("banks").style.display = "block";
       document.getElementById("branch").style.display = "block";
+      document.getElementById("district").style.display = "block";
     }
     // else {
     // //   document.getElementById("name").style.display = "block";
@@ -81,6 +87,7 @@ function ComplaintForm() {
       document.getElementById("serviceCharges").style.display = "block";
       document.getElementById("banks").style.display = "block";
       document.getElementById("branch").style.display = "block";
+      document.getElementById("district").style.display = "block";
     }
   }
   const handleComplaint = async () => {
@@ -91,6 +98,7 @@ function ComplaintForm() {
       subCategory: subCategory,
       bankName: bankName,
       bankBranch: bankBranch,
+      bankDistrict: bankDistrict,
       description: description,
     };
     const res = await axios.post("/postcomplaint", data);
@@ -281,17 +289,44 @@ function ComplaintForm() {
                   </select>
                   {/* <div class="select_arrow"></div> */}
                 </div>
+                <input
+                  style={{}}
+                  id="branch"
+                  type="text"
+                  onChange={(e) => setBankBranch(e.target.value)}
+                  placeholder="Branch / Name of Bank and Branch"
+                  // onChange={(e) => setArea(e.target.value)}
+                  required
+                />
                 <div class="input_field select_option">
                   {" "}
-                  <input
-                    style={{}}
-                    id="branch"
-                    type="text"
-                    onChange={(e) => setBankBranch(e.target.value)}
-                    placeholder="Branch / Name of Bank and Branch"
-                    // onChange={(e) => setArea(e.target.value)}
-                    required
-                  />
+                  <select
+                    className="drp-control"
+                    data-flag="true"
+                    id="district"
+                    onChange={(e) => setBankDistrict(e.target.value)}
+                  >
+                    <option value="  " selected>
+                      Select Bank District
+                    </option>
+                    <option>Afghanistan</option>
+                    <option value="Alappuzha">Alappuzha</option>
+                    <option value="Ernakulam">Ernakulam</option>
+                    <option value="Idukki">Idukki</option>
+                    <option value="Kannur">Kannur</option>
+                    <option value="Kasaragod">Kasaragod</option>
+                    <option value="Kollam">Kollam</option>
+                    <option value="Kottayam">Kottayam</option>
+                    <option value="Kozhikode">Kozhikode</option>
+                    <option value="Malappuram">Malappuram</option>
+                    <option value="Palakkad">Palakkad</option>
+                    <option value="Pathanamthitta">Pathanamthitta</option>
+                    <option value="Thiruvananthapuram">
+                      Thiruvananthapuram
+                    </option>
+                    <option value="Thrissur">Thrissur</option>
+                    <option value="Wayanad">Wayanad</option>
+                  </select>
                 </div>
                 {/* <------------3-------------> */}
                 {/* <div class="col_half">

@@ -25,6 +25,7 @@ const complaintSchema = new mongoose.Schema({
   sub_complaint_type: { type: String, required: true },
   bank_name: { type: String, required: true },
   bank_branch: { type: String, required: true },
+  bank_district: { type: String, required: true },
   officer: { type: mongoose.Schema.Types.ObjectId, ref: "officerModel" },
   address: {
     type: String,
@@ -52,7 +53,7 @@ const complaintSchema = new mongoose.Schema({
     type: String,
     enum: [
       "Pending",
-      "Approved",
+      "Reported",
       "Assigned",
       "Resolved",
       "Processing",
@@ -62,6 +63,10 @@ const complaintSchema = new mongoose.Schema({
   },
   priority: {
     type: String,
+  },
+  Reported: {
+    type: Boolean,
+    default: false,
   },
   date: {
     type: Date,
