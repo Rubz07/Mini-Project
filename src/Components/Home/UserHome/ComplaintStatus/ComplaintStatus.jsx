@@ -46,21 +46,25 @@ function ComplaintStatus() {
           <div class="data">
             <table>
               <tr>
-                <th style={{ padding: "20px" }}>Complaint ID</th>
-                <th>Status</th>
-                <th>Department</th>
-                <th>Officer</th>
-                <th>Comments</th>
-                <th>Action Date</th>
+                <th>Date of Receipt</th>
+                <th>Received By Ministry/Department</th>
+                <th>Grievance Description</th>
+                <th>Current Status</th>
+                <th>Date of Action</th>
+                <th>Remarks</th>
               </tr>
 
               <tr>
-                <td width="200px">{statusdata.registrationNo}</td>
-                <td width="200px"> {statusdata.status}</td>
-                <td width="200px"> {statusdata.department}</td>
-                <td width="200px">{officerdata.name}</td>
-                <td width="200px">{statusdata.subcomment}</td>
+                <td width="200px">{statusdata.date}</td>
+                <td width="200px"> Financial Services (Banking Division)</td>
+                <td width="200px">
+                  {" "}
+                  {statusdata.main_complaint_type}+
+                  {statusdata.sub_complaint_type}+{statusdata.description}
+                </td>
+                <td width="200px">{statusdata.status}</td>
                 <td width="200px">{statusdata.actiondate}</td>
+                <td width="200px">{statusdata.subcomment}</td>
               </tr>
             </table>
           </div>

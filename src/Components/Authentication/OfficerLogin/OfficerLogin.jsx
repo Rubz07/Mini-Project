@@ -4,13 +4,16 @@ import { Route, useHistory, Redirect } from "react-router-dom";
 function OfficerLogin() {
   const [password, setPassword] = useState();
   const history = useHistory();
+ 
   const [officerId, setOfficerId] = useState();
+  const loginErr = document.querySelector(".loginErr");
+  const [errorMessage, setErrorMessage] = useState();
 
-    // NAV BAR
-    const diffLogin = (e) => {
-      history.push(`/${e}`);
-    };
-      // NAV BAR
+  // NAV BAR
+  const diffLogin = (e) => {
+    history.push(`/${e}`);
+  };
+  // NAV BAR
 
   const handleSubmit = async () => {
     const data = {
@@ -19,11 +22,12 @@ function OfficerLogin() {
     };
     const res = await axios.post("officer/login", data);
     try {
-      if (res.status === 200 && res.data.verify === true) {
+      if (res.status === 200 && res.data.status === true) {
         window.localStorage.setItem("officer-token", res.data.authToken);
         history.push("/Officerdashboard");
       } else {
-        alert("some error occured");
+        setErrorMessage(res.data.message);
+        loginErr.classList.remove("loginErr-hidden");
       }
     } catch (error) {
       alert("some error occured");
@@ -105,7 +109,7 @@ function OfficerLogin() {
               ></input>
             </div>
             <div className="loginErr loginErr-hidden ">
-              <p>Login failed</p>
+              <p>{errorMessage}</p>
             </div>
           </form>
         </div>

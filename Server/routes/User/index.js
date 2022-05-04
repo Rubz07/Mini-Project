@@ -140,4 +140,18 @@ router.post("/verify-passotp", async (req, res, next) => {
     });
 });
 
+router.post("/ticketAction", (req, res) => {
+  console.log(req.body);
+  userOperation.ticketAction(req.body).then((response) => {
+    console.log(response);
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
 module.exports = router;

@@ -146,4 +146,33 @@ module.exports = {
         .catch((err) => console.log("error", err));
     });
   },
+
+  ticketAction: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let update;
+        const action = {
+          ticket_raised: true,
+          ticket_raised_category: data.ticketCategory,
+          ticket_raised_reason: data.ticketRaisedReason,
+          ticket_raised_date: Date.now(),
+        };
+        let res = await complaintSchema.findByIdAndUpdate(
+          data.complaint_id,
+          action,
+          {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false,
+          }
+        );
+        if (res) {
+          update = "success";
+          resolve(update);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
 };

@@ -10,6 +10,7 @@ function Login() {
   const loginErr = document.querySelector(".loginErr");
 
   const [password, setPassword] = useState();
+  const [errorMessage, setErrorMessage] = useState();
 
   const [mobile, setmobile] = useState();
 
@@ -50,25 +51,19 @@ function Login() {
       password: password,
     };
     await axios.post("/login", data).then((res) => {
-      if (res.status == 400) {
-        console.log("huuuuuuuuuuuuuuu");
+      if (res.status === 200 && res.data.status === true) {
+        window.localStorage.setItem("auth-token", res.data.authToken);
+        console.log(res.data.role);
+        if (res.data.role === "admin") {
+          history.push("/Admindashboard");
+        } else {
+          history.push("/dashboard");
+        }
       } else {
-        console.log("gjjjjjjjjjjjjjjjjj");
+        setErrorMessage(res.data.message);
+        loginErr.classList.remove("loginErr-hidden");
       }
     });
-
-    // if (res.status === 200 && res.data.verify === true) {
-    //   window.localStorage.setItem("auth-token", res.data.authToken);
-    //   console.log(res.data.role);
-    //   if (res.data.role === "admin") {
-    //     history.push("/Admindashboard");
-    //   } else {
-    //     history.push("/dashboard");
-    //   }
-    // } else {
-    //   console.log("hii");
-    //   loginErr.classList.remove("loginErr-hidden");
-    // }
   };
 
   // useEffect(() => {
@@ -125,6 +120,10 @@ function Login() {
                 value={mobile}
                 placeholder="mobile"
                 autocomplete="off"
+                required
+                minlength="10"
+                maxlength="10"
+                size="10"
                 onChange={(e) => setmobile(e.target.value)}
               />
             </div>
@@ -150,7 +149,7 @@ function Login() {
               ></input>
             </div>
             <div className="loginErr loginErr-hidden ">
-              <p>Login failed</p>
+              <p>{errorMessage}</p>
             </div>
           </form>
         </div>

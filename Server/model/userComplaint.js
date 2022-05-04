@@ -68,6 +68,19 @@ const complaintSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  ticket_raised: {
+    type: Boolean,
+    default: false,
+  },
+  ticket_raised_category: {
+    type: String,
+  },
+  ticket_raised_reason: {
+    type: String,
+  },
+  ticket_raised_date: {
+    type: Date,
+  },
   date: {
     type: Date,
     default: Date.now,

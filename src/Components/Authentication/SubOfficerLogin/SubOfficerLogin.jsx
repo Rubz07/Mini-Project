@@ -5,7 +5,8 @@ function SubOfficerLogin() {
   const [password, setPassword] = useState();
   const history = useHistory();
   const [officerId, setOfficerId] = useState();
-
+  const loginErr = document.querySelector(".loginErr");
+  const [errorMessage, setErrorMessage] = useState();
    // NAV BAR
    const diffLogin = (e) => {
     history.push(`/${e}`);
@@ -23,7 +24,8 @@ function SubOfficerLogin() {
         window.localStorage.setItem("Subofficer-token", res.data.authToken);
         history.push("/SubOfficerdashboard");
       } else {
-        alert("some error occured");
+        setErrorMessage(res.data.message);
+        loginErr.classList.remove("loginErr-hidden");
       }
     } catch (error) {
       alert("some error occured");
@@ -105,7 +107,7 @@ function SubOfficerLogin() {
             ></input>
           </div>
           <div className="loginErr loginErr-hidden ">
-            <p>Login failed</p>
+          <p>{errorMessage}</p>
           </div>
         </form>
       </div>
