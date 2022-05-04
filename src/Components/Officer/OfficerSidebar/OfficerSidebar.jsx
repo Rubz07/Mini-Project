@@ -35,7 +35,7 @@ function officerSidebar() {
                 Add Officer
               </li>
             </Link>
-            <Link to="/officers" className="link">
+            <Link to="/manage-officers" className="link">
               <li className="sidebarListItem">
                 <WorkOutline className="sidebarIcon" />
                 Manage
@@ -43,7 +43,7 @@ function officerSidebar() {
             </Link>
           </ul>
         </div>
-       
+
         <div className="officerSidebarMenu">
           <h2 className="officerSidebarTitle"></h2>
           <ul className="officerSidebarList">

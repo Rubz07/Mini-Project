@@ -7,6 +7,7 @@ import OfficerMain from "../OfficerHome/OfficerMain/OfficerMain";
 import OfficerLogin from "../../Authentication/OfficerLogin/OfficerLogin";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SubOfficers from "../OfficerHome/SubOfficers/SubOfficers";
+import ManageSubOfficers from "../OfficerHome/ManageSubOfficers/ManageSubOfficers";
 
 function OfficerDashboard() {
   return (
@@ -22,6 +23,9 @@ function OfficerDashboard() {
             </Route>
             <Route path="/add-subofficer">
               <SubOfficers />
+            </Route>
+            <Route path="/manage-officers">
+              <ManageSubOfficers />
             </Route>
           </Switch>
         </div>

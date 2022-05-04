@@ -4,7 +4,7 @@ import { Route, useHistory, Redirect } from "react-router-dom";
 function OfficerLogin() {
   const [password, setPassword] = useState();
   const history = useHistory();
- 
+
   const [officerId, setOfficerId] = useState();
   const loginErr = document.querySelector(".loginErr");
   const [errorMessage, setErrorMessage] = useState();
@@ -25,6 +25,7 @@ function OfficerLogin() {
       if (res.status === 200 && res.data.status === true) {
         window.localStorage.setItem("officer-token", res.data.authToken);
         history.push("/Officerdashboard");
+        console.log("hiiiiiiii");
       } else {
         setErrorMessage(res.data.message);
         loginErr.classList.remove("loginErr-hidden");

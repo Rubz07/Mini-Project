@@ -9,7 +9,6 @@ function OfficerList() {
   async function getOfficers() {
     let response = await axios.get(`/admin/getOfficers`);
     if (response.status === 200) {
-      console.log(response.data.officer);
       setOfficer(response.data.officer);
     }
   }

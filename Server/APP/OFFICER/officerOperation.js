@@ -1,5 +1,6 @@
 const OfficerSchema = require("../../model/OfficerModel");
 const complaintSchema = require("../../model/userComplaint");
+const officerSchema = require("../../model/OfficerModel");
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken);
@@ -60,13 +61,12 @@ module.exports = {
         let Officermobile = `+${91}` + data.mobile;
         let status;
         const OfficerExist = await OfficerSchema.findOne({
-          userId: data.mobile,
+          district: data.distrct,
         });
         if (OfficerExist) {
           status = "denied";
-          // resolve(status);
+          resolve(status);
         } else {
-          console.log(Officermobile);
           client.messages
             .create({
               body:
@@ -123,6 +123,66 @@ module.exports = {
       } catch (error) {
         console.log((err) => err.message);
       }
+    });
+  },
+
+  manageOfficers: () => {
+    return new Promise(async (resolve, reject) => {
+      await officerSchema
+        .find({ role: "sub" })
+        .exec()
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          } else {
+            console.log("some error occured");
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+
+  blockOfficer: (id) => {
+    return new Promise(async (resolve, reject) => {
+      const action = {
+        status: "0",
+      };
+      await officerSchema
+        .findByIdAndUpdate(id.officer_id, action, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        })
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          } else {
+            console.log("some error occured");
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+
+  unBlockOfficer: (id) => {
+    return new Promise(async (resolve, reject) => {
+      const action = {
+        status: "1",
+      };
+      await officerSchema
+        .findByIdAndUpdate(id.officer_id, action, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        })
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          } else {
+            console.log("some error occured");
+          }
+        })
+        .catch((err) => console.log("error", err));
     });
   },
 };
