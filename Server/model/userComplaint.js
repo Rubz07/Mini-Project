@@ -18,7 +18,6 @@ const complaintSchema = new mongoose.Schema({
   userContact: {
     type: Number,
     required: true,
-    unique: true,
   },
   department: { type: String, ref: "departments" },
   main_complaint_type: { type: String, required: true },
