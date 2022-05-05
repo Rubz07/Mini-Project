@@ -49,7 +49,7 @@ function officerSidebar() {
           <ul className="officerSidebarList">
             <Link to="/Officerlogin" className="link">
               <li className="officerSidebarListItem" onClick={termination}>
-                <ExitToApp className="officerSidebarIcon" />
+                <ExitToApp className="officerSidebarIcon logout" />
                 Logout
               </li>
             </Link>

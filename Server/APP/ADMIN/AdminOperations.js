@@ -15,7 +15,7 @@ module.exports = {
   getAllUsers: () => {
     return new Promise(async (resolve, reject) => {
       await userSchema
-        .find()
+        .find({ role: "user" })
         .exec()
         .then((response) => {
           if (response) {
@@ -239,8 +239,51 @@ module.exports = {
   getAllOfficers: () => {
     return new Promise(async (resolve, reject) => {
       await officerSchema
-        .find()
+        .find({ role: "main" })
         .exec()
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          } else {
+            console.log("some error occured");
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+  blockOfficer: (id) => {
+    return new Promise(async (resolve, reject) => {
+      const action = {
+        status: "0",
+      };
+      await officerSchema
+        .findByIdAndUpdate(id.officer_id, action, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        })
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          } else {
+            console.log("some error occured");
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+
+  unBlockOfficer: (id) => {
+    return new Promise(async (resolve, reject) => {
+      const action = {
+        status: "1",
+      };
+      await officerSchema
+        .findByIdAndUpdate(id.officer_id, action, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        })
         .then((response) => {
           if (response) {
             resolve(response);

@@ -11,6 +11,9 @@
   color: #555;
 }
 
+.logout{
+  color: red;
+}
 .officerSidebarMenu {
   margin-bottom: 10px;
 }

@@ -14,7 +14,9 @@
 .sidebarMenu {
   margin-bottom: 10px;
 }
-
+.logout{
+  color: red;
+}
 .sidebarTitle {
   font-size: 14px;
   font-weight: bold;

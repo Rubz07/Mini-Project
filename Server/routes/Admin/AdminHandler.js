@@ -132,4 +132,25 @@ router.post("/assign-complaint", function (req, res, next) {
   });
 });
 
+router.post("/block-officer", async (req, res) => {
+  adminOperations.blockOfficer(req.body).then((response) => {
+    if (response) {
+      res.status(200).json({ verify: "success" });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
+router.post("/unblock-officer", async (req, res) => {
+  adminOperations.unBlockOfficer(req.body).then((response) => {
+    if (response) {
+      res.status(200).json({ verify: "success" });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
+
 module.exports = router;

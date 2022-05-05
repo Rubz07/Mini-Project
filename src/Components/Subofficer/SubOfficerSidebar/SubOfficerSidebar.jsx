@@ -31,7 +31,7 @@ function SubOfficerSidebar() {
           <ul className="subOfficerSidebarList">
             <Link to="/SubOfficerlogin" className="link">
               <li className="subOfficerSidebarListItem" onClick={termination}>
-                <ExitToApp className="subOfficerSidebarIcon" />
+                <ExitToApp className="subOfficerSidebarIcon logout" />
                 Logout
               </li>
             </Link>

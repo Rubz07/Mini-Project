@@ -289,15 +289,6 @@ function ComplaintForm() {
                   </select>
                   {/* <div class="select_arrow"></div> */}
                 </div>
-                <input
-                  style={{}}
-                  id="branch"
-                  type="text"
-                  onChange={(e) => setBankBranch(e.target.value)}
-                  placeholder="Branch / Name of Bank and Branch"
-                  // onChange={(e) => setArea(e.target.value)}
-                  required
-                />
                 <div class="input_field select_option">
                   {" "}
                   <select
@@ -328,6 +319,15 @@ function ComplaintForm() {
                     <option value="Wayanad">Wayanad</option>
                   </select>
                 </div>
+                <input
+                  style={{}}
+                  id="branch"
+                  type="text"
+                  onChange={(e) => setBankBranch(e.target.value)}
+                  placeholder="Branch / Name of Bank and Branch"
+                  // onChange={(e) => setArea(e.target.value)}
+                  required
+                />
                 {/* <------------3-------------> */}
                 {/* <div class="col_half">
                   <div class="input_field">
@@ -375,7 +375,7 @@ function ComplaintForm() {
                     onChange={(e) => setDescription(e.target.value)}
                   ></textarea>
                 </div>
-                <div class="input_field">
+                {/* <div class="input_field">
                   {" "}
                   <input
                     type="file"
@@ -383,7 +383,7 @@ function ComplaintForm() {
                     name=""
                     id=""
                   />
-                </div>
+                </div> */}
                 <input
                   class="offcer-btn"
                   type="button"

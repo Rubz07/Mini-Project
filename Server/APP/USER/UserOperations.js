@@ -35,7 +35,6 @@ module.exports = {
               console.log(message.sid);
               var postcomplaint = new complaintSchema({
                 registrationNo: regno,
-
                 userId: data.userid,
                 main_complaint_type: data.mainCategory,
                 sub_complaint_type: data.subCategory,

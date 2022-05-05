@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./OfficerList.css";
 import { DeleteOutline } from "@material-ui/icons";
 import axios from "../../../../axios";
+import CheckIcon from "@material-ui/icons/Check";
 import { Link } from "react-router-dom";
 function OfficerList() {
   const [officer, setOfficer] = useState(null);
@@ -12,6 +13,33 @@ function OfficerList() {
       setOfficer(response.data.officer);
     }
   }
+
+  async function blockOfficer(id) {
+    console.log(id);
+    const data = {
+      officer_id: id,
+    };
+    let response = await axios.post(`admin/block-officer`, data);
+    if (response.status === 200) {
+      getOfficers();
+    } else {
+      alert("some error occured");
+    }
+  }
+
+  async function unBlockOfficer(id) {
+    console.log(id);
+    const data = {
+      officer_id: id,
+    };
+    let response = await axios.post(`admin/unblock-officer`, data);
+    if (response.status === 200) {
+      getOfficers();
+    } else {
+      alert("some error occured");
+    }
+  }
+
   useEffect(() => {
     getOfficers();
   }, []);
@@ -42,8 +70,17 @@ function OfficerList() {
                     <td width="176px">{p.department}</td>
                     <td width="176px">{p.status}</td>
 
-                    <td width="200px">
-                      <DeleteOutline className="officerListDelete" />
+                    <td width="10px">
+                      <DeleteOutline
+                        className="manageOfficerListDelete"
+                        onClick={(e) => blockOfficer(p._id)}
+                      />
+                    </td>
+                    <td width="10px">
+                      <CheckIcon
+                        className="manageOfficerListUnblock"
+                        onClick={(e) => unBlockOfficer(p._id)}
+                      />
                     </td>
                   </tr>
                 );
