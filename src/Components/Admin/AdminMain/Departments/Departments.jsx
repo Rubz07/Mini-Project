@@ -9,10 +9,13 @@ function Departments() {
   const [departments, setDepartments] = useState(null);
   const [department, setDepartmentList] = useState(null);
 
+  const departmentErr = document.querySelector(".departmentErr");
+  const [errorMessage, setErrorMessage] = useState();
   // update department
   const [depName, setDepName] = useState(null);
   const [newDep, setNewDep] = useState(null);
   const [depid, setDepid] = useState(null);
+
   // update department
   const customStyles = {
     content: {
@@ -65,11 +68,13 @@ function Departments() {
       name: departments,
     };
     const response = await axios.post("admin/create-department", data);
-    if (response.status === 200) {
+
+    if (response.data.status === true) {
       getDepartments();
       setIsOpen(false);
     } else {
-      console.log(response);
+      setErrorMessage(response.data.message);
+      departmentErr.classList.remove("departmentErr-hidden");
     }
   };
 
@@ -183,6 +188,9 @@ function Departments() {
                 onClick={handleSubmit}
               />
             </div>
+          </div>
+          <div className="departmentErr departmentErr-hidden ">
+            <p style={{ color: "red", fontWeight: "bold" }}>{errorMessage}</p>
           </div>
         </form>
       </Modal>

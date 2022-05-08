@@ -37,7 +37,18 @@ router.post("/complaintAction", (req, res) => {
 
 router.post("/reportAction", (req, res) => {
   subOfficerOperation.sendReport(req.body).then((response) => {
-    console.log(response);
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
+router.post("/clarificationAction", (req, res) => {
+  subOfficerOperation.askClarification(req.body).then((response) => {
     try {
       if (response === "success") {
         res.status(200).json({ verify: response });

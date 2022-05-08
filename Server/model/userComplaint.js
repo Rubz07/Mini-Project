@@ -80,6 +80,20 @@ const complaintSchema = new mongoose.Schema({
   ticket_raised_date: {
     type: Date,
   },
+  clarification_raised: {
+    type: Boolean,
+    default: false,
+  },
+  clarification_remark_category: {
+    type: String,
+  },
+  clarification_remark: {
+    type: String,
+  },
+  clarification_remark_date: {
+    type: Date,
+  },
+
   date: {
     type: Date,
     default: Date.now,

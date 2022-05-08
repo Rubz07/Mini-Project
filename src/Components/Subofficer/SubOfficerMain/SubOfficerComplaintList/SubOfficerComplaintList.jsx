@@ -9,6 +9,9 @@ function SubOfficerComplaintList() {
   const [reportComment, setReportComment] = useState();
   const [complaintStatus, setComplaintStatus] = useState();
   const [complaintPriority, setComplaintPriority] = useState();
+  const [clarificationType, setClarificationType] = useState();
+  const [clarificationRemarks, setClarificationRemarks] = useState();
+
   const customStyles = {
     content: {
       top: "45%",
@@ -27,6 +30,14 @@ function SubOfficerComplaintList() {
     setIsOpen(false);
   }
 
+  function openClarificationModal() {
+    setClarificationIsOpen(true);
+  }
+
+  function closeClarificationModal() {
+    setClarificationIsOpen(false);
+  }
+
   function openReportModal() {
     setIsReportOpen(true);
   }
@@ -34,7 +45,9 @@ function SubOfficerComplaintList() {
   function closeReportModal() {
     setIsReportOpen(false);
   }
+
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalClarificationIsOpen, setClarificationIsOpen] = useState(false);
   const [modalReportIsOpen, setIsReportOpen] = useState(false);
 
   async function getOfficerComplaints() {
@@ -74,8 +87,24 @@ function SubOfficerComplaintList() {
     };
     let response = await axios.post(`subofficer/reportAction`, data);
     if (response.status === 200 && response.data.verify === "success") {
+      alert("Complaint Reported Successfully")
       getOfficerComplaints();
       closeReportModal();
+    }
+  }
+
+  //  <-------CLARIFICATION----------->
+  async function clarificationAction(e, id) {
+    e.preventDefault();
+    const data = {
+      complaint_id: id,
+      clarification_type: clarificationType,
+      clarification_remark: clarificationRemarks,
+    };
+    let response = await axios.post(`subofficer/clarificationAction`, data);
+    if (response.status === 200 && response.data.verify === "success") {
+      getOfficerComplaints();
+      closeClarificationModal();
     }
   }
 
@@ -95,6 +124,7 @@ function SubOfficerComplaintList() {
               <th>Issue</th>
               <th>Description</th>
               <th>Bank</th>
+              <th>Action</th>
             </tr>
             {complaints &&
               complaints.length > 0 &&
@@ -117,7 +147,19 @@ function SubOfficerComplaintList() {
                       <div className="report">
                         <button
                           style={{
-                            backgroundColor: "green",
+                            backgroundColor: "#289cc9",
+                            marginTop: "10px",
+                          }}
+                          className="officerComplaintUpdate"
+                          onClick={(e) => openClarificationModal()}
+                        >
+                          Clarification
+                        </button>
+                      </div>
+                      <div className="report">
+                        <button
+                          style={{
+                            backgroundColor: "rgb(255, 99, 113)",
                             marginTop: "10px",
                           }}
                           className="officerComplaintUpdate"
@@ -361,6 +403,95 @@ function SubOfficerComplaintList() {
                         className="officerComplaintUpdate"
                         style={{ marginTop: "25px" }}
                         onClick={(e) => reportAction(e, data._id)}
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+        </form>
+      </Modal>
+      {/* 
+    <-------Clarification Modal------------> */}
+      <Modal
+        isOpen={modalClarificationIsOpen}
+        onRequestClose={closeClarificationModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div class="modal-close-btn">
+          <Close className="closeBtn" onClick={closeClarificationModal} />
+        </div>
+
+        <form>
+          <div className="title">
+            <h1>Ask Clarification</h1>
+          </div>
+          {complaints &&
+            complaints.length > 0 &&
+            complaints.map((data) => {
+              return (
+                <div className="body">
+                  <div class="datas">
+                    <div class="data">
+                      <table>
+                        {complaints &&
+                          complaints.length > 0 &&
+                          complaints.map((data, index) => {
+                            return (
+                              <>
+                                <tr>
+                                  <th width="200">Complaint Id</th>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.registrationNo}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th>Clarification Type</th>
+                                  <td>
+                                    {" "}
+                                    <div class="input_field cmpselect_option">
+                                      <select
+                                        onChange={(e) =>
+                                          setClarificationType(e.target.value)
+                                        }
+                                      >
+                                        <option value=""></option>
+                                        <option value="Insufficient information">
+                                          Insufficient information
+                                        </option>
+                                      </select>
+                                      <div class="select_arrow"></div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th>Remarks</th>
+                                  <td style={{ textAlign: "left" }}>
+                                    <div class="input_field cmpselect_option">
+                                      <textarea
+                                        className="officer-comments"
+                                        onChange={(e) =>
+                                          setClarificationRemarks(
+                                            e.target.value
+                                          )
+                                        }
+                                      ></textarea>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </>
+                            );
+                          })}
+                      </table>
+                      <button
+                        className="officerComplaintUpdate"
+                        style={{ marginTop: "25px" }}
+                        onClick={(e) => clarificationAction(e, data._id)}
                       >
                         Send
                       </button>

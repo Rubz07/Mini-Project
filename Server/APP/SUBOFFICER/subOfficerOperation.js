@@ -47,7 +47,7 @@ module.exports = {
                   response[0].registrationNo +
                   " is " +
                   data.action,
-                from: "+19108389090",
+                from: "+19794014869",
                 to: Officermobile,
               })
               .then(async (message) => {
@@ -98,6 +98,57 @@ module.exports = {
           update = "success";
           resolve(update);
         }
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
+  askClarification: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log(data);
+        let update;
+        const action = {
+          clarification_remark: data.clarification_remark,
+          clarification_remark_category: data.clarification_type,
+          clarification_raised: true,
+
+          clarification_remark_date: Date.now(),
+        };
+        await complaintSchema
+          .find({
+            _id: data.complaint_id,
+          })
+          .then((response) => {
+            let userMobile = `+${91}` + response[0].userContact;
+            client.messages
+              .create({
+                body:
+                  " Your complaint ID " +
+                  response[0].registrationNo +
+                  " Needs more Clarification. Clarification Type - " +
+                  data.clarification_type,
+                from: "+19794014869",
+                to: userMobile,
+              })
+              .then(async (message) => {
+                if (message.status === "queued") {
+                  let res = await complaintSchema.findByIdAndUpdate(
+                    data.complaint_id,
+                    action,
+                    {
+                      new: true,
+                      runValidators: true,
+                      useFindAndModify: false,
+                    }
+                  );
+                  if (res) {
+                    update = "success";
+                    resolve(update);
+                  }
+                }
+              });
+          });
       } catch (error) {
         console.log(error.message);
       }
