@@ -236,7 +236,14 @@ function ComplaintForm() {
                   type="text"
                   onChange={(e) => setBankBranch(e.target.value)}
                   placeholder="Branch / Name of Bank and Branch"
-                  // onChange={(e) => setArea(e.target.value)}
+                  required
+                />
+                <input
+                  style={{}}
+                  id="IFSC Code"
+                  type="text"
+                  // onChange={(e) => setBankBranch(e.target.value)}
+                  placeholder="IFSC Code"
                   required
                 />
                 {/* <------------3-------------> */}
