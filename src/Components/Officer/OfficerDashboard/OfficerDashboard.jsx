@@ -8,6 +8,7 @@ import OfficerLogin from "../../Authentication/OfficerLogin/OfficerLogin";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SubOfficers from "../OfficerHome/SubOfficers/SubOfficers";
 import ManageSubOfficers from "../OfficerHome/ManageSubOfficers/ManageSubOfficers";
+import ComplaintData from "../OfficerHome/ComplaintData/ComplaintData";
 
 function OfficerDashboard() {
   return (
@@ -26,6 +27,9 @@ function OfficerDashboard() {
             </Route>
             <Route path="/manage-officers">
               <ManageSubOfficers />
+            </Route>
+            <Route path="/Complaint-data">
+              <ComplaintData />
             </Route>
           </Switch>
         </div>

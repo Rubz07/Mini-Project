@@ -44,6 +44,18 @@ function officerSidebar() {
           </ul>
         </div>
 
+        <div className="sidebarMenu">
+          <h2 className="sidebarTitle">Complaint</h2>
+          <ul className="sidebarList">
+            <Link to="/Complaint-data" className="link">
+              <li className="sidebarListItem">
+                <AddCircleOutlineOutlined className="sidebarIcon" />
+                Complaint Data
+              </li>
+            </Link>
+          </ul> 
+        </div>
+
         <div className="officerSidebarMenu">
           <h2 className="officerSidebarTitle"></h2>
           <ul className="officerSidebarList">
