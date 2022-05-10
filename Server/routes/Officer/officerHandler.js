@@ -98,5 +98,54 @@ router.post("/unblock-officer", async (req, res) => {
     }
   });
 });
+router.post("/create-ComplaintData", async (req, res) => {
+  officerOperation.createComplaintData(req.body).then((response) => {
+    try {
+      if (response === "success") {
+        res.json({ status: true, message: "complaint succesfull created" });
+      } else {
+        res.json({ status: false, message: "complaint Already Created" });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
+router.get("/getComplaintData", async (req, res) => {
+  officerOperation.getAllComplaintDatas().then((response) => {
+    try {
+      if (response) {
+        res.status(200).json({ complaintData: response });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
 
+router.get("/getBankData", async (req, res) => {
+  officerOperation.getAllBankDatas().then((response) => {
+    try {
+      if (response) {
+        res.status(200).json({ bankData: response });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
+
+router.post("/create-bank", async (req, res) => {
+  officerOperation.createBankData(req.body).then((response) => {
+    try {
+      if (response === "success") {
+        res.json({ status: true, message: "Bank succesfull Added" });
+      } else {
+        res.json({ status: false, message: "Bank Already Created" });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
 module.exports = router;

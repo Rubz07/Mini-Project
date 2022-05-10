@@ -189,4 +189,7 @@ margin-left: 50em;
     display: block;
     visibility: hidden;
   }
-  
+  .bankErr-hidden{
+    display: block;
+    visibility: hidden;
+  }

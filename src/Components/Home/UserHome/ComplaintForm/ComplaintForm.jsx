@@ -13,14 +13,33 @@ function ComplaintForm() {
   const [bankBranch, setBankBranch] = useState();
   const [bankDistrict, setBankDistrict] = useState();
 
+  const [complaintDatas, setComplaintDatas] = useState();
+  const [bankData, setBankData] = useState();
+
   const [description, setDescription] = useState();
   // const [regID, setRegId] = useState();
   const location = useLocation();
   const { userdata } = useContext(userContext);
 
+  async function getComplaintData() {
+    let response = await axios.get(`officer/getComplaintData`);
+    if (response.status === 200) {
+      setComplaintDatas(response.data.complaintData);
+    }
+  }
+
+  async function getBankData() {
+    let response = await axios.get(`officer/getBankData`);
+    if (response.status === 200) {
+      setBankData(response.data.bankData);
+    }
+  }
+
   useEffect(() => {
     const { department } = location;
     setDepartmentName(department);
+    getBankData();
+    getComplaintData();
   }, [location]);
 
   const customStyles = {
@@ -125,26 +144,15 @@ function ComplaintForm() {
                     <option value="  " selected>
                       Select Category
                     </option>
-                    <option value="Bank Loker Related">
-                      Bank Loker Related
-                    </option>
-                    <option value="Deficiency in Customer Service Related">
-                      Deficiency in Customer Service Related
-                    </option>
-
-                    <option value="Housing Lone Related">
-                      Housing Lone Related
-                    </option>
-
-                    <option value="Credit/Debit/ATM Cards Related">
-                      Credit/Debit/ATM Cards Related
-                    </option>
-                    <option value="Service Charges Related">
-                      Service Charges Related
-                    </option>
-                    <option value="Miscellaneous/Others">
-                      Miscellaneous/Others
-                    </option>
+                    {complaintDatas &&
+                      complaintDatas.length > 0 &&
+                      complaintDatas.map((p) => {
+                        return (
+                          <option value={p.main_complaint}>
+                            {p.main_complaint}
+                          </option>
+                        );
+                      })}
                   </select>
                   {/* <div class="select_arrow"></div> */}
                 </div>
@@ -159,104 +167,19 @@ function ComplaintForm() {
                     <option value="  " selected>
                       Select Next Level Category
                     </option>
-                    <option value="Non-availability of Locker">
-                      Non-availability of Locker
-                    </option>
-                    <option value="Demand of Fixed Deposit">
-                      Demand of Fixed Deposit
-                    </option>
-                    <option value="Problem in Locker Operation">
-                      Problem in Locker Operation
-                    </option>
-                    <option value="Unauthorised break opening of Locker">
-                      Unauthorised break opening of Locker
-                    </option>
-                    <option value="Others">Others</option>
+                    {complaintDatas &&
+                      complaintDatas.length > 0 &&
+                      complaintDatas.map((p) => {
+                        return (
+                          <option value={p.sub_complaint}>
+                            {p.sub_complaint}
+                          </option>
+                        );
+                      })}
                   </select>
                   {/* <div   class="select_arrow"></div> */}
                 </div>
                 {/* <-----------2- Deficiency in Customer Service Related------------> */}
-                <div class="input_field select_option">
-                  <select
-                    style={{}}
-                    id="customerService"
-                    onChange={(e) => setSubCategory(e.target.value)}
-                  >
-                    <option value="  " selected>
-                      Select Next Level Category
-                    </option>
-                    <option value="Acceptance of Cash">
-                      Acceptance of Cash
-                    </option>
-                    <option value="Issue/Payment of Draft/Banker Cheque">
-                      Issue/Payment of Draft/Banker Cheque
-                    </option>
-                    <option value="Delay in Service">Delay in Service</option>
-                    <option value="Frequent Failure of Bank Server">
-                      Frequent Failure of Bank Server
-                    </option>
-                    <option value="Others">Others</option>
-                  </select>
-                  {/* <div class="select_arrow"></div> */}
-                </div>
-                {/* <-----------2- Housing Loan Related------------> */}
-                <div class="input_field select_option">
-                  <select
-                    style={{}}
-                    id="housingLoan"
-                    onChange={(e) => setSubCategory(e.target.value)}
-                  >
-                    <option value="  " selected>
-                      Select Next Level Category
-                    </option>
-                    <option value="Related to Banks">Related to Banks</option>
-                    <option value="Related to Housing Finance Companies">
-                      Related to Housing Finance Companies
-                    </option>
-                  </select>
-                  {/* <div class="select_arrow"></div> */}
-                </div>
-                {/* <-----------2-  Credit/Debit/ATM Cards Related------------> */}
-                <div class="input_field select_option">
-                  <select
-                    style={{}}
-                    id="cards"
-                    onChange={(e) => setSubCategory(e.target.value)}
-                  >
-                    <option value="  " selected>
-                      Select Next Level Category
-                    </option>
-                    <option value="Non issuance of ATM Pin">
-                      Non issuance of ATM Pin
-                    </option>
-                    <option value="Non issuance of Credit/Debit/Atm cards">
-                      Non issuance of Credit/Debit/Atm cards
-                    </option>
-                  </select>
-                  {/* <div class="select_arrow"></div> */}
-                </div>
-                {/* <-----------2-Service charges Related------------> */}
-                <div class="input_field select_option">
-                  <select
-                    style={{}}
-                    id="serviceCharges"
-                    onChange={(e) => setSubCategory(e.target.value)}
-                  >
-                    <option value="  " selected>
-                      Select Next Level Category
-                    </option>
-                    <option value="Non Maintenance of Minimum Balance">
-                      Non Maintenance of Minimum Balance
-                    </option>
-                    <option value="Loan Processing charges">
-                      Loan Processing charges
-                    </option>
-                    <option value="Annual Maintenance charges on Credit/Debit/Atm Cards">
-                      Annual Maintenance charges on Credit/Debit/Atm Cards
-                    </option>
-                  </select>
-                  {/* <div class="select_arrow"></div> */}
-                </div>
                 {/* <------------3-------------> */}
                 <div class="input_field select_option">
                   <select
@@ -267,25 +190,13 @@ function ComplaintForm() {
                     <option value="  " selected>
                       Please select a Bank
                     </option>
-                    <option value="Reserve Bank of India">
-                      Reserve Bank of India
-                    </option>
-                    <option value="Andhra Bank">Andhra Bank</option>
-                    <option value="Allahabad Bank">Allahabad Bank</option>
-                    <option value="Bank of Baroda">Bank of Baroda</option>
-                    <option value="Bank of India">Bank of India</option>
-                    <option value="Bank of Maharashtra">
-                      Bank of Maharashtra
-                    </option>
-                    <option value="Central Bank of India">
-                      Service Charges Related
-                    </option>
-                    <option value="Canara Bank">Canara Bank</option>
-                    <option value="Corporation Bank">Corporation Bank</option>
-                    <option value="Idbi Bank">Idbi Bank</option>
-                    <option value="Punjab National Bank">
-                      Punjab National Bank
-                    </option>
+                    {bankData &&
+                      bankData.length > 0 &&
+                      bankData.map((p) => {
+                        return (
+                          <option value={p.bank_name}>{p.bank_name}</option>
+                        );
+                      })}
                   </select>
                   {/* <div class="select_arrow"></div> */}
                 </div>

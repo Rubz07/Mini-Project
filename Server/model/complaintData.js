@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const complaintDataSchema = new mongoose.Schema({
   main_complaint: {
     type: String,
-    lowercase: true,
+  
     sparse: true,
   },
   sub_complaint: {

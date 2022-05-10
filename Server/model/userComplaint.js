@@ -17,7 +17,6 @@ const complaintSchema = new mongoose.Schema({
   },
   userContact: {
     type: String,
-    required: true,
   },
   department: { type: String, ref: "departments" },
   main_complaint_type: { type: String, required: true },
