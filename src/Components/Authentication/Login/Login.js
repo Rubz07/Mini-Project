@@ -66,12 +66,12 @@ function Login() {
     });
   };
 
-  // useEffect(() => {
-  //   const isToken = localStorage.getItem("auth-token");
-  //   if (isToken) {
-  //     history.push("/dashboard");
-  //   }
-  // }, [history]);
+  useEffect(() => {
+    const isToken = localStorage.getItem("auth-token");
+    if (isToken) {
+      history.push("/dashboard");
+    }
+  }, [history]);
 
   return (
     <Route>
@@ -150,6 +150,11 @@ function Login() {
             </div>
             <div className="loginErr loginErr-hidden ">
               <p>{errorMessage}</p>
+            </div>
+            <div className="forgotPassword">
+              <Link to="/forgotPass">
+                <p style={{ color: "darkblue" }}>Forgot Password ?</p>
+              </Link>
             </div>
           </form>
         </div>

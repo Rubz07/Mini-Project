@@ -13,6 +13,7 @@ import "./App.css";
 import SubOfficerLogin from "./Components/Authentication/SubOfficerLogin/SubOfficerLogin";
 import SubOfficerDashboard from "./Components/Subofficer/SubOfficerDashboard/SubOfficerDashboard";
 import LandingPage from "./Components/Landingpage/LandingPage";
+import ForgotPass from "./Components/Authentication/Forgot_pass/ForgotPass";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/otpauth" component={OtpAuthentication} />
+          <Route exact path="/forgotPass" component={ForgotPass} />
+
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/Officerlogin" component={OfficerLogin} />

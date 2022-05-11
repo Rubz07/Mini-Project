@@ -126,6 +126,21 @@ router.post("/updatepassword", (req, res, next) => {
     }
   });
 });
+
+router.post("/resetPassword", (req, res, next) => {
+  userOperation.resetPassword(req.body).then((result) => {
+    try {
+      if (result) {
+        res.status(200).json({
+          message: "updated",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
+
 router.post("/verify-passotp", async (req, res, next) => {
   otpAuthentication
     .otpVerification(req.body.otpcode, req.body.mobile)

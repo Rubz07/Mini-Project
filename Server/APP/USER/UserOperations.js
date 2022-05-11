@@ -134,9 +134,25 @@ module.exports = {
     console.log(data);
     return new Promise(async (resolve, reject) => {
       const salt = await bcrypt.genSalt(10);
-      data.newpass = await bcrypt.hash(data.newpass, salt);
+      let pass = await bcrypt.hash(data.newpass, salt);
       await userSchema
-        .updateOne({ _id: data.userid }, { $set: { password: data.newpass } })
+        .updateOne({ _id: data.userid }, { $set: { password: pass } })
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+
+  resetPassword: (data) => {
+    console.log(data);
+    return new Promise(async (resolve, reject) => {
+      const salt = await bcrypt.genSalt(10);
+      let pass = await bcrypt.hash(data.newPass, salt);
+      await userSchema
+        .updateOne({ mobile: data.userMobile }, { $set: { password: pass } })
         .then((response) => {
           if (response) {
             resolve(response);
