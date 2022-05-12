@@ -45,7 +45,9 @@ function OfficerComplaintList({ officerDetails }) {
   }, []);
   return (
     <div className="complaintDetails">
-      <div className="complaintTitle">Complaints</div>
+      <div className="complaintTitle">
+        <p>Complaints</p>
+      </div>
 
       <div class="datas">
         <div class="data">
@@ -83,7 +85,7 @@ function OfficerComplaintList({ officerDetails }) {
                         className="officerComplaintUpdate"
                         onClick={(e) => handleComplaint(e, data.registrationNo)}
                       >
-                        Update
+                        Details
                       </button>
                     </td>
                   </tr>

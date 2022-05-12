@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../../axios";
-import "./SubOfficerComplaintList.css";
 import { Close } from "@material-ui/icons";
 import Modal from "react-modal";
-function SubOfficerComplaintList() {
-  const [complaints, setComplaints] = useState([]);
+function TicketRaisedComplaintsList() {
+  const [TicketRaisedComplaints, setTicketRaisedComplaints] = useState([]);
   const [comments, setComments] = useState();
   const [reportComment, setReportComment] = useState();
   const [complaintStatus, setComplaintStatus] = useState();
@@ -50,92 +49,43 @@ function SubOfficerComplaintList() {
   const [modalClarificationIsOpen, setClarificationIsOpen] = useState(false);
   const [modalReportIsOpen, setIsReportOpen] = useState(false);
 
-  async function getOfficerComplaints() {
-    const token = localStorage.getItem("Subofficer-token");
-    let response = await axios.post(`subofficer/getSubOfficerComplaint`, {
+  async function getTicketRaisedComplaints() {
+    const token = localStorage.getItem("officer-token");
+
+    let response = await axios.post(`officer/getTicketRaisedComplaints`, {
       headers: { Authorization: token },
     });
     if (response.status === 200) {
-      const result = response.data.complaint.filter(
-        (response) => response.status === "Pending"
-      );
-      setComplaints(result);
-    }
-  }
-
-  async function ComplaintAction(e, id) {
-    e.preventDefault();
-    const data = {
-      complaint_id: id,
-      sub_comment: comments,
-      action: complaintStatus,
-    };
-    let response = await axios.post(`subofficer/complaintAction`, data);
-    if (response.status === 200 && response.data.verify === "success") {
-      getOfficerComplaints();
-      closeModal();
-    }
-  }
-
-  //  <-------REPORT----------->
-  async function reportAction(e, id) {
-    e.preventDefault();
-    const data = {
-      complaint_id: id,
-      sub_comment: reportComment,
-      priority: complaintPriority,
-    };
-    let response = await axios.post(`subofficer/reportAction`, data);
-    if (response.status === 200 && response.data.verify === "success") {
-      alert("Complaint Reported Successfully");
-      getOfficerComplaints();
-      closeReportModal();
-    }
-  }
-
-  //  <-------CLARIFICATION----------->
-  async function clarificationAction(e, id) {
-    e.preventDefault();
-    const data = {
-      complaint_id: id,
-      clarification_type: clarificationType,
-      clarification_remark: clarificationRemarks,
-    };
-    let response = await axios.post(`subofficer/clarificationAction`, data);
-    if (response.status === 200 && response.data.verify === "success") {
-      getOfficerComplaints();
-      closeClarificationModal();
+      setTicketRaisedComplaints(response.data.complaint);
     }
   }
 
   useEffect(() => {
-    getOfficerComplaints();
+    getTicketRaisedComplaints();
   }, []);
   return (
-    <div className="complaintDetails">
-      <div className="complaintTitle">Complaints</div>
-      <div class="datas">
-        <div class="data">
+    <div className="manageOfficerList">
+      <div className="manageOfficerTitle">Ticket Raised</div>
+      <div class="manageOfficerDatas">
+        <div class="manageOfficerData">
           <table>
             <tr>
+              <th style={{ padding: "20px" }}>Sl.No</th>
               <th>Complaint Id</th>
-              <th>Complaint Type</th>
-              {/* <th>Proof</th> */}
-              <th>Issue</th>
-              <th>Description</th>
-              <th>Bank</th>
+
+              <th>Date</th>
               <th>Action</th>
             </tr>
-            {complaints &&
-              complaints.length > 0 &&
-              complaints.map((data, index) => {
+            {TicketRaisedComplaints &&
+              TicketRaisedComplaints.length > 0 &&
+              TicketRaisedComplaints.map((p, index) => {
                 return (
-                  <tr key={data._id}>
-                    <td width="150px">{data.registrationNo}</td>
-                    <td width="150px">{data.main_complaint_type}</td>
-                    <td width="150px">{data.sub_complaint_type}</td>
-                    <td width="230px">{data.description}</td>
-                    <td width="150px">{data.bank_name}</td>
+                  <tr key={TicketRaisedComplaints._id}>
+                    <td>{index}</td>
+                    <td width="180px">{p.registrationNo}</td>
+                    <td width="200px">{p.ticket_raised_category}</td>
+                    <td width="160px">{p.ticket_raised_reason}</td>
+                    <td width="176px">{p.ticket_raised_date}</td>
                     <td>
                       {" "}
                       <button
@@ -156,18 +106,16 @@ function SubOfficerComplaintList() {
                           Clarification
                         </button>
                       </div>
-                      <div className="report">
-                        <button
-                          style={{
-                            backgroundColor: "rgb(255, 99, 113)",
-                            marginTop: "10px",
-                          }}
-                          className="officerComplaintUpdate"
-                          onClick={(e) => openReportModal()}
-                        >
-                          Report
-                        </button>
-                      </div>
+                      {/* <button
+                        style={{
+                          backgroundColor: "rgb(255, 99, 113)",
+                          marginTop: "10px",
+                        }}
+                        className="officerComplaintUpdate"
+                        // onClick={(e) => openModal()}
+                      >
+                        Took Action
+                      </button> */}
                     </td>
                   </tr>
                 );
@@ -189,17 +137,17 @@ function SubOfficerComplaintList() {
           <div className="title">
             <h1>Complaint Details</h1>
           </div>
-          {complaints &&
-            complaints.length > 0 &&
-            complaints.map((data) => {
+          {TicketRaisedComplaints &&
+            TicketRaisedComplaints.length > 0 &&
+            TicketRaisedComplaints.map((data) => {
               return (
                 <div className="body">
                   <div class="datas">
                     <div class="data">
                       <table>
-                        {complaints &&
-                          complaints.length > 0 &&
-                          complaints.map((data, index) => {
+                        {TicketRaisedComplaints &&
+                          TicketRaisedComplaints.length > 0 &&
+                          TicketRaisedComplaints.map((data, index) => {
                             return (
                               <>
                                 <tr>
@@ -244,32 +192,33 @@ function SubOfficerComplaintList() {
                                 </tr>
 
                                 <tr>
-                                  <th>Complainee Name</th>
+                                  <th>Ticket Type</th>
                                   <td style={{ textAlign: "left" }}>
-                                    : {data.name}
+                                    : {data.ticket_raised_category}
                                   </td>
                                 </tr>
 
                                 <tr>
-                                  <th>Complainee Email</th>
+                                  <th>Ticket Reason</th>
                                   <td style={{ textAlign: "left" }}>
-                                    : {data.userEmail}
+                                    : {data.ticket_raised_reason}
                                   </td>
                                 </tr>
 
                                 <tr>
-                                  <th>Complainee Address</th>
+                                  <th>Ticket Raised Date</th>
                                   <td style={{ textAlign: "left" }}>
-                                    : {data.address}
+                                    : {data.ticket_raised_date}
                                   </td>
                                 </tr>
+
                                 <tr>
-                                  <th>Posted Date</th>
+                                  <th>Current Status</th>
                                   <td style={{ textAlign: "left" }}>
-                                    : {data.date}
+                                    : {data.status}
                                   </td>
                                 </tr>
-                                <tr>
+                                {/* <tr>
                                   <th>Add comment</th>
                                   <td style={{ textAlign: "left" }}>
                                     <div class="input_field cmpselect_option">
@@ -281,9 +230,9 @@ function SubOfficerComplaintList() {
                                       ></textarea>
                                     </div>
                                   </td>
-                                </tr>
+                                </tr> */}
 
-                                <tr>
+                                {/* <tr>
                                   <th>Update status</th>
                                   <td>
                                     {" "}
@@ -306,18 +255,18 @@ function SubOfficerComplaintList() {
                                       <div class="select_arrow"></div>
                                     </div>
                                   </td>
-                                </tr>
+                                </tr> */}
                               </>
                             );
                           })}
                       </table>
-                      <button
+                      {/* <button
                         className="officerComplaintUpdate"
                         style={{ marginTop: "25px" }}
-                        onClick={(e) => ComplaintAction(e, data._id)}
+                        // onClick={(e) => ComplaintAction(e, data._id)}
                       >
                         Update
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -341,17 +290,17 @@ function SubOfficerComplaintList() {
           <div className="title">
             <h1>Send Report</h1>
           </div>
-          {complaints &&
-            complaints.length > 0 &&
-            complaints.map((data) => {
+          {TicketRaisedComplaints &&
+            TicketRaisedComplaints.length > 0 &&
+            TicketRaisedComplaints.map((data) => {
               return (
                 <div className="body">
                   <div class="datas">
                     <div class="data">
                       <table>
-                        {complaints &&
-                          complaints.length > 0 &&
-                          complaints.map((data, index) => {
+                        {TicketRaisedComplaints &&
+                          TicketRaisedComplaints.length > 0 &&
+                          TicketRaisedComplaints.map((data, index) => {
                             return (
                               <>
                                 <tr>
@@ -402,7 +351,7 @@ function SubOfficerComplaintList() {
                       <button
                         className="officerComplaintUpdate"
                         style={{ marginTop: "25px" }}
-                        onClick={(e) => reportAction(e, data._id)}
+                        // onClick={(e) => reportAction(e, data._id)}
                       >
                         Send
                       </button>
@@ -429,17 +378,17 @@ function SubOfficerComplaintList() {
           <div className="title">
             <h1>Ask Clarification</h1>
           </div>
-          {complaints &&
-            complaints.length > 0 &&
-            complaints.map((data) => {
+          {TicketRaisedComplaints &&
+            TicketRaisedComplaints.length > 0 &&
+            TicketRaisedComplaints.map((data) => {
               return (
                 <div className="body">
                   <div class="datas">
                     <div class="data">
                       <table>
-                        {complaints &&
-                          complaints.length > 0 &&
-                          complaints.map((data, index) => {
+                        {TicketRaisedComplaints &&
+                          TicketRaisedComplaints.length > 0 &&
+                          TicketRaisedComplaints.map((data, index) => {
                             return (
                               <>
                                 <tr>
@@ -450,38 +399,23 @@ function SubOfficerComplaintList() {
                                 </tr>
 
                                 <tr>
-                                  <th>Clarification Type</th>
-                                  <td>
-                                    {" "}
-                                    <div class="input_field cmpselect_option">
-                                      <select
-                                        onChange={(e) =>
-                                          setClarificationType(e.target.value)
-                                        }
-                                      >
-                                        <option value=""></option>
-                                        <option value="Insufficient information">
-                                          Insufficient information
-                                        </option>
-                                      </select>
-                                      <div class="select_arrow"></div>
-                                    </div>
+                                  <th width="200">Ticket Type</th>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.ticket_raised_category}
                                   </td>
                                 </tr>
 
                                 <tr>
-                                  <th>Remarks</th>
+                                  <th width="200">Ticket Reason</th>
                                   <td style={{ textAlign: "left" }}>
-                                    <div class="input_field cmpselect_option">
-                                      <textarea
-                                        className="officer-comments"
-                                        onChange={(e) =>
-                                          setClarificationRemarks(
-                                            e.target.value
-                                          )
-                                        }
-                                      ></textarea>
-                                    </div>
+                                    : {data.ticket_raised_reason}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th width="200">Ticket Date</th>
+                                  <td style={{ textAlign: "left" }}>
+                                    : {data.ticket_raised_date}
                                   </td>
                                 </tr>
                               </>
@@ -491,7 +425,7 @@ function SubOfficerComplaintList() {
                       <button
                         className="officerComplaintUpdate"
                         style={{ marginTop: "25px" }}
-                        onClick={(e) => clarificationAction(e, data._id)}
+                        // onClick={(e) => clarificationAction(e, data._id)}
                       >
                         Send
                       </button>
@@ -506,4 +440,4 @@ function SubOfficerComplaintList() {
   );
 }
 
-export default SubOfficerComplaintList;
+export default TicketRaisedComplaintsList;

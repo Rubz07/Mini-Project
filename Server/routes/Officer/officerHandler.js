@@ -20,6 +20,16 @@ router.post("/getOfficerComplaint", verifyOfficer, (req, res) => {
   });
 });
 
+router.post("/getTicketRaisedComplaints", verifyOfficer, (req, res) => {
+  OfficerOperation.getTicketRaisedComplaints(req.user.department).then((response) => {
+    if (response) {
+      res.status(200).json({ complaint: response });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
 router.post("/getOfficerDetails", verifyOfficer, (req, res) => {
   OfficerOperation.getOfficerDetails(req.user.department).then((response) => {
     if (response) {

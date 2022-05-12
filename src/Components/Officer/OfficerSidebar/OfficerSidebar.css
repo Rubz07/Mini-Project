@@ -17,7 +17,10 @@
 .officerSidebarMenu {
   margin-bottom: 10px;
 }
-
+.ticketCount-hidden{
+  display: block;
+  visibility: hidden;
+}
 .officerSidebarTitle {
   font-size: 14px;
   font-weight: bold;

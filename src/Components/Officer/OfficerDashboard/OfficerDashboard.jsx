@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SubOfficers from "../OfficerHome/SubOfficers/SubOfficers";
 import ManageSubOfficers from "../OfficerHome/ManageSubOfficers/ManageSubOfficers";
 import ComplaintData from "../OfficerHome/ComplaintData/ComplaintData";
+import TicketRaisedComplaintsList from "../OfficerHome/TicketRaisedComplaintsList/TicketRaisedComplaintsList";
 
 function OfficerDashboard() {
   return (
@@ -30,6 +31,9 @@ function OfficerDashboard() {
             </Route>
             <Route path="/Complaint-data">
               <ComplaintData />
+            </Route>
+            <Route path="/TicketRaised">
+              <TicketRaisedComplaintsList />
             </Route>
           </Switch>
         </div>

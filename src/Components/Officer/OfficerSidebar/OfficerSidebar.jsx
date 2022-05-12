@@ -9,6 +9,7 @@ import {
 } from "@material-ui/icons";
 
 function officerSidebar() {
+  const TicketDiv = document.querySelector(".topbarIconContainer");
   const termination = () => {
     window.localStorage.removeItem("officer-token");
   };
@@ -27,6 +28,30 @@ function officerSidebar() {
           </ul>
         </div>
         <div className="sidebarMenu">
+          <h2 className="sidebarTitle">Complaint</h2>
+          <ul className="sidebarList">
+            <Link to="/TicketRaised" className="link">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Tickets
+                <div
+                  className="topbarIconContainer ticketCount-hidden"
+                  style={{ marginLeft: "20px" }}
+                >
+                  <span className="topIconBadge">2</span>
+                </div>
+              </li>
+            </Link>
+            <Link to="/Complaint-data" className="link">
+              <li className="sidebarListItem">
+                <AddCircleOutlineOutlined className="sidebarIcon" />
+                Complaint Data
+              </li>
+            </Link>
+          </ul>
+        </div>
+
+        <div className="sidebarMenu">
           <h2 className="sidebarTitle">Officer</h2>
           <ul className="sidebarList">
             <Link to="/add-subofficer" className="link">
@@ -42,18 +67,6 @@ function officerSidebar() {
               </li>
             </Link>
           </ul>
-        </div>
-
-        <div className="sidebarMenu">
-          <h2 className="sidebarTitle">Complaint</h2>
-          <ul className="sidebarList">
-            <Link to="/Complaint-data" className="link">
-              <li className="sidebarListItem">
-                <AddCircleOutlineOutlined className="sidebarIcon" />
-                Complaint Data
-              </li>
-            </Link>
-          </ul> 
         </div>
 
         <div className="officerSidebarMenu">
