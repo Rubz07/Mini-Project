@@ -25,7 +25,6 @@ function OfficerLogin() {
       if (res.status === 200 && res.data.status === true) {
         window.localStorage.setItem("officer-token", res.data.authToken);
         history.push("/Officerdashboard");
-        console.log("hiiiiiiii");
       } else {
         setErrorMessage(res.data.message);
         loginErr.classList.remove("loginErr-hidden");

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SubOfficerHome.css";
 import axios from "../../../../axios";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, useHistory } from "react-router-dom";
 import SubOfficerCount from "../SubOfficerCount/SubOfficerCount";
 import SubOfficerComplaintList from "../SubOfficerComplaintList/SubOfficerComplaintList";
 function SubOfficerHome() {
@@ -18,9 +18,17 @@ function SubOfficerHome() {
     }
   }
 
+  const history = useHistory();
+
   useEffect(() => {
-    getOfficerComplaints();
-  }, []);
+    const isToken = localStorage.getItem("Subofficer-token");
+    if (!isToken) {
+      history.push("/SubOfficerlogin");
+    } else {
+      getOfficerComplaints();
+    }
+  }, [history]);
+
   return (
     <Router>
       <Switch>
