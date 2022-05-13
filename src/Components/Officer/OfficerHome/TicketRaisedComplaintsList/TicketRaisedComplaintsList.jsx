@@ -4,7 +4,22 @@ import { Close } from "@material-ui/icons";
 import Modal from "react-modal";
 function TicketRaisedComplaintsList() {
   const [TicketRaisedComplaints, setTicketRaisedComplaints] = useState([]);
-  const [comments, setComments] = useState();
+  const [cmpId, setCmpId] = useState();
+  const [ticketCat, setTicketCat] = useState();
+  const [ticketReason, setTicketReason] = useState();
+  const [ticketDate, setTicketDate] = useState();
+
+  const [dcmpId, dsetCmpId] = useState();
+  const [dticketCat, dsetTicketCat] = useState();
+  const [dticketReason, dsetTicketReason] = useState();
+  const [dticketDate, dsetTicketDate] = useState();
+  const [cmpType, setCmpType] = useState();
+  const [cmpSubType, setCmpSubType] = useState();
+  const [cmpDesc, setCmpDesc] = useState();
+  const [cmpBank, setCmpBank] = useState();
+  const [cmpBankBranch, setCmpBankBranch] = useState();
+  const [cmpStatus, setCmpStatus] = useState();
+
   const [reportComment, setReportComment] = useState();
   const [complaintStatus, setComplaintStatus] = useState();
   const [complaintPriority, setComplaintPriority] = useState();
@@ -21,7 +36,28 @@ function TicketRaisedComplaintsList() {
       transform: "translate(-50%, -50%)",
     },
   };
-  function openModal() {
+  function openModal(
+    cmpId,
+    cmpType,
+    cmpSubType,
+    cmpDesc,
+    cmpBank,
+    cmpBankBranch,
+    ticketCat,
+    ticketType,
+    ticketDate,
+    status
+  ) {
+    dsetCmpId(cmpId);
+    dsetTicketCat(ticketCat);
+    dsetTicketReason(ticketType);
+    dsetTicketDate(ticketDate);
+    setCmpType(cmpType);
+    setCmpSubType(cmpSubType);
+    setCmpDesc(cmpDesc);
+    setCmpBank(cmpBank);
+    setCmpBankBranch(cmpBankBranch);
+    setCmpStatus(status);
     setIsOpen(true);
   }
 
@@ -29,7 +65,11 @@ function TicketRaisedComplaintsList() {
     setIsOpen(false);
   }
 
-  function openClarificationModal() {
+  function openClarificationModal(cmpid, ticketCat, ticketReason, ticketDate) {
+    setCmpId(cmpid);
+    setTicketCat(ticketCat);
+    setTicketReason(ticketReason);
+    setTicketDate(ticketDate);
     setClarificationIsOpen(true);
   }
 
@@ -90,7 +130,20 @@ function TicketRaisedComplaintsList() {
                       {" "}
                       <button
                         className="officerComplaintUpdate"
-                        onClick={(e) => openModal()}
+                        onClick={(e) =>
+                          openModal(
+                            p.registrationNo,
+                            p.main_complaint_type,
+                            p.sub_complaint_type,
+                            p.description,
+                            p.bank_name,
+                            p.bank_branch,
+                            p.ticket_raised_category,
+                            p.ticket_raised_reason,
+                            p.ticket_raised_date,
+                            p.status
+                          )
+                        }
                       >
                         Details
                       </button>
@@ -101,7 +154,14 @@ function TicketRaisedComplaintsList() {
                             marginTop: "10px",
                           }}
                           className="officerComplaintUpdate"
-                          onClick={(e) => openClarificationModal()}
+                          onClick={(e) =>
+                            openClarificationModal(
+                              p.registrationNo,
+                              p.ticket_raised_category,
+                              p.ticket_raised_reason,
+                              p.ticket_raised_date
+                            )
+                          }
                         >
                           Clarification
                         </button>
@@ -137,88 +197,76 @@ function TicketRaisedComplaintsList() {
           <div className="title">
             <h1>Complaint Details</h1>
           </div>
-          {TicketRaisedComplaints &&
-            TicketRaisedComplaints.length > 0 &&
-            TicketRaisedComplaints.map((data) => {
-              return (
-                <div className="body">
-                  <div class="datas">
-                    <div class="data">
-                      <table>
-                        {TicketRaisedComplaints &&
-                          TicketRaisedComplaints.length > 0 &&
-                          TicketRaisedComplaints.map((data, index) => {
-                            return (
-                              <>
-                                <tr>
-                                  <th width="200">Complaint Id</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.registrationNo}
-                                  </td>
-                                </tr>
+          <div className="body">
+            <div class="datas">
+              <div class="data">
+                <table>
+                  <>
+                    <tr>
+                      <th width="200">Complaint Id</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {dcmpId}
+                      </td>
+                    </tr>
 
-                                <tr>
-                                  <th>Complaint Type</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.main_complaint_type}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th>Issue</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.sub_complaint_type}
-                                  </td>
-                                </tr>
+                    <tr>
+                      <th>Complaint Type</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {cmpType}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Issue</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {cmpSubType}
+                      </td>
+                    </tr>
 
-                                <tr>
-                                  <th>Description</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.description}
-                                  </td>
-                                </tr>
+                    <tr>
+                      <th>Description</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {cmpDesc}
+                      </td>
+                    </tr>
 
-                                <tr>
-                                  <th>Bank</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.bank_name}
-                                  </td>
-                                </tr>
+                    <tr>
+                      <th>Bank</th>
+                      <td style={{ textAlign: "left" }}>: {cmpBank}</td>
+                    </tr>
 
-                                <tr>
-                                  <th>Bank Branch</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.bank_branch}
-                                  </td>
-                                </tr>
+                    <tr>
+                      <th>Bank Branch</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {cmpBankBranch}
+                      </td>
+                    </tr>
 
-                                <tr>
-                                  <th>Ticket Type</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.ticket_raised_category}
-                                  </td>
-                                </tr>
+                    <tr>
+                      <th>Ticket Type</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {dticketCat}
+                      </td>
+                    </tr>
 
-                                <tr>
-                                  <th>Ticket Reason</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.ticket_raised_reason}
-                                  </td>
-                                </tr>
+                    <tr>
+                      <th>Ticket Reason</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {dticketReason}
+                      </td>
+                    </tr>
 
-                                <tr>
-                                  <th>Ticket Raised Date</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.ticket_raised_date}
-                                  </td>
-                                </tr>
+                    <tr>
+                      <th>Ticket Raised Date</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {dticketDate}
+                      </td>
+                    </tr>
 
-                                <tr>
-                                  <th>Current Status</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.status}
-                                  </td>
-                                </tr>
-                                {/* <tr>
+                    <tr>
+                      <th>Current Status</th>
+                      <td style={{ textAlign: "left" }}>: {cmpStatus}</td>
+                    </tr>
+                    {/* <tr>
                                   <th>Add comment</th>
                                   <td style={{ textAlign: "left" }}>
                                     <div class="input_field cmpselect_option">
@@ -232,7 +280,7 @@ function TicketRaisedComplaintsList() {
                                   </td>
                                 </tr> */}
 
-                                {/* <tr>
+                    {/* <tr>
                                   <th>Update status</th>
                                   <td>
                                     {" "}
@@ -256,22 +304,18 @@ function TicketRaisedComplaintsList() {
                                     </div>
                                   </td>
                                 </tr> */}
-                              </>
-                            );
-                          })}
-                      </table>
-                      {/* <button
+                  </>
+                </table>
+                {/* <button
                         className="officerComplaintUpdate"
                         style={{ marginTop: "25px" }}
                         // onClick={(e) => ComplaintAction(e, data._id)}
                       >
                         Update
                       </button> */}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+              </div>
+            </div>
+          </div>
         </form>
       </Modal>
       {/* 
@@ -378,62 +422,43 @@ function TicketRaisedComplaintsList() {
           <div className="title">
             <h1>Ask Clarification</h1>
           </div>
-          {TicketRaisedComplaints &&
-            TicketRaisedComplaints.length > 0 &&
-            TicketRaisedComplaints.map((data) => {
-              return (
-                <div className="body">
-                  <div class="datas">
-                    <div class="data">
-                      <table>
-                        {TicketRaisedComplaints &&
-                          TicketRaisedComplaints.length > 0 &&
-                          TicketRaisedComplaints.map((data, index) => {
-                            return (
-                              <>
-                                <tr>
-                                  <th width="200">Complaint Id</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.registrationNo}
-                                  </td>
-                                </tr>
 
-                                <tr>
-                                  <th width="200">Ticket Type</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.ticket_raised_category}
-                                  </td>
-                                </tr>
+          <div className="body">
+            <div class="datas">
+              <div class="data">
+                <table>
+                  <>
+                    <tr>
+                      <th width="200">Complaint Id</th>
+                      <td style={{ textAlign: "left" }}>: {cmpId}</td>
+                    </tr>
 
-                                <tr>
-                                  <th width="200">Ticket Reason</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.ticket_raised_reason}
-                                  </td>
-                                </tr>
+                    <tr>
+                      <th width="200">Ticket Type</th>
+                      <td style={{ textAlign: "left" }}>: {ticketCat}</td>
+                    </tr>
 
-                                <tr>
-                                  <th width="200">Ticket Date</th>
-                                  <td style={{ textAlign: "left" }}>
-                                    : {data.ticket_raised_date}
-                                  </td>
-                                </tr>
-                              </>
-                            );
-                          })}
-                      </table>
-                      <button
-                        className="officerComplaintUpdate"
-                        style={{ marginTop: "25px" }}
-                        // onClick={(e) => clarificationAction(e, data._id)}
-                      >
-                        Send
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                    <tr>
+                      <th width="200">Ticket Reason</th>
+                      <td style={{ textAlign: "left" }}>: {ticketReason}</td>
+                    </tr>
+
+                    <tr>
+                      <th width="200">Ticket Date</th>
+                      <td style={{ textAlign: "left" }}>: {ticketDate}</td>
+                    </tr>
+                  </>
+                </table>
+                <button
+                  className="officerComplaintUpdate"
+                  style={{ marginTop: "25px" }}
+                  // onClick={(e) => clarificationAction(e, data._id)}
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
         </form>
       </Modal>
     </div>
