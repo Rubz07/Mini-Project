@@ -21,6 +21,7 @@ function Sidebar() {
   const history = useHistory();
   const termination = () => {
     window.localStorage.removeItem("auth-token");
+    history.push("/login");
   };
   return (
     <div className="sidebar">
