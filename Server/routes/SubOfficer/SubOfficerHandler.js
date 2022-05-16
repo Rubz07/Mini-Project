@@ -12,7 +12,7 @@ router.post("/login", Login);
 
 router.post("/getSubOfficerComplaint", verifyOfficer, (req, res) => {
   subOfficerOperation
-    .getSubOfficerComplaint(req.user.officerid)
+    .getSubOfficerComplaint(req.user.district)
     .then((response) => {
       if (response) {
         res.status(200).json({ complaint: response });
@@ -33,6 +33,42 @@ router.post("/complaintAction", (req, res) => {
       res.status(401).json({ message: error });
     }
   });
+});
+
+router.post("/reportAction", (req, res) => {
+  subOfficerOperation.sendReport(req.body).then((response) => {
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
+router.post("/clarificationAction", (req, res) => {
+  subOfficerOperation.askClarification(req.body).then((response) => {
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
+router.post("/getEscalatedComplaints", verifyOfficer, (req, res) => {
+  subOfficerOperation
+    .getEscalatedComplaints(req.user.officerid)
+    .then((response) => {
+      if (response) {
+        res.status(200).json({ complaint: response });
+      } else {
+        res.status(401).json({ message: "some error occured" });
+      }
+    });
 });
 
 module.exports = router;

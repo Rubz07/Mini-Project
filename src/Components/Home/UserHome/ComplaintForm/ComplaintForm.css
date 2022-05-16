@@ -153,16 +153,20 @@
 }
 
 .select_option {
-  position: relative;
+  position: absolute;
   width: 100%;
 }
+/* .bank_category{
+  position: absolute;
+} */
 .select_option select {
   display: inline-block;
+  font-weight: 600;
   width: 100%;
   height: 35px;
   padding: 0px 15px;
   cursor: pointer;
-  color: #7b7b7b;
+  color: #000000;
   border: 1px solid #ccc;
   border-radius: 0;
   background: #fff;
@@ -178,6 +182,7 @@
 .select_option select:focus {
   color: #000;
   background: #fafafa;
+  font-weight: 600;
   border-color: #000;
   outline: none;
 }
@@ -196,7 +201,10 @@
 .select_option select:focus + .select_arrow {
   border-top-color: #000;
 }
-
+.autoshow{
+  display: block;
+  visibility: hidden
+}
 @-webkit-keyframes check {
   0% {
     height: 0;

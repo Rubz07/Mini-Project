@@ -6,6 +6,19 @@ function ComplaintCount({ complaint }) {
     return p.status === "Pending";
   });
 
+  var processingCount = complaint.filter(function (p) {
+    return p.status === "Processing";
+  });
+
+  var reportedCount = complaint.filter(function (p) {
+    return p.status === "Reported";
+  });
+  var resolvedCount = complaint.filter(function (p) {
+    return p.status === "Resolved";
+  });
+
+  const onprocessingCount =
+    pendingCount.length + processingCount.length + reportedCount.length;
   return (
     <div className="Complaintfeatured">
       <div className="complaintFeaturedItem">
@@ -19,7 +32,7 @@ function ComplaintCount({ complaint }) {
       </div>
       <div className="complaintFeaturedItem">
         <div className="complaintFeaturedMoneyContainer">
-          <span className="complaintFeaturedMoney">{pendingCount.length}</span>
+          <span className="complaintFeaturedMoney">{onprocessingCount}</span>
 
           <Save className="complaintFeaturedIcon" />
         </div>
@@ -27,7 +40,7 @@ function ComplaintCount({ complaint }) {
       </div>
       <div className="complaintFeaturedItem">
         <div className="complaintFeaturedMoneyContainer">
-          <span className="complaintFeaturedMoney">0</span>
+          <span className="complaintFeaturedMoney">{resolvedCount.length}</span>
           <ArrowUpward className="complaintFeaturedIcon" />
         </div>
         <span className="complaintFeaturedSub">Resolved Grievances</span>

@@ -42,62 +42,30 @@ function Complaints() {
     getDepartments();
   }, []);
   return (
-    <div className="complaintList">
-      <div className="complaintTitle">complaints</div>
-      <div class="complaintDatas">
-        <div class="complaintData">
-          <table>
-            <tr>
-              <th style={{ padding: "20px" }}>Sl.No</th>
-              <th>Registration Id</th>
-              <th>Department</th>
-              <th>Description</th>
-              <th>Date</th>
-              <th>Action</th>
-            </tr>
-            {complaints &&
-              complaints.length > 0 &&
-              complaints.map((data, index) => {
-                console.log("length", data.length);
-
-                return (
-                  <tr key={data._id}>
-                    <td>{index}</td>
-                    <td width="200px">{data.registrationNo}</td>
-                    <td width="200px">{data.department}</td>
-                    <td width="200px">{data.description}</td>
-                    <td width="200px">{data.date}</td>
-                    <td width="230px">
-                      <div class="input_field cmpselect_option">
-                        <select
-                          onChange={(e) =>
-                            handleChange(
-                              e,
-                              data._id,
-                              data.registrationNo,
-                              data.description,
-                              data.status
-                            )
-                          }
-                        >
-                          <option>Select Deparment</option>
-                          {department &&
-                            department.length > 0 &&
-                            department.map((p) => {
-                              return (
-                                <option value={p.registrationNo}>
-                                  {p.departmentname}
-                                </option>
-                              );
-                            })}
-                        </select>
-                        <div class="select_arrow"></div>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-          </table>
+    <div className="report-main">
+      <div class="report-container">
+        <div class="report-content">
+          <div className="reportinput-box">
+            <span className="report-details">Select Department</span>
+            <select style={{ width: "200px" }} id="cars">
+              );
+              {department &&
+                department.length > 0 &&
+                department.map((p) => {
+                  return (
+                    <option value={p.registrationNo}>{p.departmentname}</option>
+                  );
+                })}
+            </select>
+          </div>
+          <div className="report-submit">
+            <input
+              type="button"
+              className="report-submitbtn"
+              value="Check"
+              // onClick={(e) => fetchStatus(e)}
+            />
+          </div>
         </div>
       </div>
     </div>

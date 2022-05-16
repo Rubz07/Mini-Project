@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import image1 from "../../../Assets/images/image-1.png";
 import axios from "../../../axios";
 import { Route, useHistory, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 function Login() {
   const history = useHistory();
@@ -9,9 +10,15 @@ function Login() {
   const loginErr = document.querySelector(".loginErr");
 
   const [password, setPassword] = useState();
+  const [errorMessage, setErrorMessage] = useState();
 
   const [mobile, setmobile] = useState();
 
+  // NAV BAR
+  const diffLogin = (e) => {
+    history.push(`/${e}`);
+  };
+  // NAV BAR
   // const validateMobile = () => {
   //   if (phnoChk.test(mobile)) {
   //     setmobileError(false);
@@ -43,9 +50,8 @@ function Login() {
       mobile: mobile,
       password: password,
     };
-    const res = await axios.post("/login", data);
-    try {
-      if (res.status === 200 && res.data.verify === true) {
+    await axios.post("/login", data).then((res) => {
+      if (res.status === 200 && res.data.status === true) {
         window.localStorage.setItem("auth-token", res.data.authToken);
         console.log(res.data.role);
         if (res.data.role === "admin") {
@@ -54,23 +60,50 @@ function Login() {
           history.push("/dashboard");
         }
       } else {
-        console.log("hii");
+        setErrorMessage(res.data.message);
         loginErr.classList.remove("loginErr-hidden");
       }
-    } catch (error) {
-      console.log("hiiiii");
-    }
+    });
   };
 
-  // useEffect(() => {
-  //   const isToken = localStorage.getItem("auth-token");
-  //   if (isToken) {
-  //     history.push("/dashboard");
-  //   }
-  // }, [history]);
+  useEffect(() => {
+    const isToken = localStorage.getItem("auth-token");
+    if (isToken) {
+      history.push("/dashboard");
+    }
+  }, [history]);
 
   return (
     <Route>
+      {/* NAV BAR */}
+
+      <header>
+        <div class="container">
+          <div class="logo">
+            <p className="logo-title">CM-Portal</p>
+          </div>
+
+          <div class="links">
+            <select
+              className="btn5"
+              onChange={(e) => diffLogin(e.target.value)}
+            >
+              <option value="">user</option>
+              <option value="Officerlogin">Officer</option>
+              <option value="SubOfficerlogin">Sub Officer</option>
+            </select>
+          </div>
+
+          <div class="overlay"></div>
+
+          <div class="hamburger-menu">
+            <div class="bar"></div>
+          </div>
+        </div>
+      </header>
+
+      {/* NAV BAR */}
+
       <div className="wrapper">
         <div className="img1">
           {" "}
@@ -87,6 +120,10 @@ function Login() {
                 value={mobile}
                 placeholder="mobile"
                 autocomplete="off"
+                required
+                minlength="10"
+                maxlength="10"
+                size="10"
                 onChange={(e) => setmobile(e.target.value)}
               />
             </div>
@@ -112,7 +149,12 @@ function Login() {
               ></input>
             </div>
             <div className="loginErr loginErr-hidden ">
-              <p>Login failed</p>
+              <p>{errorMessage}</p>
+            </div>
+            <div className="forgotPassword">
+              <Link to="/forgotPass">
+                <p style={{ color: "darkblue" }}>Forgot Password ?</p>
+              </Link>
             </div>
           </form>
         </div>

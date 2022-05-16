@@ -96,20 +96,22 @@ function SubOfficers() {
                 <div class="input_field select_option">
                   <select onChange={(e) => setDistrict(e.target.value)}>
                     <option>Select District</option>
-                    <option value="AL">Alappuzha</option>
-                    <option value="ER">Ernakulam</option>
-                    <option value="ID">Idukki</option>
-                    <option value="KN">Kannur</option>
-                    <option value="KS">Kasargod</option>
-                    <option value="KL">Kollam</option>
-                    <option value="KT">Kottayam</option>
-                    <option value="KZ">Kozhikode</option>
-                    <option value="MA">Malappuram</option>
-                    <option value="PL">Palakkad</option>
-                    <option value="PT">Pathanamthitta</option>
-                    <option value="TV">Thiruvananthapuram</option>
-                    <option value="TS">Thrissur</option>
-                    <option value="WA">Wayanad</option>
+                    <option value="Alappuzha">Alappuzha</option>
+                    <option value="Ernakulam">Ernakulam</option>
+                    <option value="Idukki">Idukki</option>
+                    <option value="Kannur">Kannur</option>
+                    <option value="Kasargod">Kasargod</option>
+                    <option value="Kollam">Kollam</option>
+                    <option value="Kottayam">Kottayam</option>
+                    <option value="Kozhikode">Kozhikode</option>
+                    <option value="Malappuram">Malappuram</option>
+                    <option value="Palakkad">Palakkad</option>
+                    <option value="Pathanamthitta">Pathanamthitta</option>
+                    <option value="Thiruvananthapuram">
+                      Thiruvananthapuram
+                    </option>
+                    <option value="Thrissur">Thrissur</option>
+                    <option value="Wayanad">Wayanad</option>
                     {/* {department &&
                       department.length > 0 &&
                       department.map((p) => {

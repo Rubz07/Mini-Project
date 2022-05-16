@@ -48,7 +48,7 @@ function SideBarAdmin() {
             <Link to="/complaints" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
-                Complaints
+                Complaint Report
                 {/* <span className="topIconBadge">2</span> */}
               </li>
             </Link>
@@ -59,11 +59,6 @@ function SideBarAdmin() {
                 Departments
               </li>
             </Link>
-
-            <li className="sidebarListItem">
-              <BarChart className="sidebarIcon" />
-              Reports
-            </li>
           </ul>
         </div>
 
@@ -82,10 +77,10 @@ function SideBarAdmin() {
                 Manage
               </li>
             </Link>
-            <li className="sidebarListItem">
+            {/* <li className="sidebarListItem">
               <Report className="sidebarIcon" />
               Reports
-            </li>
+            </li> */}
           </ul>
         </div>
 
@@ -94,7 +89,7 @@ function SideBarAdmin() {
           <ul className="sidebarList">
             <Link to="/login" className="link">
               <li className="sidebarListItem" onClick={termination}>
-                <ExitToApp className="sidebarIcon" />
+                <ExitToApp className="sidebarIcon logout" />
                 Logout
               </li>
             </Link>

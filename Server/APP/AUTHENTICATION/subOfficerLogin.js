@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   try {
     //validation
     if (!req.body.officerId || !req.body.password)
-      return res.status(400).json({
+      return res.json({
         status: false,
         message: "Validation Failed",
       });
@@ -14,20 +14,19 @@ module.exports = async (req, res, next) => {
     const officer = await officerSchema.findOne({
       password: req.body.password,
     });
-    console.log(officer);
+    if (!officer)
+      return res.json({
+        status: false,
+        message: "User does not exist",
+      });
     if (officer.status === "1") {
-      if (!officer)
-        return res.status(404).json({
-          status: false,
-          message: "User does not exist",
-        });
-
       if (req.body.password === officer.password) {
         const token = jwt.sign(
           {
             officerid: officer._id,
             name: officer.email,
             mobile: officer.mobile,
+            district: officer.district,
             department: officer.department,
             departmentId: officer.userId,
           },
@@ -35,22 +34,23 @@ module.exports = async (req, res, next) => {
           { expiresIn: "1d" }
         );
         return res.status(200).json({
+          status: true,
           verify: true,
           authToken: token,
         });
       } else {
-        return res.status(401).json({
+        return res.json({
           status: false,
           message: "Password Incorrect",
         });
       }
     } else {
-      return res.status(500).send({
+      return res.json({
         message: "User Denied",
       });
     }
   } catch (err) {
-    return res.status(400).json({
+    return res.json({
       status: false,
       message: "Something went wrong",
       data: err,

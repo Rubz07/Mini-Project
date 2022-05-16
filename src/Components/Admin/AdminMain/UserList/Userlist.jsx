@@ -36,7 +36,6 @@ function Userlist() {
   async function getUsers() {
     let response = await axios.get(`/admin/getUsers`);
     if (response.status === 200) {
-      console.log(response.data);
       setUsers(response.data.users);
     }
   }

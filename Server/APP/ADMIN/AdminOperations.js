@@ -15,7 +15,7 @@ module.exports = {
   getAllUsers: () => {
     return new Promise(async (resolve, reject) => {
       await userSchema
-        .find()
+        .find({ role: "user" })
         .exec()
         .then((response) => {
           if (response) {
@@ -30,17 +30,27 @@ module.exports = {
   createDepartment: (data) => {
     return new Promise(async (resolve, reject) => {
       try {
+        let status;
         let regno = randomstring.generate({
           length: 6,
           charset: "numeric",
         });
-        var department = new departmentSchema({
+        const dep = await departmentSchema.findOne({
           departmentname: data.name,
-          registrationNo: regno,
         });
-        var departmentData = await department.save();
-        if (departmentData) {
-          resolve(departmentData);
+        if (dep) {
+          status = "false";
+          resolve(status);
+        } else {
+          var department = new departmentSchema({
+            departmentname: data.name,
+            registrationNo: regno,
+          });
+          var departmentData = await department.save();
+          if (departmentData) {
+            status = "success";
+            resolve(status);
+          }
         }
       } catch (error) {
         console.log((err) => err.message);
@@ -151,7 +161,8 @@ module.exports = {
                 data.department_id +
                 " and PASSWORD " +
                 password,
-              from: "+19108389090",
+              from: "+19794014869",
+
               to: "+919048317092",
             })
             .then(async (message, err) => {
@@ -239,8 +250,51 @@ module.exports = {
   getAllOfficers: () => {
     return new Promise(async (resolve, reject) => {
       await officerSchema
-        .find()
+        .find({ role: "main" })
         .exec()
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          } else {
+            console.log("some error occured");
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+  blockOfficer: (id) => {
+    return new Promise(async (resolve, reject) => {
+      const action = {
+        status: "0",
+      };
+      await officerSchema
+        .findByIdAndUpdate(id.officer_id, action, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        })
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          } else {
+            console.log("some error occured");
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+
+  unBlockOfficer: (id) => {
+    return new Promise(async (resolve, reject) => {
+      const action = {
+        status: "1",
+      };
+      await officerSchema
+        .findByIdAndUpdate(id.officer_id, action, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        })
         .then((response) => {
           if (response) {
             resolve(response);

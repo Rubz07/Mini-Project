@@ -126,6 +126,21 @@ router.post("/updatepassword", (req, res, next) => {
     }
   });
 });
+
+router.post("/resetPassword", (req, res, next) => {
+  userOperation.resetPassword(req.body).then((result) => {
+    try {
+      if (result) {
+        res.status(200).json({
+          message: "updated",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
+  });
+});
+
 router.post("/verify-passotp", async (req, res, next) => {
   otpAuthentication
     .otpVerification(req.body.otpcode, req.body.mobile)
@@ -138,6 +153,20 @@ router.post("/verify-passotp", async (req, res, next) => {
         res.status(401).json({ message: error });
       }
     });
+});
+
+router.post("/ticketAction", (req, res) => {
+  console.log(req.body);
+  userOperation.ticketAction(req.body).then((response) => {
+    console.log(response);
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
 });
 
 module.exports = router;

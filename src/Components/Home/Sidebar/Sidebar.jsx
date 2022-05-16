@@ -21,6 +21,7 @@ function Sidebar() {
   const history = useHistory();
   const termination = () => {
     window.localStorage.removeItem("auth-token");
+    history.push("/login");
   };
   return (
     <div className="sidebar">
@@ -75,7 +76,7 @@ function Sidebar() {
           <ul className="sidebarList">
             <Link to="/login" className="link">
               <li className="sidebarListItem" onClick={termination}>
-                <ExitToApp className="sidebarIcon" />
+                <ExitToApp className="sidebarIcon logout" />
                 Logout
               </li>
             </Link>

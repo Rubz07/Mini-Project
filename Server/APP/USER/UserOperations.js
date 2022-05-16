@@ -27,7 +27,7 @@ module.exports = {
             body:
               "Your complaint is registered successfully and you register number is " +
               regno,
-            from: "+19108389090",
+            from: "+19794014869",
             to: usermobile,
           })
           .then(async (message) => {
@@ -35,14 +35,20 @@ module.exports = {
               console.log(message.sid);
               var postcomplaint = new complaintSchema({
                 registrationNo: regno,
-                department: data.department,
                 userId: data.userid,
+                main_complaint_type: data.mainCategory,
+                sub_complaint_type: data.subCategory,
+                bank_name: data.bankName,
+                bank_branch: data.bankBranch,
+                bank_district: data.bankDistrict,
+                description: data.description,
+                department: data.department,
                 name: user[0].name,
                 userContact: user[0].mobile,
-                description: data.description,
-                complaint_type: data.category,
-                panchayat: data.panchayat,
-                area: data.area,
+                district: user[0].district,
+                address: user[0].address,
+                userPincode: user[0].pincode,
+                userEmail: user[0].email,
               });
               var complaint = await postcomplaint.save();
               if (complaint) {
@@ -128,15 +134,60 @@ module.exports = {
     console.log(data);
     return new Promise(async (resolve, reject) => {
       const salt = await bcrypt.genSalt(10);
-      data.newpass = await bcrypt.hash(data.newpass, salt);
+      let pass = await bcrypt.hash(data.newpass, salt);
       await userSchema
-        .updateOne({ _id: data.userid }, { $set: { password: data.newpass } })
+        .updateOne({ _id: data.userid }, { $set: { password: pass } })
         .then((response) => {
           if (response) {
             resolve(response);
           }
         })
         .catch((err) => console.log("error", err));
+    });
+  },
+
+  resetPassword: (data) => {
+    console.log(data);
+    return new Promise(async (resolve, reject) => {
+      const salt = await bcrypt.genSalt(10);
+      let pass = await bcrypt.hash(data.newPass, salt);
+      await userSchema
+        .updateOne({ mobile: data.userMobile }, { $set: { password: pass } })
+        .then((response) => {
+          if (response) {
+            resolve(response);
+          }
+        })
+        .catch((err) => console.log("error", err));
+    });
+  },
+
+  ticketAction: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let update;
+        const action = {
+          ticket_raised: true,
+          ticket_raised_category: data.ticketCategory,
+          ticket_raised_reason: data.ticketRaisedReason,
+          ticket_raised_date: Date.now(),
+        };
+        let res = await complaintSchema.findByIdAndUpdate(
+          data.complaint_id,
+          action,
+          {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false,
+          }
+        );
+        if (res) {
+          update = "success";
+          resolve(update);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
     });
   },
 };

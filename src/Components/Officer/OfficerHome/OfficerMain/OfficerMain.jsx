@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./OfficerMain.css";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, useHistory } from "react-router-dom";
 import axios from "../../../../axios";
 import OfficerCount from "../OfficerCount/OfficerCount";
 import OfficerComplaintList from "../OfficerComplaintList/OfficerComplaintList";
@@ -29,11 +29,18 @@ function OfficerMain() {
       setOfficerDetails(response.data.districts);
     }
   }
+  const history = useHistory();
 
   useEffect(() => {
-    getOfficerComplaints();
-    getOfficerDetails();
-  }, []);
+    const isToken = localStorage.getItem("officer-token");
+    if (!isToken) {
+      history.push("/Officerlogin");
+    } else {
+      getOfficerComplaints();
+      getOfficerDetails();
+    }
+  }, [history]);
+
   return (
     <Router>
       <Switch>

@@ -16,18 +16,28 @@ const complaintSchema = new mongoose.Schema({
     required: true,
   },
   userContact: {
-    type: Number,
-    required: true,
-    unique: true,
+    type: String,
   },
   department: { type: String, ref: "departments" },
-  complaint_type: { type: String, required: true },
+  main_complaint_type: { type: String, required: true },
+  sub_complaint_type: { type: String, required: true },
+  bank_name: { type: String, required: true },
+  bank_branch: { type: String, required: true },
+  bank_district: { type: String, required: true },
   officer: { type: mongoose.Schema.Types.ObjectId, ref: "officerModel" },
-  area: {
+  address: {
     type: String,
     required: true,
   },
-  panchayat: {
+  district: {
+    type: String,
+    required: true,
+  },
+  userPincode: {
+    type: Number,
+    required: true,
+  },
+  userEmail: {
     type: String,
     required: true,
   },
@@ -41,7 +51,7 @@ const complaintSchema = new mongoose.Schema({
     type: String,
     enum: [
       "Pending",
-      "Approved",
+      "Reported",
       "Assigned",
       "Resolved",
       "Processing",
@@ -52,6 +62,37 @@ const complaintSchema = new mongoose.Schema({
   priority: {
     type: String,
   },
+  Reported: {
+    type: Boolean,
+    default: false,
+  },
+  ticket_raised: {
+    type: Boolean,
+    default: false,
+  },
+  ticket_raised_category: {
+    type: String,
+  },
+  ticket_raised_reason: {
+    type: String,
+  },
+  ticket_raised_date: {
+    type: Date,
+  },
+  clarification_raised: {
+    type: Boolean,
+    default: false,
+  },
+  clarification_remark_category: {
+    type: String,
+  },
+  clarification_remark: {
+    type: String,
+  },
+  clarification_remark_date: {
+    type: Date,
+  },
+
   date: {
     type: Date,
     default: Date.now,

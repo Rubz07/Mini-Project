@@ -169,3 +169,8 @@ td {
   transform: scale(0.99);
   background: #3425a5;
 }
+.departmentErr-hidden {
+ 
+  display: block;
+  visibility: hidden;
+}

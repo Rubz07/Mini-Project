@@ -28,8 +28,10 @@ router.get("/getOfficers", async (req, res) => {
 router.post("/create-department", function (req, res, next) {
   adminOperations.createDepartment(req.body).then((response) => {
     try {
-      if (response) {
-        res.status(200).json({ message: "Department succesfull created" });
+      if (response === "success") {
+        res.json({ status: true, message: "Department succesfull created" });
+      } else {
+        res.json({ status: false, message: "Department Already Created" });
       }
     } catch (error) {
       res.status(400).json({ message: error });
@@ -128,6 +130,26 @@ router.post("/assign-complaint", function (req, res, next) {
       }
     } catch (error) {
       res.status(401).json({ message: error });
+    }
+  });
+});
+
+router.post("/block-officer", async (req, res) => {
+  adminOperations.blockOfficer(req.body).then((response) => {
+    if (response) {
+      res.status(200).json({ verify: "success" });
+    } else {
+      res.status(401).json({ message: "some error occured" });
+    }
+  });
+});
+
+router.post("/unblock-officer", async (req, res) => {
+  adminOperations.unBlockOfficer(req.body).then((response) => {
+    if (response) {
+      res.status(200).json({ verify: "success" });
+    } else {
+      res.status(401).json({ message: "some error occured" });
     }
   });
 });

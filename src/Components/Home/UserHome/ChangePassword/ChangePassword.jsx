@@ -30,7 +30,7 @@ function ChangePassword() {
   };
 
   const submitval = () => {
-    if (passwordError == false) {
+    if (passwordError === false) {
       regSubBtn.classList.remove("disabled");
       buttonCursor.classList.remove("cursor-disabled");
     } else {
@@ -65,10 +65,7 @@ function ChangePassword() {
       otpVerify.classList.remove("passmain-hidden");
       otperr.classList.remove("otp-error");
     } else {
-      otpVerify.classList.add("passmain-hidden");
-
-      //   loginerr.classList.remove("login-error");
-      //   verifyCheck.classList.add("anim-hidden");
+      console.log("gggg");
     }
   }
 
