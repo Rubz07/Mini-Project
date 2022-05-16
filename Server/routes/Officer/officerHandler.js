@@ -21,13 +21,15 @@ router.post("/getOfficerComplaint", verifyOfficer, (req, res) => {
 });
 
 router.post("/getTicketRaisedComplaints", verifyOfficer, (req, res) => {
-  OfficerOperation.getTicketRaisedComplaints(req.user.department).then((response) => {
-    if (response) {
-      res.status(200).json({ complaint: response });
-    } else {
-      res.status(401).json({ message: "some error occured" });
+  OfficerOperation.getTicketRaisedComplaints(req.user.department).then(
+    (response) => {
+      if (response) {
+        res.status(200).json({ complaint: response });
+      } else {
+        res.status(401).json({ message: "some error occured" });
+      }
     }
-  });
+  );
 });
 
 router.post("/getOfficerDetails", verifyOfficer, (req, res) => {
@@ -158,4 +160,17 @@ router.post("/create-bank", async (req, res) => {
     }
   });
 });
+
+router.post("/ClarificationAction", (req, res) => {
+  officerOperation.askClarification(req.body).then((response) => {
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
 module.exports = router;

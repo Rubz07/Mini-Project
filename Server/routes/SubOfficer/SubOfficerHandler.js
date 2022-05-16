@@ -59,4 +59,16 @@ router.post("/clarificationAction", (req, res) => {
   });
 });
 
+router.post("/getEscalatedComplaints", verifyOfficer, (req, res) => {
+  subOfficerOperation
+    .getEscalatedComplaints(req.user.officerid)
+    .then((response) => {
+      if (response) {
+        res.status(200).json({ complaint: response });
+      } else {
+        res.status(401).json({ message: "some error occured" });
+      }
+    });
+});
+
 module.exports = router;

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./OfficerSidebar.css";
+import axios from "../../../axios";
 import {
   LineStyle,
   ExitToApp,
@@ -8,11 +9,29 @@ import {
   AddCircleOutlineOutlined,
 } from "@material-ui/icons";
 
-function officerSidebar() {
-  const TicketDiv = document.querySelector(".topbarIconContainer");
+function OfficerSidebar() {
+  const [TicketRaisedComplaints, setTicketRaisedComplaints] = useState();
+  // const TicketDiv = document.querySelector(".topbarIconContainer");
   const termination = () => {
     window.localStorage.removeItem("officer-token");
   };
+
+  async function getTicketRaisedComplaints() {
+    const token = localStorage.getItem("officer-token");
+
+    let response = await axios.post(`officer/getTicketRaisedComplaints`, {
+      headers: { Authorization: token },
+    });
+    if (response.status === 200 && response.data.complaint.length > 0) {
+      setTicketRaisedComplaints(response.data.complaint.length);
+      // TicketDiv.classList.remove("ticketCount-hidden");
+    }
+  }
+
+  useEffect(() => {
+    getTicketRaisedComplaints();
+  }, []);
+
   return (
     <div className="officerSidebar">
       <div className="officerSidebarWrapper">
@@ -35,10 +54,10 @@ function officerSidebar() {
                 <WorkOutline className="sidebarIcon" />
                 Tickets
                 <div
-                  className="topbarIconContainer ticketCount-hidden"
+                  className="topbarIconContainer "
                   style={{ marginLeft: "20px" }}
                 >
-                  <span className="topIconBadge">2</span>
+                  <span className="topIconBadge">{TicketRaisedComplaints}</span>
                 </div>
               </li>
             </Link>
@@ -85,4 +104,4 @@ function officerSidebar() {
   );
 }
 
-export default officerSidebar;
+export default OfficerSidebar;

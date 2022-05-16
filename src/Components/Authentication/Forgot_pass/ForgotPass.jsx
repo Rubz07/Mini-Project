@@ -95,13 +95,11 @@ function ForgotPass() {
       await axios
         .post("/otpAuthentication", data)
         .then((res) => {
-          console.log(res.status);
           if (res.status === 200) {
             setSendOtpCode("Resend");
             verifyInput.classList.remove("hidden-mob");
           } else {
             verifyInput.classList.add("hidden-mob");
-            console.log(res.data.message);
           }
         })
         .catch((err) => console.log(err));
@@ -116,7 +114,7 @@ function ForgotPass() {
       mobile: mobile,
     };
     const res = await axios.post("/otpVerification", data);
-    console.log(res);
+
     if (res.status === 200 && res.data.verify === "approved") {
       setOtpError(true);
       passwordInput.classList.remove("hidden-pass");

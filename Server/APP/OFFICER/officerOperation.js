@@ -1,6 +1,7 @@
 const OfficerSchema = require("../../model/OfficerModel");
 const complaintSchema = require("../../model/userComplaint");
 const complaintDataSchema = require("../../model/complaintData");
+const TicketSchema = require("../../model/TicketHandlerModel");
 const bankDataSchema = require("../../model/BankData");
 const officerSchema = require("../../model/OfficerModel");
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -286,6 +287,53 @@ module.exports = {
         }
       } catch (error) {
         console.log((err) => err.message);
+      }
+    });
+  },
+
+  askClarification: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let update;
+
+        await OfficerSchema.find({
+          district: data.bankDistrict,
+        }).then((response) => {
+          let officerMobile = `+${91}` + response[0].mobile;
+          client.messages
+            .create({
+              body:
+                " Explanation seeked for the complaint Id  " +
+                data.complaint_regNo +
+                " Needs more Clarification. Clarification Type - " +
+                data.ticketCategory,
+              from: "+19794014869",
+              to: "+919048317092",
+            })
+            .then(async (message) => {
+              console.log(message);
+              if (message.status === "queued") {
+                var ticketData = new TicketSchema({
+                  complaint_id: data.complaint_id,
+                  complaint_regNo: data.complaint_regNo,
+                  ticket_category: data.ticketCategory,
+                  ticket_reason: data.ticketRaisedReason,
+                  ticket_raised_cmp_bank_name: data.bankDistrict,
+                  ticket_raised_date: data.ticketRaisedDate,
+                  clarification_remark: data.officerRemark,
+                  officer_id: response[0]._id,
+                });
+                var ticketDetails = await ticketData.save();
+                if (ticketDetails) {
+       
+                  update = "success";
+                  resolve(update);
+                }
+              }
+            });
+        });
+      } catch (error) {
+        console.log(error.message);
       }
     });
   },

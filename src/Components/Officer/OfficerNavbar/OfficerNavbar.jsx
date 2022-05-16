@@ -7,7 +7,7 @@ function OfficerNavbar() {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">Department</span>
+          <span className="logo">Banking</span>
         </div>
         <div className="topRight"></div>
       </div>

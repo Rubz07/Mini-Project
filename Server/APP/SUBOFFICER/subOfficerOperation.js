@@ -1,5 +1,6 @@
 const OfficerSchema = require("../../model/OfficerModel");
 const complaintSchema = require("../../model/userComplaint");
+const TicketSchema = require("../../model/TicketHandlerModel");
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken);
@@ -149,6 +150,25 @@ module.exports = {
                 }
               });
           });
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
+  getEscalatedComplaints: (id) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await TicketSchema.find({ officer_id: id })
+          .then((response) => {
+            if (response) {
+              //   complaints
+              var escalatedComplaint = response.map((p) => {
+                return p;
+              });
+              resolve(escalatedComplaint);
+            }
+          })
+          .catch((err) => console.log("error", err));
       } catch (error) {
         console.log(error.message);
       }
