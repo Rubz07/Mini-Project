@@ -24,13 +24,21 @@ const ticketHandlerSchema = new mongoose.Schema({
   clarification_remark: {
     type: String,
   },
+  clarification_asked: {
+    type: Boolean,
+    default: false,
+  },
   explanation: {
     type: String,
+  },
+  explanation_sended: {
+    type: Boolean,
+    default: false,
   },
   explanation_send_date: {
     type: Date,
   },
-   ticket_raised_date: {
+  ticket_raised_date: {
     type: Date,
   },
   clarification_ask_date: {

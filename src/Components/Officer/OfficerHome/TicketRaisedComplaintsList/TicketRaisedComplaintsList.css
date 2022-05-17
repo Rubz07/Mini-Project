@@ -1,0 +1,5 @@
+.clarification-hidden{
+    display: block;
+    position: absolute;
+    visibility: hidden;
+}

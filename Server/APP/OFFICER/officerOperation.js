@@ -38,7 +38,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         await complaintSchema
-          .find({ department: department } && { ticket_raised: true })
+          .find({ department: department } && { ticket_raised: true }   )
           .then((response) => {
             if (response) {
               //   complaints
@@ -321,11 +321,11 @@ module.exports = {
                   ticket_raised_cmp_bank_name: data.bankDistrict,
                   ticket_raised_date: data.ticketRaisedDate,
                   clarification_remark: data.officerRemark,
+                  clarification_asked: true,
                   officer_id: response[0]._id,
                 });
                 var ticketDetails = await ticketData.save();
                 if (ticketDetails) {
-       
                   update = "success";
                   resolve(update);
                 }

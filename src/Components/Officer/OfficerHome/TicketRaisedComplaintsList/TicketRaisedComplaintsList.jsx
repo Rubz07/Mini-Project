@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../../axios";
 import { Close } from "@material-ui/icons";
+import "./TicketRaisedComplaintsList.css";
 import Modal from "react-modal";
 function TicketRaisedComplaintsList() {
   const [TicketRaisedComplaints, setTicketRaisedComplaints] = useState([]);
@@ -137,6 +138,7 @@ function TicketRaisedComplaintsList() {
     if (response.status === 200 && response.data.verify === "success") {
       // getOfficerComplaints();
       alert("Clarification Seeked Successfully");
+      // document.getElementById("clrBtn").style.visibility = "hidden";
       closeClarificationModal();
     }
   }
@@ -195,13 +197,13 @@ function TicketRaisedComplaintsList() {
                             backgroundColor: "#289cc9",
                             marginTop: "10px",
                           }}
+                          id="clrBtn"
                           className="officerComplaintUpdate"
                           onClick={(e) =>
                             openClarificationModal(
                               p._id,
                               p.registrationNo,
                               p.bank_district,
-
                               p.ticket_raised_category,
                               p.ticket_raised_reason,
                               p.ticket_raised_date
@@ -286,6 +288,27 @@ function TicketRaisedComplaintsList() {
                       <td style={{ textAlign: "left" }}>: {cmpStatus}</td>
                     </tr>
                   </>
+                </table>
+
+                <table
+                  border="1"
+                  className="ticketDetails clarification-hidden"
+                >
+                  <tr>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Country</th>
+                  </tr>
+                  <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                  </tr>
+                  <tr>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                  </tr>
                 </table>
               </div>
             </div>
