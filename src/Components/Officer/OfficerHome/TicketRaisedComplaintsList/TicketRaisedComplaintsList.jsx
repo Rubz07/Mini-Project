@@ -5,6 +5,7 @@ import "./TicketRaisedComplaintsList.css";
 import Modal from "react-modal";
 function TicketRaisedComplaintsList() {
   const [TicketRaisedComplaints, setTicketRaisedComplaints] = useState([]);
+  const [explanation, setExplanaion] = useState([]);
 
   const [objCmpId, setObjCmpId] = useState();
   const [cmpId, setCmpId] = useState();
@@ -115,6 +116,17 @@ function TicketRaisedComplaintsList() {
     }
   }
 
+  async function getExplanation() {
+    const token = localStorage.getItem("officer-token");
+
+    let response = await axios.post(`officer/getExplanation`, {
+      headers: { Authorization: token },
+    });
+    if (response.status === 200) {
+      setExplanaion(response.data.complaint);
+    }
+  }
+
   async function clarificationAction(
     e,
     id,
@@ -145,6 +157,7 @@ function TicketRaisedComplaintsList() {
 
   useEffect(() => {
     getTicketRaisedComplaints();
+    getExplanation()
   }, []);
   return (
     <div className="manageOfficerList">
@@ -220,6 +233,84 @@ function TicketRaisedComplaintsList() {
           </table>
         </div>
       </div>
+
+      {/* <____TICKET DETAILS_________> */}
+
+      <div className="manageOfficerList">
+        <div className="manageOfficerTitle">Ticket Details</div>
+        <div class="manageOfficerDatas">
+          <div class="manageOfficerData">
+            <table>
+              <tr>
+                <th style={{ padding: "20px" }}>Sl.No</th>
+                <th>Complaint Id</th>
+
+                <th>Ticket Reason</th>
+                <th>Explanation</th>
+                <th>Date</th>
+              </tr>
+              {explanation &&
+                explanation.length > 0 &&
+                explanation.map((p, index) => {
+                  return (
+                    <tr key={explanation._id}>
+                      <td>{index}</td>
+                      <td width="180px">{p.complaint_regNo}</td>
+                      <td width="200px">{p.ticket_reason}</td>
+                      <td width="160px">{p.explanation}</td>
+                      <td width="176px">{p.explanation_send_date}</td>
+                      {/* <td>
+                        {" "}
+                        <button
+                          className="officerComplaintUpdate"
+                          onClick={(e) =>
+                            openModal(
+                              p.registrationNo,
+                              p.main_complaint_type,
+                              p.sub_complaint_type,
+                              p.description,
+                              p.bank_name,
+                              p.bank_branch,
+                              p.ticket_raised_category,
+                              p.ticket_raised_reason,
+                              p.ticket_raised_date,
+                              p.status
+                            )
+                          }
+                        >
+                          Details
+                        </button>
+                        <div className="report">
+                          <button
+                            style={{
+                              backgroundColor: "#289cc9",
+                              marginTop: "10px",
+                            }}
+                            id="clrBtn"
+                            className="officerComplaintUpdate"
+                            onClick={(e) =>
+                              openClarificationModal(
+                                p._id,
+                                p.registrationNo,
+                                p.bank_district,
+                                p.ticket_raised_category,
+                                p.ticket_raised_reason,
+                                p.ticket_raised_date
+                              )
+                            }
+                          >
+                            Clarification
+                          </button>
+                        </div>
+                      </td> */}
+                    </tr>
+                  );
+                })}
+            </table>
+          </div>
+        </div>
+      </div>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

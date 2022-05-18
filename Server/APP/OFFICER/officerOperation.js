@@ -38,7 +38,27 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         await complaintSchema
-          .find({ department: department } && { ticket_raised: true }   )
+          .find({ department: department } && { ticket_raised: true })
+          .then((response) => {
+            if (response) {
+              //   complaints
+              var officerComplaint = response.map((p) => {
+                return p;
+              });
+              resolve(officerComplaint);
+            }
+          })
+          .catch((err) => console.log("error", err));
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
+
+  getExplanation: (department) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await TicketSchema.find({ explanation_sended: true })
           .then((response) => {
             if (response) {
               //   complaints
