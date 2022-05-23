@@ -71,4 +71,16 @@ router.post("/getEscalatedComplaints", verifyOfficer, (req, res) => {
     });
 });
 
+router.post("/ExplanationAction", (req, res) => {
+  subOfficerOperation.giveExplanation(req.body).then((response) => {
+    try {
+      if (response === "success") {
+        res.status(200).json({ verify: response });
+      }
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+});
+
 module.exports = router;

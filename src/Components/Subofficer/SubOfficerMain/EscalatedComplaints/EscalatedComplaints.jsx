@@ -6,6 +6,16 @@ import Modal from "react-modal";
 function EscalatedComplaints() {
   const [excalatedComplaints, setEscalatedComplaints] = useState([]);
 
+  const [explanation, setExplanation] = useState();
+
+  const [cmpObjId, setCmpObjId] = useState();
+  const [cmpId, setCmpId] = useState();
+  const [ticketCat, setTicketCat] = useState();
+  const [ticketReason, setTicketReason] = useState();
+  const [clarificationRemark, setClarificationRemark] = useState();
+  const [clarificationdate, setClarificationDate] = useState();
+  const [ticketDate, setTicketDate] = useState();
+
   const customStyles = {
     content: {
       top: "45%",
@@ -17,18 +27,22 @@ function EscalatedComplaints() {
     },
   };
   function openModal(
+    id,
     cmpId,
-    cmpType,
-    cmpSubType,
-    cmpDesc,
-    cmpBank,
-    cmpBankBranch,
     ticketCat,
-    ticketType,
-    ticketDate,
-    status
+    ticketReason,
+    clarificationRemark,
+    clarificationDate,
+    ticketdate
   ) {
     setIsOpen(true);
+    setCmpObjId(id)
+    setCmpId(cmpId);
+    setTicketCat(ticketCat);
+    setTicketReason(ticketReason);
+    setClarificationRemark(clarificationRemark);
+    setClarificationDate(clarificationDate);
+    setTicketDate(ticketdate);
   }
 
   function closeModal() {
@@ -47,6 +61,19 @@ function EscalatedComplaints() {
     }
   }
 
+  async function clarificationAction(e, id) {
+    e.preventDefault();
+    const data = {
+      cmpID: id,
+      explanation: explanation,
+    };
+    let response = await axios.post(`subofficer/ExplanationAction`, data);
+    if (response.status === 200 && response.data.verify === "success") {
+      alert("Success");
+      closeModal();
+    }
+  }
+
   useEffect(() => {
     getEscalatedComplaints();
   }, []);
@@ -60,7 +87,7 @@ function EscalatedComplaints() {
               <th style={{ padding: "20px" }}>Sl.No</th>
               <th>Complaint Id</th>
               <th>Ticket Type</th>
-              <th>Officer Remark</th>
+              <th>Clarification Remark</th>
               <th>Clarification Date</th>
               <th>Action</th>
             </tr>
@@ -79,17 +106,15 @@ function EscalatedComplaints() {
                       <button
                         className="officerComplaintUpdate"
                         onClick={(e) =>
-                          openModal()
-                          // p.registrationNo,
-                          // p.main_complaint_type,
-                          // p.sub_complaint_type,
-                          // p.description,
-                          // p.bank_name,
-                          // p.bank_branch,
-                          // p.ticket_raised_category,
-                          // p.ticket_raised_reason,
-                          // p.ticket_raised_date,
-                          // p.status
+                          openModal(
+                            p._id,
+                            p.complaint_regNo,
+                            p.ticket_category,
+                            p.ticket_reason,
+                            p.clarification_remark,
+                            p.clarification_ask_date,
+                            p.ticket_raised_date
+                          )
                         }
                       >
                         Explanation
@@ -114,7 +139,7 @@ function EscalatedComplaints() {
 
         <form>
           <div className="title">
-            <h1>Complaint Details</h1>
+            <h1>Ticket Details</h1>
           </div>
           <div className="body">
             <div class="datas">
@@ -123,54 +148,56 @@ function EscalatedComplaints() {
                   <>
                     <tr>
                       <th width="200">Complaint Id</th>
-                      <td style={{ textAlign: "left" }}>: </td>
-                    </tr>
-
-                    <tr>
-                      <th>Complaint Type</th>
-                      <td style={{ textAlign: "left" }}>: </td>
-                    </tr>
-                    <tr>
-                      <th>Issue</th>
-                      <td style={{ textAlign: "left" }}>: </td>
-                    </tr>
-
-                    <tr>
-                      <th>Description</th>
-                      <td style={{ textAlign: "left" }}>: </td>
-                    </tr>
-
-                    <tr>
-                      <th>Bank</th>
-                      <td style={{ textAlign: "left" }}>: </td>
-                    </tr>
-
-                    <tr>
-                      <th>Bank Branch</th>
-                      <td style={{ textAlign: "left" }}>: </td>
+                      <td style={{ textAlign: "left" }}>: {cmpId} </td>
                     </tr>
 
                     <tr>
                       <th>Ticket Type</th>
-                      <td style={{ textAlign: "left" }}>: </td>
+                      <td style={{ textAlign: "left" }}>: {ticketCat} </td>
+                    </tr>
+                    <tr>
+                      <th>Ticket Reason</th>
+                      <td style={{ textAlign: "left" }}>: {ticketReason} </td>
                     </tr>
 
                     <tr>
-                      <th>Ticket Reason</th>
-                      <td style={{ textAlign: "left" }}>: </td>
+                      <th>Clarification Remark</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {clarificationRemark}{" "}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th>Clarification Date</th>
+                      <td style={{ textAlign: "left" }}>
+                        : {clarificationdate}{" "}
+                      </td>
                     </tr>
 
                     <tr>
                       <th>Ticket Raised Date</th>
-                      <td style={{ textAlign: "left" }}>: </td>
+                      <td style={{ textAlign: "left" }}>: {ticketDate} </td>
                     </tr>
-
                     <tr>
-                      <th>Current Status</th>
-                      <td style={{ textAlign: "left" }}>: </td>
+                      <th>Explanation</th>
+                      <td style={{ textAlign: "left" }}>
+                        <div class="input_field cmpselect_option">
+                          <textarea
+                            className="officer-comments"
+                            onChange={(e) => setExplanation(e.target.value)}
+                          ></textarea>
+                        </div>
+                      </td>
                     </tr>
                   </>
                 </table>
+                <button
+                  className="officerComplaintUpdate"
+                  style={{ marginTop: "25px" }}
+                  onClick={(e) => clarificationAction(e, cmpObjId)}
+                >
+                  Send
+                </button>
               </div>
             </div>
           </div>

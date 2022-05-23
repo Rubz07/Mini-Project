@@ -55,6 +55,26 @@ module.exports = {
     });
   },
 
+  getExplanation: (department) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await TicketSchema.find({ explanation_sended: true })
+          .then((response) => {
+            if (response) {
+              //   complaints
+              var officerComplaint = response.map((p) => {
+                return p;
+              });
+              resolve(officerComplaint);
+            }
+          })
+          .catch((err) => console.log("error", err));
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
+
   getOfficerDetails: (department) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -321,11 +341,11 @@ module.exports = {
                   ticket_raised_cmp_bank_name: data.bankDistrict,
                   ticket_raised_date: data.ticketRaisedDate,
                   clarification_remark: data.officerRemark,
+                  clarification_asked: true,
                   officer_id: response[0]._id,
                 });
                 var ticketDetails = await ticketData.save();
                 if (ticketDetails) {
-       
                   update = "success";
                   resolve(update);
                 }

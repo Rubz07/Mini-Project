@@ -155,10 +155,13 @@ module.exports = {
       }
     });
   },
+
   getEscalatedComplaints: (id) => {
     return new Promise(async (resolve, reject) => {
       try {
-        await TicketSchema.find({ officer_id: id })
+        await TicketSchema.find(
+          { officer_id: id } && { explanation_sended: false }
+        )
           .then((response) => {
             if (response) {
               //   complaints
@@ -169,6 +172,32 @@ module.exports = {
             }
           })
           .catch((err) => console.log("error", err));
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  },
+
+  giveExplanation: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log(data);
+        let update;
+        const action = {
+          explanation: data.explanation,
+          explanation_sended: true,
+          explanation_send_date: Date.now(),
+        };
+
+        let res = await TicketSchema.findByIdAndUpdate(data.cmpID, action, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        });
+        if (res) {
+          update = "success";
+          resolve(update);
+        }
       } catch (error) {
         console.log(error.message);
       }
