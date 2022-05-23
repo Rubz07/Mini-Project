@@ -16,7 +16,7 @@ import {
   Lock,
   ExitToApp,
 } from "@material-ui/icons";
-
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 function Sidebar() {
   const history = useHistory();
   const termination = () => {
@@ -69,13 +69,19 @@ function Sidebar() {
                 Change Password
               </li>
             </Link>
+            <Link to="/faq" className="link">
+              <li className="sidebarListItem">
+                < LiveHelpIcon className="sidebarIcon" />
+                Faq
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
           <h2 className="sidebarTitle"></h2>
           <ul className="sidebarList">
             <Link to="/login" className="link">
-              <li className="sidebarListItem" onClick={termination}>
+              <li className="sidebarListItem" onClick={termination} id="logout">
                 <ExitToApp className="sidebarIcon logout" />
                 Logout
               </li>

@@ -120,6 +120,7 @@ function Login() {
                 value={mobile}
                 placeholder="mobile"
                 autocomplete="off"
+                id="mobile"
                 required
                 minlength="10"
                 maxlength="10"
@@ -133,6 +134,7 @@ function Login() {
                 type="password"
                 className="form-control"
                 value={password}
+                id="password"
                 autocomplete="off"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}

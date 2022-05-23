@@ -17,6 +17,7 @@ import ComplaintForm from "../UserHome/ComplaintForm/ComplaintForm";
 import Login from "../../Authentication/Login/Login";
 import ComplaintStatus from "../UserHome/ComplaintStatus/ComplaintStatus";
 import ChangePassword from "../UserHome/ChangePassword/ChangePassword";
+import Faq from "../UserHome/Faq/Faq";
 function Dashboard() {
   const history = useHistory();
   const [authenticated, setAuthenticated] = useState(false);
@@ -64,6 +65,9 @@ function Dashboard() {
             </Route>
             <Route path="/change-password">
               <ChangePassword />
+            </Route>
+            <Route path="/faq">
+              <Faq />
             </Route>
           </Switch>
         </div>
