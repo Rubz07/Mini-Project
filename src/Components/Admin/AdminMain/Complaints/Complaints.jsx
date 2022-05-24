@@ -29,7 +29,7 @@ function Complaints() {
         format: [4, 2],
       });
       pdf.addImage(imgData, "JPEG", 2, 1);
-      // pdf.output('dataurlnewwindow');
+
       pdf.save("download.pdf");
     });
   }
