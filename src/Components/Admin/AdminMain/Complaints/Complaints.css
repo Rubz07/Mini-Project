@@ -6,7 +6,7 @@
 .report-container {
   position: absolute;
   left: 50%;
-  top: 28%;
+  top: 25%;
   transform: translate(-50%, -50%);
   height: 200px;
   width: 400px;
@@ -16,7 +16,28 @@
 
   box-shadow: 0 0 20px 8px #d0d0d0;
 }
-
+.reportDetails-container{
+  position: absolute;
+  left: 50%;
+  top: 28%;
+  transform: translate(-50%, -50%);
+  height: 300px;
+  width: 500px;
+  background: #f5f5f5;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 8px #d0d0d0;
+}
+.printReport{
+  left: 50%;
+  top: 28%;
+  transform: translate(78%, 40%);
+}
+.date{
+  transform: translate(3%, -40%);
+  color: black;
+  font-weight: bold;
+}
 .report-content {
   position: absolute;
   display: flex;
@@ -30,6 +51,23 @@
   padding: 40px;
   font-family: "Merriweather", serif;
 }
+
+.reportDetails-content{
+  position: absolute;
+  display: flex;
+  column-gap: 20px;
+width: auto;
+  justify-content: space-between;
+  top: 10%;
+  left: 5%;
+  /* transform: translatey(-50%); */
+  text-align: justify;
+  color: black;
+  padding: 40px;
+  font-family: "Merriweather", serif;
+  font-size: large;
+}
+
 .report-submitbtn {
   top: 50%;
   left: 5%;
@@ -141,6 +179,10 @@ td {
   text-align: left;
 }
 .reportlist-hide {
+  visibility: hidden;
+  display: none;
+}
+.reportDetails-container_hide{
   visibility: hidden;
   display: none;
 }

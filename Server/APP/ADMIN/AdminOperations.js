@@ -196,7 +196,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         await complaintSchema
-          .find({ status: "Pending" })
+          .find({})
           .exec()
           .then((response) => {
             if (response) {
