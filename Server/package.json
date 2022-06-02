@@ -3,16 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "build": "webpack"
   },
   "dependencies": {
     "@mui/icons-material": "^5.6.2",
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
-    "dom-to-pdf": "^0.2.9",
+    "dom-to-pdf": "^0.3.0",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "generate-password": "^1.7.0",
@@ -24,5 +24,8 @@
     "nodemon": "^2.0.7",
     "randomstring": "^1.2.1",
     "twilio": "^3.71.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.9.2"
   }
 }

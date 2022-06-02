@@ -16,7 +16,7 @@ import {
   Lock,
   ExitToApp,
 } from "@material-ui/icons";
-import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 function Sidebar() {
   const history = useHistory();
   const termination = () => {
@@ -46,7 +46,7 @@ function Sidebar() {
                 Lodge Public Grievance
               </li>
             </Link>
-            <Link to="/complaint-status" className="link">
+            <Link to="/complaint-status" className="link" id="cmpstatus">
               <li className="sidebarListItem">
                 <Autorenew className="sidebarIcon" />
                 Grievance Status
@@ -71,7 +71,7 @@ function Sidebar() {
             </Link>
             <Link to="/faq" className="link">
               <li className="sidebarListItem">
-                < LiveHelpIcon className="sidebarIcon" />
+                <LiveHelpIcon className="sidebarIcon" />
                 Faq
               </li>
             </Link>

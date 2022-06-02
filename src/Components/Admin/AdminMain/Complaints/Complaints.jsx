@@ -20,18 +20,57 @@ function Complaints() {
   const [escalatedComplaintCount, totEscalatedComplaintCount] = useState(null);
 
   function printDocument() {
-    const input = document.getElementById("divToPrint");
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "in",
-        format: [4, 2],
-      });
-      pdf.addImage(imgData, "JPEG", 2, 1);
+    var doc = new jsPDF("landscape", "px", "a4", "false");
+    doc.rect(
+      20,
+      20,
+      doc.internal.pageSize.width - 40,
+      doc.internal.pageSize.height - 40,
+      "S"
+    );
+    doc.setFont("Helvertica", "bold");
+    doc.text(300, 40, `CM-Portal`);
+    doc.setFont("Helvertica", "bold");
+    doc.text(60, 90, `Date : ${date}`);
+    doc.text(
+      60,
+      120,
+      `Total number of Registered Complaints : ${complaintCount}`
+    );
+    doc.text(
+      60,
+      135,
+      `Total number of Processing Complaints :  ${processingComplaintCount}`
+    );
+    doc.text(
+      60,
+      150,
+      ` Total number of Resolved Complaints :  ${resolvedComplaintCount}`
+    );
+    doc.text(
+      60,
+      165,
+      `Total number of Reported Complaints : ${reportedComplaintCount}`
+    );
+    doc.text(
+      60,
+      180,
+      ` Total number of Escalated Complaints : ${escalatedComplaintCount}`
+    );
+   
+    doc.save("download.pdf");
+    // const input = document.getElementById("divToPrint");
+    // html2canvas(input).then((canvas) => {
+    //   const imgData = canvas.toDataURL("image/png");
+    //   const pdf = new jsPDF({
+    //     orientation: "landscape",
+    //     unit: "in",
+    //     format: [4, 2],
+    //   });
+    //   pdf.addImage(imgData, "JPEG", 2, 1);
 
-      pdf.save("download.pdf");
-    });
+    //   pdf.save("download.pdf");
+    // });
   }
 
   async function reportDetailsfun() {

@@ -1,5 +1,5 @@
 const userSchema = require("../../model/userModel");
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 module.exports = {
   userRegistration: (data) => {

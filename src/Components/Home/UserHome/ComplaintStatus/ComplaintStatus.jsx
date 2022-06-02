@@ -27,6 +27,7 @@ function ComplaintStatus() {
             <input
               type="text"
               className="status-input"
+              id="statusinput"
               onChange={(e) => setRegNO(e.target.value)}
               required
             />
@@ -36,12 +37,13 @@ function ComplaintStatus() {
               type="button"
               className="status-submitbtn"
               value="Check"
+              id="statuscheck"
               onClick={(e) => fetchStatus(e)}
             />
           </div>
         </div>
       </div>
-      <div className="statusDetails statuslist-hide">
+      <div id="statusDetails" className="statusDetails statuslist-hide">
         <div class="datas">
           <div class="data">
             <table>
